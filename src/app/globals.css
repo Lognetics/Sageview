@@ -1,0 +1,433 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   SAGEVIEW PRODUCTION LTD — DESIGN SYSTEM
+   Documentary Film × Global Development Organization × Premium Creative Agency
+
+   A single cinematic surface: deep black base, bone-white type, one restrained
+   brass accent. Hierarchy comes from typography, contrast, spacing and motion —
+   never from decoration.
+   ========================================================================== */
+
+@theme {
+  /* --- Base surfaces (dark cinematic foundation) ------------------------ */
+  --color-void: #050607;
+  --color-ink: #0a0c0d;
+  --color-charcoal: #121516;
+  --color-graphite: #1b1f20;
+  --color-slate: #2a2f30;
+
+  /* --- Neutrals --------------------------------------------------------- */
+  --color-ash: #545b59;
+  --color-mist: #8b918e;
+  --color-fog: #b4b8b5;
+  --color-bone: #e9e5dd;
+  --color-paper: #f6f4ef;
+
+  /* --- Accent (restrained, singular) ------------------------------------ */
+  --color-brass: #c2a05a;
+  --color-brass-bright: #d9bb7c;
+  --color-brass-deep: #8f7436;
+
+  /* --- Supporting tint (used sparingly: rules, tints, never as UI colour) */
+  --color-sage: #7d8f7e;
+
+  /* --- Semantic --------------------------------------------------------- */
+  --color-danger: #d98b7a;
+  --color-success: #8fae8b;
+
+  /* --- Typefaces -------------------------------------------------------- */
+  --font-display: var(--font-instrument-serif), "Iowan Old Style", Georgia,
+    "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular",
+    Menlo, Consolas, monospace;
+
+  /* --- Fluid editorial type scale --------------------------------------- */
+  /* Clamped so nothing overflows at 320px and nothing bloats past 1920px.   */
+  --text-eyebrow: 0.6875rem;
+  --text-micro: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --text-body-sm: clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);
+  --text-body: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-body-lg: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --text-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --text-h4: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+  --text-h3: clamp(1.5rem, 1.25rem + 1.2vw, 2.25rem);
+  --text-h2: clamp(2rem, 1.5rem + 2.4vw, 3.75rem);
+  --text-h1: clamp(2.5rem, 1.7rem + 3.8vw, 5.5rem);
+  --text-display: clamp(3rem, 1.6rem + 6.2vw, 8.5rem);
+  --text-numeral: clamp(3.5rem, 2rem + 7vw, 9rem);
+
+  /* --- Motion ----------------------------------------------------------- */
+  --ease-cinema: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-shutter: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 240ms;
+  --dur-base: 520ms;
+  --dur-slow: 900ms;
+  --dur-reveal: 1100ms;
+
+  /* --- Layout ----------------------------------------------------------- */
+  --spacing-gutter: clamp(1.25rem, 4vw, 4.5rem);
+  --spacing-section: clamp(4.5rem, 9vw, 11rem);
+  --container-editorial: 78rem;
+  --container-prose: 46rem;
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: color-mix(in oklab, var(--color-bone) 12%, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    /* Belt-and-braces against horizontal overflow on any viewport. */
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, high-contrast focus for keyboard users only. */
+  :focus-visible {
+    outline: 2px solid var(--color-brass);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-brass);
+    color: var(--color-void);
+  }
+
+  /* Offset anchor targets so sticky nav never covers a heading. */
+  [id] {
+    scroll-margin-top: 6.5rem;
+  }
+
+  img,
+  video,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ==========================================================================
+   TYPOGRAPHY UTILITIES
+   ========================================================================== */
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+}
+
+/* Small caps technical label — the "timecode" voice of the interface. */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-brass);
+}
+
+@utility eyebrow-muted {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-ash);
+}
+
+@utility index-numeral {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   LAYOUT UTILITIES
+   ========================================================================== */
+
+@utility container-editorial {
+  width: 100%;
+  max-width: var(--container-editorial);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+@utility container-wide {
+  width: 100%;
+  max-width: 96rem;
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+@utility container-prose {
+  width: 100%;
+  max-width: var(--container-prose);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+@utility section-y {
+  padding-block: var(--spacing-section);
+}
+
+/* Full-viewport hero height. Declared as one utility so the `svh` override is
+   guaranteed to follow the `vh` fallback in source order. */
+@utility hero-viewport {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Hairline rule in the brand's bone tone. */
+@utility rule-hairline {
+  border-top: 1px solid color-mix(in oklab, var(--color-bone) 12%, transparent);
+}
+
+/* ==========================================================================
+   FILM GRAIN
+   Fixed, screen-blended noise across the whole surface. One repeating SVG
+   turbulence tile — no image request, negligible cost, disabled on reduced
+   motion is unnecessary (it does not move), but it is hidden when printing.
+   ========================================================================== */
+
+@utility film-grain {
+  position: relative;
+}
+
+@utility film-grain-layer {
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+  will-change: transform;
+  animation: grain-drift 6s steps(6) infinite;
+}
+
+@keyframes grain-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  16% {
+    transform: translate(-2%, -3%);
+  }
+  33% {
+    transform: translate(3%, -2%);
+  }
+  50% {
+    transform: translate(-1%, 2%);
+  }
+  66% {
+    transform: translate(2%, 3%);
+  }
+  83% {
+    transform: translate(-3%, 1%);
+  }
+}
+
+/* Scroll cue: a light travelling down a hairline. */
+@keyframes scroll-cue {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+/* Staggered entry for the network roles list when a cluster is selected. */
+@keyframes network-role-in {
+  from {
+    opacity: 0;
+    transform: translateX(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Vignette used on full-bleed cinematic frames.
+   Four layers, each doing one job:
+     1. top scrim   - guarantees contrast for the fixed navigation, whatever
+                      the footage is doing up there (bright sky, pale walls).
+     2. bottom lift - anchors the hero copy and blends into the page below.
+     3. radial      - pulls the eye to centre frame.
+     4. overall     - a light grade so white type always clears AA. */
+@utility cinema-vignette {
+  background-image:
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--color-void) 82%, transparent) 0%,
+      color-mix(in oklab, var(--color-void) 42%, transparent) 14%,
+      transparent 30%
+    ),
+    linear-gradient(
+      to top,
+      var(--color-void) 2%,
+      color-mix(in oklab, var(--color-void) 78%, transparent) 30%,
+      color-mix(in oklab, var(--color-void) 30%, transparent) 62%,
+      transparent 100%
+    ),
+    radial-gradient(
+      120% 90% at 50% 40%,
+      transparent 25%,
+      color-mix(in oklab, var(--color-void) 70%, transparent) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--color-void) 28%, transparent),
+      color-mix(in oklab, var(--color-void) 28%, transparent)
+    );
+}
+
+/* ==========================================================================
+   SCROLL REVEAL
+   Driven by one shared IntersectionObserver (see components/primitives/reveal).
+
+   Elements are only hidden under `html.js`, a class set by a synchronous inline
+   script in <head>. That means: no flash of hidden-then-shown content, and a
+   visitor without JavaScript sees every word of the site.
+   ========================================================================== */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y, 1.75rem), 0);
+  transition:
+    opacity var(--dur-reveal) var(--ease-cinema),
+    transform var(--dur-reveal) var(--ease-cinema);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal][data-reveal-visible="true"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Clip-path curtain reveal — used for imagery and full-bleed frames.
+   The clip lives on the inner wrapper, never on the observed element: a
+   clipped element has an empty intersection rectangle, so the observer would
+   never fire and the content would stay hidden permanently. */
+.js [data-reveal="clip"],
+.js [data-reveal="wipe"] {
+  opacity: 1;
+  transform: none;
+}
+
+.js [data-reveal="clip"] > [data-reveal-inner] {
+  clip-path: inset(0 0 101% 0);
+  transition: clip-path var(--dur-reveal) var(--ease-cinema);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal="clip"][data-reveal-visible="true"] > [data-reveal-inner] {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Horizontal wipe — used for rules and dividers. */
+.js [data-reveal="wipe"] > [data-reveal-inner] {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur-slow) var(--ease-shutter);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal="wipe"][data-reveal-visible="true"] > [data-reveal-inner] {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   Everything non-essential collapses to an instant, static presentation.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal],
+  .js [data-reveal-inner] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+
+  .film-grain-layer {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   PRINT
+   ========================================================================== */
+
+@media print {
+  .film-grain-layer,
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
