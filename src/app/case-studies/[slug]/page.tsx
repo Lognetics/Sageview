@@ -172,7 +172,7 @@ export default async function CaseStudyPage(
             src={study.film?.src}
             poster={study.film?.poster}
             alt={study.film?.alt ?? `The ${study.title} documentary`}
-            caption="Press play — nothing downloads until you do"
+            caption="Press play: nothing downloads until you do"
             aspect="wide"
           />
         </Reveal>

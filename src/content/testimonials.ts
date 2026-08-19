@@ -41,7 +41,7 @@ export const testimonials: readonly Testimonial[] = [
   },
 ];
 
-/** Testimonials that carry a quote — used by the slider. */
+/** Testimonials that carry a quote, used by the slider. */
 export const quotedTestimonials = testimonials.filter(
   (testimonial): testimonial is Testimonial & { quote: string } =>
     Boolean(testimonial.quote),

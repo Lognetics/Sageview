@@ -9,7 +9,7 @@ import { site } from "@/content/site";
  *
  * ImageResponse renders in an isolated environment that cannot fetch from the
  * site's own origin at build time, so the artwork has to be embedded rather
- * than linked. Read once at module scope — this runs during the build.
+ * than linked. Read once at module scope: this runs during the build.
  */
 function wordmarkDataUri(): string | null {
   try {
@@ -30,14 +30,14 @@ const WORDMARK = wordmarkDataUri();
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = `${site.name} — ${site.tagline}`;
+export const alt = `${site.name}, ${site.tagline}`;
 
 /**
  * Default social card.
  *
  * Generated at build time from the brand's own tokens rather than shipped as
  * a static PNG, so it can never drift out of sync with the wordmark or the
- * tagline. Uses system-safe font stacks — ImageResponse cannot reach the
+ * tagline. Uses system-safe font stacks, ImageResponse cannot reach the
  * self-hosted next/font files without extra fetching, and the card reads
  * correctly without them.
  */

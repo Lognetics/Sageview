@@ -3,14 +3,14 @@
  *
  * Page copy plus the enquiry-form field configuration.
  *
- * Select options below are UX affordances for qualifying an enquiry — they are
+ * Select options below are UX affordances for qualifying an enquiry: they are
  * not statements about pricing, turnaround or company policy.
  */
 
 export const contactCopy = {
   eyebrow: "Contact",
   headline: "Let's build something powerful",
-  body: "Tell us what the story has to achieve. We'll come back with a point of view — not a price list.",
+  body: "Tell us what the story has to achieve. We'll come back with a point of view, not a price list.",
   formIntro:
     "The more context you give us, the more useful our first reply will be.",
 } as const;
@@ -27,7 +27,7 @@ export const projectTypes = [
 ] as const;
 
 export const timelines = [
-  "Urgent — within 4 weeks",
+  "Urgent: within 4 weeks",
   "1–3 months",
   "3–6 months",
   "6+ months",

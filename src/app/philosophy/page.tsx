@@ -14,7 +14,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Storytelling Philosophy",
   description:
-    "Kama Muta — moved by love. Emotional honesty, cinematic realism, human-centered focus and ethical integrity: the four principles behind every SageView film.",
+    "Kama Muta, moved by love. Emotional honesty, cinematic realism, human-centered focus and ethical integrity: the four principles behind every SageView film.",
   path: "/philosophy",
 });
 

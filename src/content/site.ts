@@ -41,7 +41,7 @@ export const principal = {
   role: "Principal Visual Strategist & Creative Director",
 } as const;
 
-/** Audiences SageView partners with — stated in the portfolio introduction. */
+/** Audiences SageView partners with, stated in the portfolio introduction. */
 export const partnerSectors = [
   "Development-sector organizations",
   "Corporate brands",
@@ -108,7 +108,7 @@ export const primaryNav: NavItem[] = [
   {
     label: "Philosophy",
     href: "/philosophy",
-    description: "Kama Muta — moved by love.",
+    description: "Kama Muta, moved by love.",
   },
   {
     label: "Network",

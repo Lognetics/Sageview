@@ -13,7 +13,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Case Studies",
   description:
-    "Selected work from SageView Production Ltd, including The Makoko Education Crisis — a character-driven documentary on educational exclusion, aligned to SDG 4.",
+    "Selected work from SageView Production Ltd, including The Makoko Education Crisis, a character-driven documentary on educational exclusion, aligned to SDG 4.",
   path: "/case-studies",
 });
 

@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   SAGEVIEW PRODUCTION LTD — DESIGN SYSTEM
+   SAGEVIEW PRODUCTION LTD: DESIGN SYSTEM
    Documentary Film × Global Development Organization × Premium Creative Agency
 
    A single cinematic surface: deep black base, bone-white type, one restrained
-   brass accent. Hierarchy comes from typography, contrast, spacing and motion —
+   brass accent. Hierarchy comes from typography, contrast, spacing and motion,
    never from decoration.
    ========================================================================== */
 
@@ -152,7 +152,7 @@
   line-height: 0.98;
 }
 
-/* Small caps technical label — the "timecode" voice of the interface. */
+/* Small caps technical label: the "timecode" voice of the interface. */
 @utility eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-eyebrow);
@@ -224,7 +224,7 @@
 /* ==========================================================================
    FILM GRAIN
    Fixed, screen-blended noise across the whole surface. One repeating SVG
-   turbulence tile — no image request, negligible cost, disabled on reduced
+   turbulence tile, no image request, negligible cost, disabled on reduced
    motion is unnecessary (it does not move), but it is hidden when printing.
    ========================================================================== */
 
@@ -354,7 +354,7 @@
   transform: translate3d(0, 0, 0);
 }
 
-/* Clip-path curtain reveal — used for imagery and full-bleed frames.
+/* Clip-path curtain reveal, used for imagery and full-bleed frames.
    The clip lives on the inner wrapper, never on the observed element: a
    clipped element has an empty intersection rectangle, so the observer would
    never fire and the content would stay hidden permanently. */
@@ -374,7 +374,7 @@
   clip-path: inset(0 0 0 0);
 }
 
-/* Horizontal wipe — used for rules and dividers. */
+/* Horizontal wipe, used for rules and dividers. */
 .js [data-reveal="wipe"] > [data-reveal-inner] {
   clip-path: inset(0 100% 0 0);
   transition: clip-path var(--dur-slow) var(--ease-shutter);

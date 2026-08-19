@@ -6,12 +6,12 @@ import { contact } from "@/content/site";
  * The closing invitation, used at the foot of every page.
  *
  * Deliberately written as the next step in the story rather than a sales
- * push — the visitor has just read an argument; this is where it lands.
+ * push: the visitor has just read an argument; this is where it lands.
  */
 export function CTASection({
   eyebrow = "Start a Project",
   heading = "Let's build something powerful",
-  body = "Tell us what the story has to achieve. We'll come back with a point of view — not a price list.",
+  body = "Tell us what the story has to achieve. We'll come back with a point of view, not a price list.",
 }: {
   eyebrow?: string;
   heading?: string;

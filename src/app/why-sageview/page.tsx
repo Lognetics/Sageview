@@ -29,7 +29,7 @@ export default function WhySageViewPage() {
             </span>
           </>
         }
-        lead="Credibility in this field is not claimed, it is demonstrated — in how a subject is treated, how a budget is respected and whether the finished film survives the room it is shown in."
+        lead="Credibility in this field is not claimed: it is demonstrated, in how a subject is treated, how a budget is respected and whether the finished film survives the room it is shown in."
         image={photo.portersCarrying}
         meta={whySageView.slice(0, 4).map((reason) => ({
           label: reason.index,

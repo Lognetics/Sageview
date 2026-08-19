@@ -26,7 +26,7 @@ export default function ProcessPage() {
             <span className="block text-brass italic">nothing improvised.</span>
           </>
         }
-        lead="Every project moves through the same disciplined sequence — because the difference between a film that moves people and one that merely documents them is decided long before the camera is switched on."
+        lead="Every project moves through the same disciplined sequence, because the difference between a film that moves people and one that merely documents them is decided long before the camera is switched on."
         image={photo.quarryWide}
         meta={[
           { label: "Stage 01", value: "Discovery" },
@@ -63,7 +63,7 @@ export default function ProcessPage() {
           headingId="process-workflow-heading"
           heading={
             <>
-              And before all that —
+              And before all that:
               <span className="text-brass italic"> the engagement.</span>
             </>
           }

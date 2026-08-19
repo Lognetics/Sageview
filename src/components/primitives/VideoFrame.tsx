@@ -46,7 +46,7 @@ export function VideoFrame({
         alt={alt}
         aspect={aspect}
         caption={caption}
-        label={errored ? "Video unavailable" : `${label} — placeholder`}
+        label={errored ? "Video unavailable" : `${label}, placeholder`}
         className={className}
         interactive={false}
       />

@@ -14,7 +14,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Deliverables",
   description:
-    "Customised asset packages for institutional reports, global campaigns and digital platforms — the Documentary Package and the Brand Strategy Package.",
+    "Customised asset packages for institutional reports, global campaigns and digital platforms: the Documentary Package and the Brand Strategy Package.",
   path: "/deliverables",
 });
 

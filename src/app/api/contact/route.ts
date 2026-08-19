@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { parseEnquiry, validateEnquiry } from "@/lib/enquiry";
 import { deliverEnquiry } from "@/lib/enquiry-delivery";
 
-/** Never prerendered, never cached — this route only ever handles POSTs. */
+/** Never prerendered, never cached: this route only ever handles POSTs. */
 export const dynamic = "force-dynamic";
 
 /**

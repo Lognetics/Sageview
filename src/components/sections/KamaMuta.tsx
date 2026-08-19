@@ -3,7 +3,7 @@ import { TextLink } from "@/components/primitives/Button";
 import { philosophy } from "@/content/philosophy";
 
 /**
- * The philosophy band — the most distinctive surface on the site.
+ * The philosophy band: the most distinctive surface on the site.
  *
  * A single term, set enormous, with the four principles beneath it as a
  * numbered editorial grid. The oversized ghost word behind the type gives the
@@ -15,7 +15,7 @@ export function KamaMuta({ showLink = true }: { showLink?: boolean }) {
       aria-labelledby="philosophy-heading"
       className="relative isolate overflow-hidden bg-void"
     >
-      {/* Ghost word — decorative, never announced. Sized so the full phrase
+      {/* Ghost word, decorative, never announced. Sized so the full phrase
           spans the viewport rather than reading as a clipped fragment. */}
       <span
         aria-hidden="true"

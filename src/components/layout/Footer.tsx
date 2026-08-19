@@ -18,7 +18,7 @@ export function Footer() {
           <div className="lg:col-span-5">
             <Link
               href="/"
-              aria-label={`${site.name} — home`}
+              aria-label={`${site.name}, home`}
               className="group/foot inline-flex items-center gap-3 text-bone transition-colors hover:text-brass"
             >
               {wordmark ? (
@@ -44,7 +44,7 @@ export function Footer() {
             </p>
 
             <p className="mt-6 max-w-sm text-body-sm leading-relaxed text-mist">
-              {site.name} — a strategic creative company specialising in
+              {site.name}, a strategic creative company specialising in
               documentary filmmaking, high-impact brand storytelling and visual
               communication.
             </p>

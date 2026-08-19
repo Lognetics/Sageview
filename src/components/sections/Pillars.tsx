@@ -6,7 +6,7 @@ import { corePillars } from "@/content/philosophy";
 /**
  * The three core pillars.
  *
- * Every pillar shows its full text at every breakpoint — the hover interaction
+ * Every pillar shows its full text at every breakpoint: the hover interaction
  * is purely visual (a slow image push and a brass rule wiping across). Hiding
  * the explanation behind a hover would cost mobile and keyboard visitors real
  * content in exchange for a trick.
@@ -28,7 +28,7 @@ export function Pillars() {
             <span className="text-brass italic"> on every project.</span>
           </>
         }
-        lead="Three beliefs decide what survives our edit — and what never makes it into the frame."
+        lead="Three beliefs decide what survives our edit, and what never makes it into the frame."
       />
 
       <ul className="mt-16 grid gap-10 md:grid-cols-3 md:gap-8">

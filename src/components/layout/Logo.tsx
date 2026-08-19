@@ -18,8 +18,8 @@ export type Wordmark = {
  * its simplest geometry. Drawn inline so it inherits colour and costs no
  * request.
  *
- * Still used as the compact mark — favicon, the hub of the network diagram,
- * and the footer — where the full horizontal wordmark would be unreadable.
+ * Still used as the compact mark, favicon, the hub of the network diagram,
+ * and the footer, where the full horizontal wordmark would be unreadable.
  */
 export function ApertureMark({ className }: { className?: string }) {
   return (
@@ -55,7 +55,7 @@ export function ApertureMark({ className }: { className?: string }) {
  *
  * Renders the official SageView wordmark when the artwork is present, and the
  * typographic lockup otherwise. Which one applies is decided once, on the
- * server (see `assetExists`), and passed down — the header is a Client
+ * server (see `assetExists`), and passed down: the header is a Client
  * Component and cannot touch the filesystem itself.
  *
  * The wordmark is a wide horizontal lockup, so it is sized by height and left
@@ -80,7 +80,7 @@ export function Logo({
     <Link
       href="/"
       onClick={onNavigate}
-      aria-label={`${site.name} — home`}
+      aria-label={`${site.name}, home`}
       className={cn(
         "group/logo flex items-center text-bone transition-colors duration-[var(--dur-fast)] hover:text-brass",
         wordmark ? "gap-0" : "gap-3",

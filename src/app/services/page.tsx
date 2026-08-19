@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Services",
   description:
-    "Documentary filmmaking and human-centered storytelling, visual communication strategy and conception, and full-scale production management — including live technical broadcast.",
+    "Documentary filmmaking and human-centered storytelling, visual communication strategy and conception, and full-scale production management, including live technical broadcast.",
   path: "/services",
 });
 
@@ -28,7 +28,7 @@ export default function ServicesPage() {
             </span>
           </>
         }
-        lead="Strategy, documentary and full-scale production are not separate departments here. They are the same team, working from the same brief — which is why the intent set in the first meeting is still intact in the final grade."
+        lead="Strategy, documentary and full-scale production are not separate departments here. They are the same team, working from the same brief, which is why the intent set in the first meeting is still intact in the final grade."
         image={photo.collierSmiling}
         meta={[
           { label: "01", value: "Documentary" },

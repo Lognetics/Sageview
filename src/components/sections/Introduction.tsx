@@ -8,8 +8,8 @@ import { partnerSectors } from "@/content/site";
 
 /**
  * The first thing the visitor reads after the hero: who SageView is and who
- * they work with. Asymmetric two-column editorial — statement left, evidence
- * right — so the eye has somewhere to travel.
+ * they work with. Asymmetric two-column editorial, statement left, evidence
+ * right, so the eye has somewhere to travel.
  */
 export function Introduction() {
   return (
@@ -53,7 +53,7 @@ export function Introduction() {
           </Reveal>
         </div>
 
-        {/* Who we partner with — a quiet credibility panel. */}
+        {/* Who we partner with, a quiet credibility panel. */}
         <div className="lg:col-span-5 lg:pt-4">
           <Reveal variant="clip" delay={140}>
             <MediaFrame

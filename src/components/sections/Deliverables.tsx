@@ -96,7 +96,7 @@ export function AssetEcosystem({
         <Reveal delay={180}>
           <p className="mt-6 max-w-sm text-body-sm leading-relaxed text-mist">
             One field deployment is edited, graded and versioned into every
-            format a campaign needs — from the flagship cut down to the vertical
+            format a campaign needs, from the flagship cut down to the vertical
             social edit and the stills that end up in the annual report.
           </p>
         </Reveal>

@@ -8,7 +8,7 @@ import { site } from "@/content/site";
  * Sitemap.
  *
  * Generated from the content layer, so adding a service or case study puts it
- * in the sitemap automatically — there is no second list to forget.
+ * in the sitemap automatically: there is no second list to forget.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const url = (path: string) => new URL(path, site.url).toString();

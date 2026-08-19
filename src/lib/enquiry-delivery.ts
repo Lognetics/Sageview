@@ -4,8 +4,8 @@ import type { EnquiryValues } from "./enquiry";
  * THE INTEGRATION POINT.
  *
  * This is the only file that needs to change to connect the enquiry form to a
- * real destination. Everything else — the form, the validation, the API route,
- * the UI states — is already finished and does not care how delivery happens.
+ * real destination. Everything else: the form, the validation, the API route,
+ * the UI states, is already finished and does not care how delivery happens.
  *
  * Currently supported without writing any code:
  *

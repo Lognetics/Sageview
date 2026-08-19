@@ -62,7 +62,7 @@ export function Hero() {
           </Reveal>
         </div>
 
-        {/* Contextual metadata strip — the "slate" of the opening frame. */}
+        {/* Contextual metadata strip: the "slate" of the opening frame. */}
         <Reveal delay={620}>
           <div className="mt-14 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-6 border-t border-bone/10 pt-8 sm:grid-cols-4">
             {[
@@ -80,7 +80,7 @@ export function Hero() {
         </Reveal>
       </div>
 
-      {/* Scroll cue. Decorative — the metadata strip already signals depth. */}
+      {/* Scroll cue. Decorative: the metadata strip already signals depth. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute right-[var(--spacing-gutter)] bottom-8 hidden lg:block"

@@ -161,14 +161,14 @@ export const film = {
 /**
  * Brand artwork.
  *
- * The official "— SAGE VIEW —" horizontal lockup, in brass on transparent.
+ * The official "- SAGE VIEW -" horizontal lockup, in brass on transparent.
  * Prepared from the 2400x2400 master by trimming the empty margins down to
  * the ink: 2318x261, an 8.88:1 band. The component sizes it by height and
  * lets width follow, so trimming is what keeps the mark from rendering at a
  * tenth of its intended size.
  *
  * Replacing it: drop a new file in as `.svg` (preferred) or `.png` and update
- * width/height here to match — they set the layout aspect ratio. An SVG is
+ * width/height here to match: they set the layout aspect ratio. An SVG is
  * picked over a PNG automatically.
  */
 export const brand = {
@@ -181,7 +181,7 @@ export const brand = {
 } as const;
 
 /**
- * Founder portraits — Daniel Okafor, Principal Visual Strategist & Creative
+ * Founder portraits: Daniel Okafor, Principal Visual Strategist & Creative
  * Director.
  *
  * Listed in preference order. The Founder section renders whichever of these
@@ -189,7 +189,7 @@ export const brand = {
  * waiting on a file to look finished.
  *
  * `daniel-okafor-portrait-bw.jpg` was recovered from the company portfolio PDF
- * at 629x787 — small, so it is used at a contained size rather than as a
+ * at 629x787, small, so it is used at a contained size rather than as a
  * full-bleed hero. Drop higher-resolution files in at the names below to
  * upgrade it.
  */

@@ -11,7 +11,7 @@ import { assetExists } from "@/lib/asset-exists";
  * Which founder portraits are actually on disk, in preference order.
  *
  * Resolved while the page is prerendered, so a portrait that has not been
- * supplied yet simply does not appear — it can never ship as a broken image.
+ * supplied yet simply does not appear: it can never ship as a broken image.
  */
 export function availableFounderPortraits(): Media[] {
   return founderPortraits.filter((portrait) => assetExists(portrait.src));

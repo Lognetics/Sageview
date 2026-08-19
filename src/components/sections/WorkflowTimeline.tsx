@@ -6,13 +6,13 @@ import { clientWorkflow } from "@/content/process";
  *
  * Kept visually distinct from the five-stage creative process: a horizontal
  * three-step track with a connecting rule, rather than the vertical timeline.
- * Same information architecture, different register — one is how the work is
+ * Same information architecture, different register, one is how the work is
  * made, this is how the engagement runs.
  */
 export function WorkflowTimeline() {
   return (
     <ol className="relative grid gap-10 md:grid-cols-3 md:gap-8">
-      {/* Connecting track — desktop only, decorative. */}
+      {/* Connecting track, desktop only, decorative. */}
       <span
         aria-hidden="true"
         className="absolute top-[0.4375rem] right-0 left-0 hidden h-px bg-bone/12 md:block"

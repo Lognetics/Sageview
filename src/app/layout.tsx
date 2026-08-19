@@ -11,10 +11,10 @@ import "./globals.css";
 /**
  * Type system.
  *
- * Display — Instrument Serif: a high-contrast editorial face used only for
+ * Display, Instrument Serif: a high-contrast editorial face used only for
  *   large statements, so it never loses its impact.
- * Sans    — Inter: the working voice of the interface.
- * Mono    — JetBrains Mono: reserved for small technical labels and indices,
+ * Sans   , Inter: the working voice of the interface.
+ * Mono   , JetBrains Mono: reserved for small technical labels and indices,
  *   the "slate" voice that gives the site its documentary register.
  *
  * All three are self-hosted by next/font: no external requests, no layout
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: site.seoTitle,
-    template: `${site.shortName} — %s`,
+    template: `${site.shortName} | %s`,
   },
   description: site.seoDescription,
   applicationName: site.name,
@@ -116,7 +116,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
         <script
           type="application/ld+json"
-          // Static, developer-authored JSON-LD — no user input reaches this.
+          // Static, developer-authored JSON-LD: no user input reaches this.
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationJsonLd(contact)),
           }}

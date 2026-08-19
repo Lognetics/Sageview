@@ -14,7 +14,7 @@ import { MobileMenu } from "./MobileMenu";
  * Site header.
  *
  * Sits transparent over the hero and condenses into a translucent bar once the
- * visitor scrolls — lighter chrome, more film. A hairline progress rule tracks
+ * visitor scrolls, lighter chrome, more film. A hairline progress rule tracks
  * reading position on long editorial pages.
  */
 export function Navbar({ wordmark = null }: { wordmark?: Wordmark | null }) {

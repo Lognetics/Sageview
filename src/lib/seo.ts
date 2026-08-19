@@ -17,7 +17,7 @@ type PageMetaInput = {
  * Builds the full Metadata object for a page: canonical URL, Open Graph and
  * Twitter/X cards, all derived from one small input.
  *
- * Title architecture: "SageView — About", with the homepage using the full
+ * Title architecture: "SageView | About", with the homepage using the full
  * SEO title on its own.
  */
 export function pageMetadata({
@@ -27,11 +27,11 @@ export function pageMetadata({
   ogImage,
   type = "website",
 }: PageMetaInput): Metadata {
-  // The root layout already applies the "SageView — %s" template, so the page
+  // The root layout already applies the "SageView, %s" template, so the page
   // title is passed bare. The homepage opts out of the template with
   // `absolute`, and `fullTitle` is built here for the social cards, which get
   // no template applied to them.
-  const fullTitle = title ? `${site.shortName} — ${title}` : site.seoTitle;
+  const fullTitle = title ? `${site.shortName}, ${title}` : site.seoTitle;
   const url = new URL(path, site.url).toString();
 
   return {
@@ -58,7 +58,7 @@ export function pageMetadata({
 
 /**
  * Organization structured data. Only facts present in the approved portfolio
- * are emitted — no founding date, address, headcount or rating is asserted.
+ * are emitted, no founding date, address, headcount or rating is asserted.
  */
 export function organizationJsonLd(contact: {
   email: string;

@@ -50,18 +50,18 @@ export const caseStudies: readonly CaseStudy[] = [
         label: "The Challenge",
         heading:
           "Document the structural barriers that keep children out of school.",
-        body: "The brief was to document the major structural barriers and educational exclusion faced by school children within Makoko's informal water settlements in Lagos — a context where the scale of the problem is well evidenced in research, but rarely felt by the people with the power to act on it.",
+        body: "The brief was to document the major structural barriers and educational exclusion faced by school children within Makoko's informal water settlements in Lagos, a context where the scale of the problem is well evidenced in research, but rarely felt by the people with the power to act on it.",
       },
       {
         label: "SageView's Role",
         heading: "Narrative design, creative direction, cinematography.",
-        body: "SageView led the narrative design, set the creative direction and shot the film — carrying the project from the structure of the story through to the way every frame was captured on the water.",
+        body: "SageView led the narrative design, set the creative direction and shot the film, carrying the project from the structure of the story through to the way every frame was captured on the water.",
       },
       {
         label: "The Solution",
         heading:
           "A five-minute documentary that turns systemic data into a human story.",
-        body: "We built a character-driven, highly cinematic five-minute documentary that translates systemic research and data into an emotionally compelling human story — so that the evidence arrives as a child rather than a chart.",
+        body: "We built a character-driven, highly cinematic five-minute documentary that translates systemic research and data into an emotionally compelling human story, so that the evidence arrives as a child rather than a chart.",
       },
       {
         label: "The Impact",
@@ -83,7 +83,7 @@ export const caseStudies: readonly CaseStudy[] = [
       alt: "A canoe crossing the waterway between stilt houses in the Makoko settlement, Lagos.",
     },
     film: film.makoko,
-    metaTitle: "SageView — The Makoko Education Crisis",
+    metaTitle: "SageView | The Makoko Education Crisis",
     metaDescription:
       "A character-driven five-minute documentary on educational exclusion in Makoko's informal water settlements, aligned to SDG 4. Narrative design, creative direction and cinematography by SageView Production Ltd.",
     featured: true,

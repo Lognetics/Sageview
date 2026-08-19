@@ -34,7 +34,7 @@ export const deliverablePackages: readonly DeliverablePackage[] = [
       {
         title: "Flagship Master Film",
         spec: "3–10 minutes",
-        body: "The cinematic documentary cut — the definitive version of the story.",
+        body: "The cinematic documentary cut: the definitive version of the story.",
       },
       {
         title: "Strategic Highlight Edits",

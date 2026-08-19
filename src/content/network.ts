@@ -1,7 +1,7 @@
 /**
  * THE AGILE NETWORK
  *
- * Roles only — the portfolio names one individual (the Principal Visual
+ * Roles only: the portfolio names one individual (the Principal Visual
  * Strategist & Creative Director). No other names, headcounts, bios or
  * credentials have been invented.
  */
@@ -13,7 +13,7 @@ export const networkIntro = {
     "SageView operates through an agile network of experienced creative, technical and communication professionals.",
     "Project-specific teams are assembled under the Principal Creative Director to deliver strategic storytelling, documentary production, digital communication and audience engagement across diverse sectors.",
   ],
-  note: "The team is built for the brief — which is why the crew that shoots a water-settlement documentary is not the crew that runs a multi-camera summit broadcast.",
+  note: "The team is built for the brief, which is why the crew that shoots a water-settlement documentary is not the crew that runs a multi-camera summit broadcast.",
 } as const;
 
 export type NetworkCluster = {

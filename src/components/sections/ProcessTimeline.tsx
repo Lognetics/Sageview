@@ -10,7 +10,7 @@ import { processStages } from "@/content/process";
 /**
  * The five-stage creative process.
  *
- * On large screens a sticky index tracks which stage the visitor is reading —
+ * On large screens a sticky index tracks which stage the visitor is reading:
  * the sensation of moving through a production rather than reading a list. The
  * index is decorative reinforcement: every stage's full content is always in
  * the document, so nothing depends on the tracking working.
@@ -45,7 +45,7 @@ export function ProcessTimeline() {
 
   return (
     <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-      {/* Sticky index — large screens only. */}
+      {/* Sticky index, large screens only. */}
       <div className="hidden lg:col-span-4 lg:block">
         <div className="sticky top-32">
           <p className="eyebrow-muted">Stage</p>

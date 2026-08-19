@@ -8,7 +8,7 @@ import { missionStatement, visionStatement } from "@/content/vision";
  *
  * Six beats, each given its own band so the argument builds as the visitor
  * scrolls rather than arriving as a paragraph. Every line is aspirational by
- * construction — what SageView is building toward, never a claim of a
+ * construction, what SageView is building toward, never a claim of a
  * position already held.
  */
 export function VisionManifesto() {
@@ -204,7 +204,7 @@ export function VisionManifesto() {
 }
 
 /**
- * Compact vision teaser for the homepage — the manifesto's opening move plus
+ * Compact vision teaser for the homepage: the manifesto's opening move plus
  * a route into the full narrative.
  */
 export function VisionTeaser() {

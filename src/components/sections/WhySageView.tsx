@@ -5,7 +5,7 @@ import { whySageView } from "@/content/about";
  * Five differentiators as full-width editorial rows.
  *
  * Large type, generous rules, and a hover state that lets the brass rule wipe
- * across the row — restrained enough to read as a document rather than a
+ * across the row, restrained enough to read as a document rather than a
  * feature grid.
  */
 export function WhySageView() {

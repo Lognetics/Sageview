@@ -11,7 +11,7 @@
  *     Jump straight to an anchor, press End, or flick-scroll on a phone, and
  *     an element can go from below the fold (ratio 0) to above the viewport
  *     (ratio 0) without a single callback. That content would then stay
- *     invisible for the rest of the session — the worst failure available to
+ *     invisible for the rest of the session: the worst failure available to
  *     a site that hides content by default.
  *
  * The sweep runs after scrolling settles rather than on every frame, so it

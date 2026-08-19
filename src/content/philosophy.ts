@@ -1,5 +1,5 @@
 /**
- * STORYTELLING PHILOSOPHY — Kama Muta.
+ * STORYTELLING PHILOSOPHY: Kama Muta.
  *
  * NOTE ON SPELLING: the source portfolio uses "Kama Muta" in the Core Pillars
  * section and "Kuma Muta" in the Philosophy section. "Kama Muta" is the
@@ -17,13 +17,13 @@ export const philosophy = {
   statement:
     "Storytelling is not just about capturing moments; it is about revealing the truth, emotion and meaning hidden within them.",
   intro:
-    "Kama Muta is the sudden feeling of being moved — the warmth in the chest when connection becomes visible. It is the emotion behind every story that changes a mind rather than merely informing one. It is the standard we edit against.",
+    "Kama Muta is the sudden feeling of being moved: the warmth in the chest when connection becomes visible. It is the emotion behind every story that changes a mind rather than merely informing one. It is the standard we edit against.",
   principles: [
     {
       index: "01",
       title: "Emotional Honesty",
       summary:
-        "Raw, genuine emotion and unfiltered human experience — never performed, never manufactured in the edit.",
+        "Raw, genuine emotion and unfiltered human experience, never performed, never manufactured in the edit.",
       points: ["Raw emotions", "Genuine emotions", "Unfiltered human experiences"],
       image: photo.childPeering,
     },
@@ -63,7 +63,7 @@ export const philosophy = {
 } as const;
 
 /**
- * CORE PILLARS — the three beliefs the company is built on.
+ * CORE PILLARS: the three beliefs the company is built on.
  */
 export const corePillars = [
   {
@@ -77,7 +77,7 @@ export const corePillars = [
     index: "02",
     title: "Emotion Over Noise",
     tagline: "Grounded in Kama Muta.",
-    body: "Grounded in Kama Muta — moved by love — our visuals are crafted to touch the human heart and move minds, rather than compete for attention with volume.",
+    body: "Grounded in Kama Muta (moved by love), our visuals are crafted to touch the human heart and move minds, rather than compete for attention with volume.",
     image: photo.childrenLaughing,
   },
   {

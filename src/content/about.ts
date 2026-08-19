@@ -1,5 +1,5 @@
 /**
- * ABOUT — introduction, positioning and the "narrative designers" argument.
+ * ABOUT: introduction, positioning and the "narrative designers" argument.
  */
 
 export const about = {
@@ -20,7 +20,7 @@ export const about = {
     eyebrow: "The SageView Difference",
     headline: "We don't just create visual content.",
     emphasis: "We are narrative designers.",
-    body: "We shape how stories are seen, felt and remembered — managing the creative process from concept and pre-production strategy through production and final execution.",
+    body: "We shape how stories are seen, felt and remembered, managing the creative process from concept and pre-production strategy through production and final execution.",
     /** The three verbs, rendered as an editorial triad. */
     verbs: [
       {
@@ -37,7 +37,7 @@ export const about = {
       },
     ],
   },
-  /** End-to-end capability chain — CONCEPT → PRE-PRODUCTION → PRODUCTION → FINAL EXECUTION */
+  /** End-to-end capability chain, CONCEPT → PRE-PRODUCTION → PRODUCTION → FINAL EXECUTION */
   capabilityChain: [
     {
       index: "01",
@@ -63,7 +63,7 @@ export const about = {
 } as const;
 
 /**
- * WHY SAGEVIEW — five differentiators.
+ * WHY SAGEVIEW: five differentiators.
  */
 export const whySageView = [
   {
@@ -79,7 +79,7 @@ export const whySageView = [
   {
     index: "03",
     title: "Strategic Communication Alignment",
-    body: "Creative execution connected to campaign goals, donor relationships and stakeholder reporting — not creative for its own sake.",
+    body: "Creative execution connected to campaign goals, donor relationships and stakeholder reporting, not creative for its own sake.",
   },
   {
     index: "04",
@@ -89,6 +89,6 @@ export const whySageView = [
   {
     index: "05",
     title: "Dynamic, Agile Deployment",
-    body: "Flexible operational infrastructure that scales and deploys specialised crews quickly — maximising budget without sacrificing premium production value.",
+    body: "Flexible operational infrastructure that scales and deploys specialised crews quickly, maximising budget without sacrificing premium production value.",
   },
 ] as const;

@@ -6,7 +6,7 @@ import { brand } from "@/content/media";
 /**
  * Does this file exist under `public/`?
  *
- * Server-only, and evaluated while the page is being prerendered — so a
+ * Server-only, and evaluated while the page is being prerendered, so a
  * section can simply not render when its artwork has not been supplied yet,
  * instead of shipping a broken image to a visitor.
  *

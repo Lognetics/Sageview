@@ -1,5 +1,5 @@
 /**
- * THE CREATIVE PROCESS — five stages.
+ * THE CREATIVE PROCESS: five stages.
  * Titles, descriptions and "Key Focus" lines are taken from the approved
  * portfolio. The `caption` is presentational framing only.
  */
@@ -32,7 +32,7 @@ export const processStages: readonly ProcessStage[] = [
     id: "narrative-design",
     title: "Narrative Design",
     description:
-      "We create the emotional blueprint — translating complex data, policy briefs or brand goals into a structured, human-centered story engine.",
+      "We create the emotional blueprint, translating complex data, policy briefs or brand goals into a structured, human-centered story engine.",
     keyFocus: ["Narrative arc", "Themes", "Tone"],
     caption: "The blueprint",
     image: photo.elderWriting,
@@ -73,7 +73,7 @@ export const processStages: readonly ProcessStage[] = [
     id: "post-production-and-delivery",
     title: "Post-Production & Editorial Delivery",
     description:
-      "We assemble the final narrative rhythm and align emotional pacing with strategic objectives — then deliver across every platform the campaign needs.",
+      "We assemble the final narrative rhythm and align emotional pacing with strategic objectives, then deliver across every platform the campaign needs.",
     keyFocus: [
       "Editorial editing",
       "Cinematic colour grading",
@@ -86,7 +86,7 @@ export const processStages: readonly ProcessStage[] = [
 ];
 
 /**
- * CLIENT WORKFLOW — what happens after a client reaches SageView.
+ * CLIENT WORKFLOW: what happens after a client reaches SageView.
  * Deliberately distinct from the five-stage creative process above.
  */
 export type WorkflowStep = {
@@ -107,7 +107,7 @@ export const clientWorkflow: readonly WorkflowStep[] = [
     index: "02",
     title: "Tailored Blueprinting",
     description:
-      "We develop a proposal customised for your stakeholders — creative and commercial in one document.",
+      "We develop a proposal customised for your stakeholders, creative and commercial in one document.",
     items: [
       "Detailed creative brief",
       "Line-itemed production budget proposal",

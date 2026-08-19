@@ -7,7 +7,7 @@
  * manifesto: an African studio built to the world's standard, with the stated
  * ambition of becoming the first name in impact storytelling globally.
  *
- * IMPORTANT — every line here is written as *aspiration*, not as achieved
+ * IMPORTANT: every line here is written as *aspiration*, not as achieved
  * fact. It says what SageView is building toward ("we are building", "our
  * ambition", "we intend"), never that a ranking, award or market position has
  * already been won. No statistics, clients or achievements are invented.
@@ -15,9 +15,9 @@
 
 export const visionStatement = {
   eyebrow: "The Vision",
-  /** Short form — used on cards, the homepage teaser and meta descriptions. */
+  /** Short form, used on cards, the homepage teaser and meta descriptions. */
   short:
-    "To become the first name in impact storytelling — an African studio built to the world's standard, and the partner organisations think of first when a story has to move people to act.",
+    "To become the first name in impact storytelling, an African studio built to the world's standard, and the partner organisations think of first when a story has to move people to act.",
   /** The headline of the vision page and homepage manifesto. */
   headline: "Built in Africa. Made for the world's most important rooms.",
   /**
@@ -29,37 +29,37 @@ export const visionStatement = {
       id: "premise",
       label: "The Premise",
       heading: "Africa has never lacked stories.",
-      body: "What the continent has too often lacked is studios trusted to tell those stories at the standard the world stops to listen to. Too much of Africa's most consequential work — the education crises, the health movements, the grassroots organisations changing real lives — has been documented as evidence rather than authored as cinema. SageView exists to close that gap.",
+      body: "What the continent has too often lacked is studios trusted to tell those stories at the standard the world stops to listen to. Too much of Africa's most consequential work: the education crises, the health movements, the grassroots organisations changing real lives - has been documented as evidence rather than authored as cinema. SageView exists to close that gap.",
     },
     {
       id: "ambition",
       label: "The Ambition",
       heading: "To become the first name in impact storytelling.",
-      body: "Our vision is to be the definitive global voice for purposeful visual communication. When a founder, a foundation, a ministry or a movement-builder has a story that has to change something — the first name that comes to mind should be SageView.",
+      body: "Our vision is to be the definitive global voice for purposeful visual communication. When a founder, a foundation, a ministry or a movement-builder has a story that has to change something: the first name that comes to mind should be SageView.",
     },
     {
       id: "standard",
       label: "The Standard",
       heading: "Best in Africa is the floor, not the ceiling.",
-      body: "We are not building toward regional recognition. We are building work that stands beside the world's finest documentary and brand storytelling and holds its own in any room, on any continent — in front of a donor board in Geneva, on a summit screen in Nairobi, in a boardroom in Lagos, at a festival anywhere.",
+      body: "We are not building toward regional recognition. We are building work that stands beside the world's finest documentary and brand storytelling and holds its own in any room, on any continent, in front of a donor board in Geneva, on a summit screen in Nairobi, in a boardroom in Lagos, at a festival anywhere.",
     },
     {
       id: "measure",
       label: "The Measure",
       heading: "Media measured by depth, not volume.",
-      body: "We envision a media landscape that rejects superficial noise in favour of lasting resonance — stories designed to move the human heart rather than chase the algorithm. Depth is our metric. Resonance is our outcome.",
+      body: "We envision a media landscape that rejects superficial noise in favour of lasting resonance, stories designed to move the human heart rather than chase the algorithm. Depth is our metric. Resonance is our outcome.",
     },
     {
       id: "partnership",
       label: "The Partnership",
       heading: "The premier partner for organisations shaping human progress.",
-      body: "We intend to be the studio that international development organisations, governments, foundations and ambitious brands trust with their most sensitive and most consequential narratives — because the craft is world-class and the ethics are uncompromising.",
+      body: "We intend to be the studio that international development organisations, governments, foundations and ambitious brands trust with their most sensitive and most consequential narratives, because the craft is world-class and the ethics are uncompromising.",
     },
     {
       id: "legacy",
       label: "The Legacy",
       heading: "A timeless archive of stories that unite, educate and inspire.",
-      body: "Beyond any single campaign, we are building a body of work that outlives its brief — carrying African craft, African dignity and African perspective into every room where human progress is decided.",
+      body: "Beyond any single campaign, we are building a body of work that outlives its brief, carrying African craft, African dignity and African perspective into every room where human progress is decided.",
     },
   ],
   /**
@@ -103,7 +103,7 @@ export const missionStatement = {
     "Our approach blends rigorous strategic communication with intentional, cinematic documentary storytelling, and emphasises the dignity of every subject.",
     "We exist to turn high-stakes development, government and corporate messages into unforgettable visual experiences.",
   ],
-  /** The mission's closing cadence — rendered as three emphasised words. */
+  /** The mission's closing cadence, rendered as three emphasised words. */
   imperative: ["See", "Feel", "Act"],
   imperativeCaption:
     "Every film we make is built to compel an audience to do all three.",

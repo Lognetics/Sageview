@@ -13,7 +13,7 @@ import { services } from "@/content/services";
  * One structure that works at every breakpoint: a stack of large editorial
  * rows that open in place. Opening a service expands its title block, brings
  * in its imagery, animates its capabilities into view and exposes a link to
- * the full service page — which is exactly the desktop interaction described
+ * the full service page, which is exactly the desktop interaction described
  * in the brief, without maintaining a second set of markup for mobile.
  *
  * Height animates via the `grid-template-rows: 0fr → 1fr` technique, so there

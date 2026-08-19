@@ -50,12 +50,12 @@ export const services: readonly Service[] = [
     summary:
       "Non-fiction stories that turn important social issues, institutional milestones and community impact into engaging cinema.",
     intro:
-      "We make non-fiction work that treats a social issue, an institutional milestone or a community's impact as cinema rather than as documentation — without ever trading the truth of the subject for the effect of the frame.",
+      "We make non-fiction work that treats a social issue, an institutional milestone or a community's impact as cinema rather than as documentation, without ever trading the truth of the subject for the effect of the frame.",
     capabilities: [
       {
         title: "Impact & NGO Documentaries",
         summary:
-          "Films built around development projects, grassroots initiatives and socio-economic crises — approached with dignity and depth.",
+          "Films built around development projects, grassroots initiatives and socio-economic crises, approached with dignity and depth.",
         points: [
           "Development projects",
           "Grassroots initiatives",
@@ -77,7 +77,7 @@ export const services: readonly Service[] = [
       {
         title: "Character-Driven Narratives",
         summary:
-          "Human stories that carry complex systemic data — so that a statistic arrives as a person, not a number.",
+          "Human stories that carry complex systemic data, so that a statistic arrives as a person, not a number.",
         points: ["Human stories", "Complex systemic data"],
       },
     ],
@@ -87,9 +87,9 @@ export const services: readonly Service[] = [
       src: film.foodSecurity.src,
       poster: film.foodSecurity.poster,
       alt: film.foodSecurity.alt,
-      caption: "Documentary film — food security and vertical farming programme",
+      caption: "Documentary film: food security and vertical farming programme",
     },
-    metaTitle: "SageView — Documentary Filmmaking",
+    metaTitle: "SageView | Documentary Filmmaking",
     metaDescription:
       "Impact and NGO documentaries, field and institutional reporting, and character-driven narratives from SageView Production Ltd.",
   },
@@ -102,7 +102,7 @@ export const services: readonly Service[] = [
     summary:
       "Before a single frame is shot, we design the blueprint for how a message will be received.",
     intro:
-      "Strategy is not something applied to a film after it is made. Before a single frame is shot, we design the blueprint for how a message will be received — by whom, in what state of mind, and toward what action.",
+      "Strategy is not something applied to a film after it is made. Before a single frame is shot, we design the blueprint for how a message will be received, by whom, in what state of mind, and toward what action.",
     capabilities: [
       {
         title: "Narrative Design & Campaign Strategy",
@@ -124,7 +124,7 @@ export const services: readonly Service[] = [
       {
         title: "Pre-Visual Analytics",
         summary:
-          "Visual tone, mood and aesthetic decided against the psychology of the target viewer — not against trend.",
+          "Visual tone, mood and aesthetic decided against the psychology of the target viewer, not against trend.",
         points: [
           "Visual tone",
           "Mood",
@@ -135,7 +135,7 @@ export const services: readonly Service[] = [
     ],
     image: photo.forestrySummit,
     secondaryImage: photo.campaignBanner,
-    metaTitle: "SageView — Visual Communication Strategy",
+    metaTitle: "SageView | Visual Communication Strategy",
     metaDescription:
       "Narrative design, campaign strategy, creative direction, scripting and pre-visual analytics from SageView Production Ltd.",
   },
@@ -148,7 +148,7 @@ export const services: readonly Service[] = [
     summary:
       "End-to-end delivery: pre-production logistics, on-set direction, live technical broadcast and post-production.",
     intro:
-      "One team carries a project from field research to final master — including live, multi-camera technical broadcast for the moments that only happen once.",
+      "One team carries a project from field research to final master, including live, multi-camera technical broadcast for the moments that only happen once.",
     capabilities: [
       {
         title: "Pre-Production Logistics",
@@ -202,7 +202,7 @@ export const services: readonly Service[] = [
     ],
     image: photo.studioSetup,
     secondaryImage: photo.committee,
-    metaTitle: "SageView — Full-Scale Production",
+    metaTitle: "SageView | Full-Scale Production",
     metaDescription:
       "Pre-production logistics, on-set direction, live technical broadcast and post-production delivery from SageView Production Ltd.",
   },

@@ -27,7 +27,7 @@ type Status =
  * enquiry has actually been delivered. Nothing here pretends.
  *
  * Validation runs on blur once a field has been touched, then on every change
- * for fields already showing an error — so the form corrects itself as you fix
+ * for fields already showing an error, so the form corrects itself as you fix
  * it, without shouting at you while you type the first character.
  */
 export function ContactForm() {
@@ -111,7 +111,7 @@ export function ContactForm() {
       setStatus({
         kind: "error",
         message:
-          "We couldn't reach our server. Check your connection and try again — or email us directly.",
+          "We couldn't reach our server. Check your connection and try again, or email us directly.",
         showEmailFallback: true,
       });
     } finally {
@@ -275,7 +275,7 @@ export function ContactForm() {
               id={`${baseId}-message`}
               name="message"
               label="Anything else"
-              hint="Optional — context, constraints, links, deadlines."
+              hint="Optional, context, constraints, links, deadlines."
               rows={4}
               value={values.message}
               error={touched.message ? errors.message : undefined}
@@ -285,7 +285,7 @@ export function ContactForm() {
           </div>
         </div>
 
-        {/* Honeypot — visually and programmatically hidden from real users. */}
+        {/* Honeypot, visually and programmatically hidden from real users. */}
         <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
           <label htmlFor={`${baseId}-website`}>
             Leave this field empty
@@ -524,7 +524,7 @@ function SuccessState({ onReset }: { onReset: () => void }) {
       <p className="eyebrow">Received</p>
 
       <h3 className="font-display mt-6 text-h2 text-paper">
-        Thank you — your brief is with us.
+        Thank you, your brief is with us.
       </h3>
 
       <p className="mt-5 max-w-xl text-body-lg leading-relaxed text-fog">

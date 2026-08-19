@@ -13,7 +13,7 @@ export const metadata: Metadata = {
  * 404.
  *
  * Styled as a missing slate rather than a browser error, and it always offers
- * a route onward — a dead end on a site whose whole argument is "we finish
+ * a route onward, a dead end on a site whose whole argument is "we finish
  * things" would be the wrong note.
  */
 export default function NotFound() {

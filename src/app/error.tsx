@@ -9,7 +9,7 @@ import { contact } from "@/content/site";
  * Runtime error boundary.
  *
  * The visitor gets a plain explanation and two ways forward. The raw error is
- * sent to the console for the operator only — never rendered, since a stack
+ * sent to the console for the operator only, never rendered, since a stack
  * trace on screen is exactly the "raw browser error" this site should never
  * expose.
  */
@@ -42,7 +42,7 @@ export default function GlobalError({
         </h1>
 
         <p className="mt-7 max-w-xl text-body-lg leading-relaxed text-fog">
-          Something on our side failed to load. Trying again usually fixes it —
+          Something on our side failed to load. Trying again usually fixes it,
           and if it doesn&rsquo;t, we would genuinely like to know.
         </p>
 

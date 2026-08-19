@@ -2,7 +2,7 @@
  * Project enquiry: shape, validation and normalisation.
  *
  * Shared by the form component and the API route so the browser and the server
- * enforce identical rules — client-side validation is a convenience, never the
+ * enforce identical rules, client-side validation is a convenience, never the
  * gate.
  */
 
@@ -76,7 +76,7 @@ export function validateEnquiry(values: EnquiryValues): EnquiryErrors {
   }
 
   if (!values.projectType) {
-    errors.projectType = "Choose the closest match — we can refine it later.";
+    errors.projectType = "Choose the closest match: we can refine it later.";
   } else if (!projectTypes.includes(values.projectType as never)) {
     errors.projectType = "Please choose one of the listed project types.";
   }

@@ -13,7 +13,7 @@ import { quotedTestimonials, testimonials } from "@/content/testimonials";
  * quoted pair rotate here and the full credit list sits beneath.
  *
  * Deliberately manual: no autoplay. An auto-advancing quote steals reading
- * time from the very content it is meant to showcase — and creates an
+ * time from the very content it is meant to showcase, and creates an
  * accessibility problem that then needs a pause button to solve.
  */
 export function TestimonialSlider() {
@@ -79,7 +79,7 @@ export function TestimonialSlider() {
               </p>
               {testimonial.project ? (
                 <p className="eyebrow-muted mt-4">
-                  Project — {testimonial.project}
+                  Project, {testimonial.project}
                 </p>
               ) : null}
             </figcaption>

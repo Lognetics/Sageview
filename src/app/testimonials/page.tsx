@@ -28,7 +28,7 @@ export default function TestimonialsPage() {
             <span className="block text-brass italic">own words.</span>
           </>
         }
-        lead="The most useful thing we can show you is what the people we have worked with chose to say afterwards — unedited."
+        lead="The most useful thing we can show you is what the people we have worked with chose to say afterwards, unedited."
       image={photo.twoChildrenCrowd}
       />
 
@@ -73,7 +73,7 @@ export default function TestimonialsPage() {
             src={film.periodPoverty.src}
             poster={film.periodPoverty.poster}
             alt={film.periodPoverty.alt}
-            caption="The Period Poverty Documentary — press play to watch"
+            caption="The Period Poverty Documentary, press play to watch"
             aspect="wide"
           />
         </Reveal>

@@ -14,7 +14,7 @@ import { principal } from "@/content/site";
  *
  * The point being made is structural: a principal at the centre, with
  * discipline clusters that are engaged as a brief requires. So the diagram is
- * literally that — a hub with five satellites, each one selectable.
+ * literally that, a hub with five satellites, each one selectable.
  *
  * One set of markup serves both layouts. Above `lg` the cluster buttons are
  * absolutely positioned around the hub with drawn connectors; below `lg` the
@@ -55,7 +55,7 @@ export function NetworkDiagram({
         <div className="lg:col-span-7">
           <Reveal>
             <div className="relative mx-auto w-full max-w-[44rem] lg:aspect-square">
-              {/* Connectors — decorative, desktop only. */}
+              {/* Connectors, decorative, desktop only. */}
               <svg
                 aria-hidden="true"
                 viewBox="0 0 100 100"

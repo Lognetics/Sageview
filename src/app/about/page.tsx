@@ -17,7 +17,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
-    "SageView Production Ltd specialises in documentary filmmaking, high-impact brand storytelling and visual communication — translating complex institutional, development, corporate and social ideas into human-centered narratives.",
+    "SageView Production Ltd specialises in documentary filmmaking, high-impact brand storytelling and visual communication, translating complex institutional, development, corporate and social ideas into human-centered narratives.",
   path: "/about",
 });
 
@@ -109,7 +109,7 @@ export default function AboutPage() {
               <span className="text-brass italic"> concept to final cut.</span>
             </>
           }
-          lead="SageView manages the creative process from concept and pre-production strategy through production and final execution — so the intent set on day one survives to the last frame."
+          lead="SageView manages the creative process from concept and pre-production strategy through production and final execution, so the intent set on day one survives to the last frame."
         />
 
         <div className="mt-16">

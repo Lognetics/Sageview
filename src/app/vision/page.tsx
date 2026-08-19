@@ -10,7 +10,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Vision & Mission",
   description:
-    "SageView's vision: to become the first name in impact storytelling — an African studio built to the world's standard, and the partner organisations think of first when a story has to move people to act.",
+    "SageView's vision: to become the first name in impact storytelling, an African studio built to the world's standard, and the partner organisations think of first when a story has to move people to act.",
   path: "/vision",
 });
 
