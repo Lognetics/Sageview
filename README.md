@@ -1,11 +1,11 @@
-# SageView Production Ltd — Website
+# SageView Production Ltd, Website
 
 A premium cinematic editorial website for SageView Production Ltd.
 
 > **Framing the Meaning That Moves Human Minds**
 
 Built with Next.js 16 (App Router), React 19, TypeScript and Tailwind CSS v4.
-No UI framework, no animation library, no icon package — every component here
+No UI framework, no animation library, no icon package, every component here
 is part of one design system.
 
 ---
@@ -21,7 +21,7 @@ npm run lint
 ```
 
 Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` before the
-first production deploy — canonical URLs, Open Graph tags and the sitemap all
+first production deploy, canonical URLs, Open Graph tags and the sitemap all
 derive from it.
 
 ---
@@ -33,7 +33,7 @@ derive from it.
 Every photograph and film on the site is SageView's own work, taken from the
 company Drive portfolio. Nothing is stock.
 
-**`src/content/media.ts` is the registry** — every asset, its path and its alt
+**`src/content/media.ts` is the registry**, every asset, its path and its alt
 text, in one file. To swap a picture anywhere on the site, drop the new file
 into `public/media/…` and change one `src`. No component needs touching.
 
@@ -48,7 +48,7 @@ What is where:
 
 | Asset | Used for |
 | --- | --- |
-| `hero-makoko.mp4` / `.webm` | Homepage hero — a silent 6.8s loop cut from the Makoko film |
+| `hero-makoko.mp4` / `.webm` | Homepage hero, a silent 6.8s loop cut from the Makoko film |
 | `makoko-education-crisis.mp4` | The film on the Makoko case study |
 | `period-poverty.mp4` | The Period Poverty Documentary, on Testimonials |
 | `food-security-programme.mp4` | On the Documentary Filmmaking service page |
@@ -59,15 +59,15 @@ Images render through `<MediaFrame />` (responsive, lazy, AVIF/WebP via
 so **nothing downloads until a visitor presses play**). If an image ever 404s,
 the frame degrades to a designed placeholder rather than a broken icon.
 
-The hero loop was cut from 12.0–19.6s of the Makoko documentary — the one long
-stretch with no burnt-in subtitles — and the last 0.8s is cross-dissolved back
+The hero loop was cut from 12.0–19.6s of the Makoko documentary: the one long
+stretch with no burnt-in subtitles, and the last 0.8s is cross-dissolved back
 over the first so it loops without a visible cut. It is muted and never
 autoplays under `prefers-reduced-motion`; those visitors get the poster still.
 
 **Not used:** the Drive `Photography/Portrait` folder (weddings, pre-wedding,
 fashion and studio portraiture). It is good work, but placing it beside
 "Impact & NGO Documentaries" would undercut the documentary positioning the
-rest of the site argues for. It is a portfolio in its own right — worth a
+rest of the site argues for. It is a portfolio in its own right, worth a
 dedicated page if SageView wants that side of the practice visible.
 
 **Alt text is required on every frame** and lives with the asset in
@@ -89,7 +89,7 @@ centre of the network diagram in place of the aperture mark.
 
 `founderPortraits` in `media.ts` is an ordered preference list. The Founder
 section renders whichever files actually exist, best first, and ignores the
-rest — so dropping a higher-resolution portrait in as `daniel-okafor-01.jpg`
+rest, so dropping a higher-resolution portrait in as `daniel-okafor-01.jpg`
 automatically promotes it to the lead image and demotes the PDF-sourced one to
 a supporting frame. No code change required.
 
@@ -98,7 +98,7 @@ full-bleed, because enlarging it would only make it soft. A higher-resolution
 original is worth supplying when convenient.
 
 The section is gated on `assetExists()`, evaluated while the page is
-prerendered — a portrait that is not there simply does not render, and can
+prerendered, a portrait that is not there simply does not render, and can
 never ship as a broken image.
 
 ### 2. Connecting the contact form
@@ -112,7 +112,7 @@ enquiries start flowing immediately.
 
 To send email instead, replace the body of `deliverEnquiry` in
 `src/lib/enquiry-delivery.ts` with a call to your provider. That file is the
-**only** one that needs to change — the form, validation, error states and API
+**only** one that needs to change: the form, validation, error states and API
 route are provider-agnostic.
 
 Until something is configured the form tells visitors plainly that it is not
@@ -148,7 +148,7 @@ generated from that entry.
 ## Content integrity
 
 Company facts come from the SageView Production Ltd Portfolio 2026 and nothing
-has been invented — no history, clients, awards, statistics, certifications,
+has been invented, no history, clients, awards, statistics, certifications,
 partnerships, locations, headcounts or project results beyond what the
 portfolio states. Where the portfolio lists a section with no content (Future
 Projects), the site says so honestly rather than filling the gap.
@@ -157,7 +157,7 @@ Two deliberate editorial decisions worth knowing about:
 
 - **The Vision was re-authored** at the client's direction into a narrative
   manifesto about becoming the first name in impact storytelling. Every line is
-  written as aspiration — what SageView is *building toward* — never as a
+  written as aspiration (what SageView is *building toward*), never as a
   ranking or market position already held. See the note at the top of
   `src/content/vision.ts`.
 - **"Kama Muta"** is used throughout. The source portfolio spells it both
@@ -179,7 +179,7 @@ src/
 │   ├── layout/             Navbar, MobileMenu, Footer, Logo
 │   ├── primitives/         Section, Button, Reveal, MediaFrame, VideoFrame
 │   └── sections/           Composed page sections
-├── content/                All copy — the CMS layer
+├── content/                All copy: the CMS layer
 └── lib/                    cn, SEO helpers, enquiry validation + delivery
 ```
 
@@ -204,16 +204,16 @@ All 23 routes prerender as static HTML. Only `/api/contact` is dynamic.
 
 Defined once in `src/app/globals.css` as Tailwind v4 theme tokens.
 
-- **Colour** — deep black base (`void`, `ink`, `charcoal`), bone/paper text, a
+- **Colour**, deep black base (`void`, `ink`, `charcoal`), bone/paper text, a
   single brass accent. Hierarchy comes from typography, contrast and spacing,
   not from colour.
-- **Type** — Instrument Serif for display statements, Inter for the interface,
+- **Type**, Instrument Serif for display statements, Inter for the interface,
   JetBrains Mono for the small technical labels that give the site its
   documentary register. All self-hosted by `next/font`: no external requests,
   no layout shift.
-- **Scale** — every size is a `clamp()`, so typography scales continuously
+- **Scale**, every size is a `clamp()`, so typography scales continuously
   rather than jumping at breakpoints.
-- **Motion** — one shared `IntersectionObserver` drives every scroll reveal
+- **Motion**, one shared `IntersectionObserver` drives every scroll reveal
   (`src/components/primitives/Reveal.tsx`); the visual behaviour is pure CSS.
 
 ### Motion and no-JavaScript
@@ -223,7 +223,7 @@ style that neutralises it. So there is no flash of hidden content, and a
 visitor without JavaScript sees every word.
 
 Under `prefers-reduced-motion: reduce`, all reveals, transitions, the grain
-drift and smooth scrolling are disabled — the site presents instantly and
+drift and smooth scrolling are disabled: the site presents instantly and
 statically.
 
 ---
@@ -241,7 +241,7 @@ Checked in Chromium across 16 pages × 5 viewports (320 / 375 / 834 / 1280 /
   server-side validation, honeypot, honest failure states
 - Every scroll reveal fires with motion enabled, on all 14 pages
   (`scratchpad/reveal-check.mjs` walks each page and asserts nothing stays
-  hidden — worth re-running after any change to `Reveal`)
+  hidden, worth re-running after any change to `Reveal`)
 - Hero film autoplays muted, loops, and is skipped entirely under reduced
   motion
 
@@ -251,5 +251,5 @@ scores.
 **Video weight.** The three documentaries total ~95 MB in `public/`. That is
 fine for a static deploy and costs a visitor nothing until they press play, but
 it is heavy for a git repository. If the film library grows, move these to a
-CDN or Vimeo and point `film` in `media.ts` at the new URLs — nothing else
+CDN or Vimeo and point `film` in `media.ts` at the new URLs, nothing else
 changes.
