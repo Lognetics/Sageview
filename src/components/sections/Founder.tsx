@@ -37,6 +37,7 @@ export function Founder() {
 
   return (
     <section
+      id="founder"
       aria-labelledby="founder-heading"
       className="relative isolate overflow-hidden border-t border-bone/10 bg-ink"
     >

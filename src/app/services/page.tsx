@@ -38,7 +38,7 @@ export default function ServicesPage() {
         ]}
       />
 
-      <Section labelledBy="service-list-heading" container="wide">
+      <Section id="disciplines" labelledBy="service-list-heading" container="wide">
         <SectionIntro
           eyebrow="Capabilities"
           headingId="service-list-heading"
@@ -56,6 +56,7 @@ export default function ServicesPage() {
       </Section>
 
       <Section
+        id="engagement"
         labelledBy="workflow-heading"
         container="wide"
         className="border-t border-bone/10 bg-ink"

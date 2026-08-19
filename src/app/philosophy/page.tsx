@@ -40,7 +40,7 @@ export default function PhilosophyPage() {
       <KamaMuta showLink={false} />
 
       {/* Each principle, at length */}
-      <Section labelledBy="principles-heading" container="wide">
+      <Section id="principles" labelledBy="principles-heading" container="wide">
         <SectionIntro
           eyebrow="In Practice"
           headingId="principles-heading"

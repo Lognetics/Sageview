@@ -46,18 +46,18 @@
 
   /* --- Fluid editorial type scale --------------------------------------- */
   /* Clamped so nothing overflows at 320px and nothing bloats past 1920px.   */
-  --text-eyebrow: 0.6875rem;
-  --text-micro: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
-  --text-body-sm: clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);
-  --text-body: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
-  --text-body-lg: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
-  --text-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
-  --text-h4: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
-  --text-h3: clamp(1.5rem, 1.25rem + 1.2vw, 2.25rem);
-  --text-h2: clamp(2rem, 1.5rem + 2.4vw, 3.75rem);
-  --text-h1: clamp(2.5rem, 1.7rem + 3.8vw, 5.5rem);
-  --text-display: clamp(3rem, 1.6rem + 6.2vw, 8.5rem);
-  --text-numeral: clamp(3.5rem, 2rem + 7vw, 9rem);
+  --text-eyebrow: 0.5844rem;
+  --text-micro: clamp(0.6375rem, 0.612rem + 0.1275vw, 0.6906rem);
+  --text-body-sm: clamp(0.7438rem, 0.7225rem + 0.1275vw, 0.7969rem);
+  --text-body: clamp(0.85rem, 0.816rem + 0.17vw, 0.9031rem);
+  --text-body-lg: clamp(0.9031rem, 0.85rem + 0.2975vw, 1.0625rem);
+  --text-lead: clamp(1.0625rem, 0.935rem + 0.595vw, 1.3812rem);
+  --text-h4: clamp(1.0625rem, 0.935rem + 0.6375vw, 1.4875rem);
+  --text-h3: clamp(1.275rem, 1.0625rem + 1.02vw, 1.9125rem);
+  --text-h2: clamp(1.7rem, 1.275rem + 2.04vw, 3.1875rem);
+  --text-h1: clamp(2.125rem, 1.445rem + 3.23vw, 4.675rem);
+  --text-display: clamp(2.55rem, 1.36rem + 5.27vw, 7.225rem);
+  --text-numeral: clamp(2.975rem, 1.7rem + 5.95vw, 7.65rem);
 
   /* --- Motion ----------------------------------------------------------- */
   --ease-cinema: cubic-bezier(0.22, 1, 0.36, 1);
@@ -430,4 +430,122 @@
     background: #fff;
     color: #000;
   }
+}
+
+/* ==========================================================================
+   ALTERNATING SURFACES
+   Bands alternate between the dark cinematic base and a warm paper surface as
+   the visitor scrolls, on every page.
+
+   The rhythm is automatic: every page is a flat list of <section> bands inside
+   <main>, so even-numbered bands take the light surface. That keeps heroes
+   (always first) dark and needs no per-page bookkeeping.
+
+   Sections carry dark-surface utilities baked into their markup (bg-ink,
+   text-fog, border-bone/10 and so on). Rather than rewrite twenty-one
+   components, the light surface remaps those utilities for its own subtree.
+   These rules sit outside @layer so they win over Tailwind's utilities.
+
+   Opt a band out with `surface-hold-dark` when its artwork depends on black.
+   ========================================================================== */
+
+:root {
+  --l-bg: #f6f4ef;
+  --l-bg-raised: #fffefb;
+  --l-bg-sunken: #eae5da;
+  --l-text: #0a0c0d;
+  --l-text-2: #4a504d;
+  --l-text-3: #5f6662;
+  --l-text-4: #767c78;
+  --l-brass: #7c6420;
+  --l-border: color-mix(in oklab, #0a0c0d 14%, transparent);
+}
+
+main > section:nth-of-type(even):not(.surface-hold-dark) {
+  background-color: var(--l-bg);
+  color: var(--l-text);
+}
+
+.surface-light,
+main > section:nth-of-type(even):not(.surface-hold-dark) {
+  /* Borders: bone hairlines become ink hairlines. Brass borders are left
+     alone so accent rules keep their colour. */
+  *:not([class*="border-brass"]),
+  *:not([class*="border-brass"])::before,
+  *:not([class*="border-brass"])::after {
+    border-color: var(--l-border);
+  }
+
+  /* Type */
+  .text-bone,
+  .text-paper { color: var(--l-text); }
+  .text-fog { color: var(--l-text-2); }
+  .text-mist { color: var(--l-text-3); }
+  .text-ash { color: var(--l-text-4); }
+  .text-brass,
+  .text-brass-bright { color: var(--l-brass); }
+  .eyebrow { color: var(--l-brass); }
+  .eyebrow-muted { color: var(--l-text-4); }
+
+  /* Panels that were black become raised paper, so layering survives. */
+  .bg-void,
+  .bg-ink { background-color: var(--l-bg-raised); }
+  .bg-charcoal,
+  .bg-graphite { background-color: var(--l-bg-sunken); }
+  .hover\:bg-charcoal:hover { background-color: var(--l-bg-sunken); }
+
+  /* Hairline rules and the brass ticks that open each section. */
+  .rule-hairline { border-top-color: var(--l-border); }
+  .bg-bone\/10,
+  .bg-bone\/15,
+  .bg-bone\/20 { background-color: var(--l-border); }
+  .bg-brass\/60,
+  .bg-brass\/40 { background-color: var(--l-brass); }
+
+  /* Buttons: the solid brass button keeps its fill, the ghost button flips. */
+  .border-bone\/25,
+  .border-bone\/30 { border-color: var(--l-border); }
+
+  /*
+    Opacity variants (text-bone/70, bg-bone/10 and friends) are separate
+    classes, so the exact-match rules above miss them: a 70%-opacity bone
+    would stay near-invisible on paper. Matched by attribute instead, which
+    trades the precise alpha for guaranteed legibility.
+  */
+  [class*="text-bone/"],
+  [class*="text-paper/"] { color: color-mix(in oklab, var(--l-text) 82%, transparent); }
+  [class*="text-fog/"],
+  [class*="text-mist/"] { color: var(--l-text-2); }
+  [class*="text-ash/"] { color: var(--l-text-4); }
+  [class*="text-brass/"] { color: var(--l-brass); }
+  [class*="bg-bone/"],
+  [class*="bg-paper/"] { background-color: var(--l-border); }
+  [class*="bg-ash/"] { background-color: color-mix(in oklab, var(--l-text) 30%, transparent); }
+
+  /*
+    Decorative washes: display type set at 2-4% opacity as a texture behind
+    the content. The blanket rule above would promote these to near-black
+    slabs sitting over the very headings they back, so they are pulled back
+    to a whisper. Declared last so it wins on source order.
+  */
+  [class*="text-bone/["],
+  [class*="text-paper/["],
+  [class*="text-brass/["],
+  .text-bone\/5,
+  .text-bone\/10,
+  .text-bone\/15,
+  .text-bone\/20,
+  .text-bone\/25,
+  .text-bone\/30 {
+    color: color-mix(in oklab, var(--l-text) 7%, transparent);
+  }
+}
+
+/* The vignette and grain are black-surface effects: hold them off paper. */
+main > section:nth-of-type(even):not(.surface-hold-dark) .cinema-vignette {
+  display: none;
+}
+
+@media print {
+  main > section { background-color: #fff; color: #000; }
 }

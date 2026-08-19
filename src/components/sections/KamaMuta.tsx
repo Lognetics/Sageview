@@ -12,6 +12,7 @@ import { philosophy } from "@/content/philosophy";
 export function KamaMuta({ showLink = true }: { showLink?: boolean }) {
   return (
     <section
+      id="kama-muta"
       aria-labelledby="philosophy-heading"
       className="relative isolate overflow-hidden bg-void"
     >

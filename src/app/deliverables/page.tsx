@@ -41,11 +41,12 @@ export default function DeliverablesPage() {
         ]}
       />
 
-      <Section labelledBy="ecosystem-heading" container="wide">
+      <Section id="ecosystem" labelledBy="ecosystem-heading" container="wide">
         <AssetEcosystem headingId="ecosystem-heading" />
       </Section>
 
       <Section
+        id="packages"
         labelledBy="packages-heading"
         container="wide"
         className="border-t border-bone/10 bg-ink"

@@ -60,14 +60,29 @@ export type NavItem = {
 /** Primary navigation. Mirrors the approved website architecture. */
 export const primaryNav: NavItem[] = [
   {
+    label: "Home",
+    href: "/",
+    description: "Framing the meaning that moves human minds.",
+    children: [
+      { label: "Services", href: "/#services" },
+      { label: "The Process", href: "/#process" },
+      { label: "Deliverables", href: "/#deliverables" },
+      { label: "Why SageView", href: "/#why-sageview" },
+      { label: "Our Network", href: "/#network" },
+      { label: "Testimonials", href: "/#testimonials" },
+    ],
+  },
+  {
     label: "About",
     href: "/about",
     description: "Strategic creativity, human-centered storytelling.",
     children: [
-      { label: "About SageView", href: "/about" },
+      { label: "Introduction", href: "/about#introduction" },
+      { label: "The Difference", href: "/about#difference" },
+      { label: "End-to-End Capability", href: "/about#capability" },
+      { label: "Core Pillars", href: "/about#core-pillars" },
+      { label: "The Founder", href: "/about#founder" },
       { label: "Vision & Mission", href: "/vision" },
-      { label: "Storytelling Philosophy", href: "/philosophy" },
-      { label: "Our Network", href: "/network" },
     ],
   },
   {
@@ -75,7 +90,7 @@ export const primaryNav: NavItem[] = [
     href: "/services",
     description: "Documentary, strategy and full-scale production.",
     children: [
-      { label: "All Services", href: "/services" },
+      { label: "All Disciplines", href: "/services#disciplines" },
       {
         label: "Documentary Filmmaking",
         href: "/services/documentary-filmmaking",
@@ -85,35 +100,52 @@ export const primaryNav: NavItem[] = [
         href: "/services/visual-communication",
       },
       { label: "Full-Scale Production", href: "/services/production" },
+      { label: "How We Engage", href: "/services#engagement" },
     ],
   },
   {
     label: "Process",
     href: "/process",
     description: "Five stages, from discovery to delivery.",
+    children: [
+      { label: "The Five Stages", href: "/process#stages" },
+      { label: "How We Engage", href: "/process#engagement" },
+    ],
   },
   {
     label: "Work",
     href: "/case-studies",
     description: "Case studies and deliverables.",
     children: [
-      { label: "Case Studies", href: "/case-studies" },
+      { label: "Selected Work", href: "/case-studies#selected-work" },
       {
         label: "The Makoko Education Crisis",
         href: "/case-studies/makoko-education-crisis",
       },
-      { label: "Deliverables", href: "/deliverables" },
+      { label: "What Comes Next", href: "/case-studies#whats-next" },
+      { label: "Deliverables", href: "/deliverables#ecosystem" },
+      { label: "Packages", href: "/deliverables#packages" },
     ],
   },
   {
     label: "Philosophy",
     href: "/philosophy",
     description: "Kama Muta, moved by love.",
+    children: [
+      { label: "Kama Muta", href: "/philosophy#kama-muta" },
+      { label: "The Four Principles", href: "/philosophy#principles" },
+      { label: "Core Pillars", href: "/philosophy#core-pillars" },
+    ],
   },
   {
     label: "Network",
     href: "/network",
     description: "An agile network, assembled per project.",
+    children: [
+      { label: "The Model", href: "/network#model" },
+      { label: "Capability Clusters", href: "/network#clusters" },
+      { label: "The Founder", href: "/network#founder" },
+    ],
   },
 ];
 

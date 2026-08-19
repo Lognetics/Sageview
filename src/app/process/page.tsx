@@ -36,7 +36,7 @@ export default function ProcessPage() {
         ]}
       />
 
-      <Section labelledBy="timeline-heading" container="wide">
+      <Section id="stages" labelledBy="timeline-heading" container="wide">
         <SectionIntro
           eyebrow="The Making"
           headingId="timeline-heading"
@@ -54,6 +54,7 @@ export default function ProcessPage() {
       </Section>
 
       <Section
+        id="engagement"
         labelledBy="process-workflow-heading"
         container="wide"
         className="border-t border-bone/10 bg-ink"

@@ -34,7 +34,7 @@ export default function CaseStudiesPage() {
         image={caseStudies[0].heroImage}
       />
 
-      <Section labelledBy="case-list-heading" container="wide">
+      <Section id="selected-work" labelledBy="case-list-heading" container="wide">
         <SectionIntro
           eyebrow="Selected Work"
           headingId="case-list-heading"
@@ -107,6 +107,7 @@ export default function CaseStudiesPage() {
 
       {/* An honest placeholder rather than invented projects. */}
       <Section
+        id="whats-next"
         labelledBy="future-heading"
         container="wide"
         className="border-t border-bone/10 bg-ink"

@@ -36,7 +36,7 @@ export default function NetworkPage() {
         }))}
       />
 
-      <Section labelledBy="network-diagram-heading" container="wide">
+      <Section id="model" labelledBy="network-diagram-heading" container="wide">
         <SectionIntro
           eyebrow="The Structure"
           headingId="network-diagram-heading"
@@ -67,6 +67,7 @@ export default function NetworkPage() {
 
       {/* Full roster of disciplines, always readable without interaction. */}
       <Section
+        id="clusters"
         labelledBy="clusters-heading"
         container="wide"
         className="border-t border-bone/10 bg-ink"

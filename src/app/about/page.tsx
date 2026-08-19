@@ -45,7 +45,7 @@ export default function AboutPage() {
       />
 
       {/* Introduction */}
-      <Section labelledBy="about-intro-heading" container="wide">
+      <Section id="introduction" labelledBy="about-intro-heading" container="wide">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <SectionIntro
@@ -99,7 +99,7 @@ export default function AboutPage() {
       <NarrativeDesigners />
 
       {/* End-to-end capability */}
-      <Section labelledBy="capability-heading" container="wide">
+      <Section id="capability" labelledBy="capability-heading" container="wide">
         <SectionIntro
           eyebrow="End-to-End Capability"
           headingId="capability-heading"
@@ -122,7 +122,7 @@ export default function AboutPage() {
       <Founder />
 
       {/* Vision pointer */}
-      <Section labelledBy="about-vision-heading" container="wide">
+      <Section id="vision" labelledBy="about-vision-heading" container="wide">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <SectionIntro

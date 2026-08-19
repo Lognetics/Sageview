@@ -11,6 +11,7 @@ import { about } from "@/content/about";
 export function NarrativeDesigners() {
   return (
     <section
+      id="difference"
       aria-labelledby="difference-heading"
       className="relative isolate overflow-hidden border-y border-bone/10 bg-ink"
     >

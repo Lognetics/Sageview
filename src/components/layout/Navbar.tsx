@@ -83,9 +83,9 @@ export function Navbar({ wordmark = null }: { wordmark?: Wordmark | null }) {
           />
 
           <nav aria-label="Primary" className="hidden lg:block">
-            <ul className="flex items-center gap-8 xl:gap-10">
+            <ul className="flex items-center gap-5 xl:gap-8">
               {primaryNav.map((item) => (
-                <li key={item.href}>
+                <li key={item.href} className="group/item relative">
                   <Link
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
@@ -107,6 +107,37 @@ export function Navbar({ wordmark = null }: { wordmark?: Wordmark | null }) {
                       )}
                     />
                   </Link>
+
+                  {/*
+                    Section menu. Opens on hover and on keyboard focus
+                    (focus-within), so tabbing through the header reaches every
+                    link without a click handler or any open/closed state.
+                    `pt-3` keeps the panel touching the trigger, so the pointer
+                    never crosses a gap that would dismiss it.
+                  */}
+                  {item.children?.length ? (
+                    <div
+                      className={cn(
+                        "invisible absolute left-1/2 top-full z-50 w-[17rem] -translate-x-1/2 pt-3 opacity-0",
+                        "transition-[opacity,visibility] duration-[var(--dur-fast)]",
+                        "group-hover/item:visible group-hover/item:opacity-100",
+                        "group-focus-within/item:visible group-focus-within/item:opacity-100",
+                      )}
+                    >
+                      <ul className="border border-bone/10 bg-void/95 p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.85)] backdrop-blur-xl">
+                        {item.children.map((child) => (
+                          <li key={child.href}>
+                            <Link
+                              href={child.href}
+                              className="block px-4 py-2.5 text-body-sm text-fog transition-colors duration-[var(--dur-fast)] hover:bg-charcoal hover:text-bone"
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
                 </li>
               ))}
             </ul>
