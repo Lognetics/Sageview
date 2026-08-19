@@ -21,7 +21,9 @@ export const site = {
    * Set NEXT_PUBLIC_SITE_URL at build time once the domain is live.
    * Used for canonical URLs, Open Graph and the sitemap.
    */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.sageviewproduction.com",
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+    "https://www.sageviewproduction.com",
   locale: "en",
   foundedYear: 2026,
 } as const;
