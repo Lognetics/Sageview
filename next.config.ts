@@ -42,6 +42,31 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
 
+  /**
+   * Redirects for the pre-2026 architecture.
+   *
+   * Those pages were absorbed into Services and About rather than deleted, so
+   * every old URL still resolves to where its content actually went. Permanent
+   * because the old structure is not coming back.
+   */
+  async redirects() {
+    return [
+      { source: "/contact", destination: "/start-a-project", permanent: true },
+      { source: "/case-studies", destination: "/work", permanent: true },
+      { source: "/case-studies/:slug", destination: "/work/:slug", permanent: true },
+      { source: "/process", destination: "/services#process", permanent: true },
+      { source: "/deliverables", destination: "/services", permanent: true },
+      { source: "/services/documentary-filmmaking", destination: "/services#film", permanent: true },
+      { source: "/services/visual-communication", destination: "/services#visual-communication", permanent: true },
+      { source: "/services/production", destination: "/services#live-production", permanent: true },
+      { source: "/vision", destination: "/about#who-we-are", permanent: true },
+      { source: "/philosophy", destination: "/about#philosophy", permanent: true },
+      { source: "/network", destination: "/about#network", permanent: true },
+      { source: "/why-sageview", destination: "/about#approach", permanent: true },
+      { source: "/testimonials", destination: "/about", permanent: true },
+    ];
+  },
+
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

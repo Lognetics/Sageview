@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Archivo, Inter, JetBrains_Mono } from "next/font/google";
 
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
@@ -11,21 +11,20 @@ import "./globals.css";
 /**
  * Type system.
  *
- * Display, Instrument Serif: a high-contrast editorial face used only for
- *   large statements, so it never loses its impact.
- * Sans   , Inter: the working voice of the interface.
- * Mono   , JetBrains Mono: reserved for small technical labels and indices,
- *   the "slate" voice that gives the site its documentary register.
+ * Display, Archivo: a heavy grotesque, set large and tight. It carries the
+ *   whole voice of the site, so it is loaded across its weight range rather
+ *   than at one weight.
+ * Sans   , Inter: the working voice of the interface and all running text.
+ * Mono   , JetBrains Mono: small technical labels, indices and filters.
  *
  * All three are self-hosted by next/font: no external requests, no layout
  * shift, automatically subset to latin.
  */
-const instrumentSerif = Instrument_Serif({
-  weight: "400",
-  style: ["normal", "italic"],
+const archivo = Archivo({
+  weight: ["600", "700", "800", "900"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-instrument-serif",
+  variable: "--font-archivo",
 });
 
 const inter = Inter({
@@ -85,7 +84,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       // `js` gates every scroll-reveal. It is set server-side (so there is no
       // flash of hidden content) and neutralised by the <noscript> style below
       // for visitors without JavaScript.
-      className={`js ${instrumentSerif.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
+      className={`js ${archivo.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
       // Next 16 no longer overrides `scroll-behavior: smooth` during route
       // transitions unless asked; this keeps navigation instant while anchor
       // links stay smooth.

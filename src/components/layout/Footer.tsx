@@ -66,7 +66,7 @@ export function Footer() {
               <div>
                 <h2 className="eyebrow-muted">Company</h2>
                 <ul className="mt-5 flex flex-col gap-3">
-                  {footerNav.company.map((item) => (
+                  {footerNav.services.map((item) => (
                     <li key={item.href}>
                       <FooterLink href={item.href}>{item.label}</FooterLink>
                     </li>

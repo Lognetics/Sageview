@@ -9,7 +9,13 @@ import {
   type EnquiryErrors,
   type EnquiryValues,
 } from "@/lib/enquiry";
-import { budgetBands, projectTypes, timelines } from "@/content/contact";
+import {
+  BRIEF_ACCEPT,
+  budgetBands,
+  MAX_BRIEF_BYTES,
+  projectTypes,
+  timelines,
+} from "@/content/contact";
 import { contact } from "@/content/site";
 import { Button } from "@/components/primitives/Button";
 
@@ -119,6 +125,49 @@ export function ContactForm() {
     }
   };
 
+  /**
+   * Reads the chosen file into the enquiry as base64.
+   *
+   * Held in state rather than uploaded on selection: there is nowhere to
+   * upload it to, so it travels with the submission or not at all. Oversized
+   * files are still stored so validation can explain the ceiling rather than
+   * the field silently doing nothing.
+   */
+  const setBrief = (file: File | null) => {
+    if (!file) {
+      setValues((current) => ({ ...current, brief: null }));
+      setErrors((current) => ({ ...current, brief: undefined }));
+      return;
+    }
+
+    if (file.size > MAX_BRIEF_BYTES) {
+      setValues((current) => ({ ...current, brief: null }));
+      setErrors((current) => ({
+        ...current,
+        brief: `That file is over ${Math.round(MAX_BRIEF_BYTES / (1024 * 1024))}MB. Email it across instead and we will match it to your enquiry.`,
+      }));
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = typeof reader.result === "string" ? reader.result : "";
+      // Strip the data: prefix so only the payload travels.
+      const data = result.slice(result.indexOf(",") + 1);
+      setValues((current) => ({
+        ...current,
+        brief: { name: file.name, type: file.type, size: file.size, data },
+      }));
+      setErrors((current) => ({ ...current, brief: undefined }));
+    };
+    reader.onerror = () =>
+      setErrors((current) => ({
+        ...current,
+        brief: "That file could not be read. Try attaching it again.",
+      }));
+    reader.readAsDataURL(file);
+  };
+
   if (status.kind === "success") {
     return <SuccessState onReset={() => setStatus({ kind: "idle" })} />;
   }
@@ -136,24 +185,24 @@ export function ContactForm() {
         className={cn(status.kind === "error" ? "mb-8 block" : "sr-only")}
       >
         {status.kind === "error" ? (
-          <div className="border border-danger/40 bg-danger/8 p-6">
-            <p className="eyebrow text-danger">Not sent</p>
-            <p className="mt-3 text-body-sm leading-relaxed text-bone">
+          <div className="border border-[var(--color-danger)]/40 bg-[var(--color-danger)]/8 p-6">
+            <p className="eyebrow text-[var(--color-danger)]">Not sent</p>
+            <p className="mt-3 text-body-sm leading-relaxed text-[var(--text-strong)]">
               {status.message}
             </p>
             {status.showEmailFallback ? (
-              <p className="mt-4 text-body-sm text-mist">
+              <p className="mt-4 text-body-sm text-[var(--text-muted)]">
                 Email{" "}
                 <a
                   href={`mailto:${contact.email}`}
-                  className="text-brass underline underline-offset-4"
+                  className="text-[var(--accent)] underline underline-offset-4"
                 >
                   {contact.email}
                 </a>{" "}
                 or call{" "}
                 <a
                   href={`tel:${contact.phoneHref}`}
-                  className="text-brass underline underline-offset-4"
+                  className="text-[var(--accent)] underline underline-offset-4"
                 >
                   {contact.phone}
                 </a>
@@ -165,6 +214,8 @@ export function ContactForm() {
       </div>
 
       <fieldset disabled={submitting} className="contents">
+        <FormGroup title="Your Information" />
+
         <div className="grid gap-x-8 gap-y-7 sm:grid-cols-2">
           <Field
             id={`${baseId}-fullName`}
@@ -214,6 +265,10 @@ export function ContactForm() {
             autoComplete="tel"
           />
 
+          <div className="sm:col-span-2">
+            <FormGroup title="Project" />
+          </div>
+
           <SelectField
             id={`${baseId}-projectType`}
             name="projectType"
@@ -238,6 +293,10 @@ export function ContactForm() {
             onChange={setField}
             onBlur={onBlur}
           />
+
+          <div className="sm:col-span-2">
+            <FormGroup title="Tell Us About The Project" />
+          </div>
 
           <div className="sm:col-span-2">
             <TextareaField
@@ -283,6 +342,15 @@ export function ContactForm() {
               onBlur={onBlur}
             />
           </div>
+
+          <div className="sm:col-span-2">
+            <BriefField
+              id={`${baseId}-brief`}
+              brief={values.brief}
+              error={errors.brief}
+              onChange={setBrief}
+            />
+          </div>
         </div>
 
         {/* Honeypot, visually and programmatically hidden from real users. */}
@@ -301,14 +369,14 @@ export function ContactForm() {
           </label>
         </div>
 
-        <div className="mt-10 flex flex-col gap-5 border-t border-bone/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-sm text-micro leading-relaxed text-ash">
+        <div className="mt-10 flex flex-col gap-5 border-t border-[var(--line)] pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-sm text-micro leading-relaxed text-[var(--text-faint)]">
             We read every enquiry ourselves. Fields marked with an asterisk are
             required.
           </p>
 
           <Button type="submit" size="lg" withArrow={!submitting}>
-            {submitting ? "Sending…" : "Start the Conversation"}
+            {submitting ? "Sending…" : "Submit Project"}
           </Button>
         </div>
       </fieldset>
@@ -319,7 +387,7 @@ export function ContactForm() {
 /* ---------------------------------------------------------------- fields -- */
 
 const FIELD_CLASS =
-  "w-full border-b bg-transparent px-0 py-3 text-body text-bone placeholder:text-ash/70 transition-colors duration-[var(--dur-fast)] focus:outline-none";
+  "w-full border-b bg-transparent px-0 py-3 text-body text-[var(--text-strong)] placeholder:text-[var(--text-faint)] transition-colors duration-[var(--dur-fast)] focus:outline-none";
 
 type FieldCommon = {
   id: string;
@@ -352,11 +420,11 @@ function FieldShell({
     <div>
       <label
         htmlFor={id}
-        className="eyebrow-muted flex items-center gap-1.5 text-bone/70"
+        className="eyebrow-muted flex items-center gap-1.5 text-[var(--text-strong)]/70"
       >
         {label}
         {required ? (
-          <span aria-hidden="true" className="text-brass">
+          <span aria-hidden="true" className="text-[var(--accent)]">
             *
           </span>
         ) : null}
@@ -365,11 +433,11 @@ function FieldShell({
       {children}
 
       {error ? (
-        <p id={`${id}-error`} className="mt-2 text-micro text-danger">
+        <p id={`${id}-error`} className="mt-2 text-micro text-[var(--color-danger)]">
           {error}
         </p>
       ) : hint ? (
-        <p id={`${id}-hint`} className="mt-2 text-micro text-ash">
+        <p id={`${id}-hint`} className="mt-2 text-micro text-[var(--text-faint)]">
           {hint}
         </p>
       ) : null}
@@ -409,7 +477,7 @@ function Field({
           "mt-2",
           error
             ? "border-danger focus:border-danger"
-            : "border-bone/20 focus:border-brass",
+            : "border-[var(--line)] focus:border-brass",
         )}
       />
     </FieldShell>
@@ -447,17 +515,17 @@ function SelectField({
           className={cn(
             FIELD_CLASS,
             "cursor-pointer appearance-none pr-8",
-            value ? "text-bone" : "text-ash/70",
+            value ? "text-[var(--text-strong)]" : "text-[var(--text-faint)]",
             error
               ? "border-danger focus:border-danger"
-              : "border-bone/20 focus:border-brass",
+              : "border-[var(--line)] focus:border-brass",
           )}
         >
-          <option value="" className="bg-charcoal text-ash">
+          <option value="" className="bg-charcoal text-[var(--text-faint)]">
             {placeholder}
           </option>
           {options.map((option) => (
-            <option key={option} value={option} className="bg-charcoal text-bone">
+            <option key={option} value={option} className="bg-charcoal text-[var(--text-strong)]">
               {option}
             </option>
           ))}
@@ -505,7 +573,7 @@ function TextareaField({
           "mt-2 resize-y leading-relaxed",
           error
             ? "border-danger focus:border-danger"
-            : "border-bone/20 focus:border-brass",
+            : "border-[var(--line)] focus:border-brass",
         )}
       />
     </FieldShell>
@@ -527,7 +595,7 @@ function SuccessState({ onReset }: { onReset: () => void }) {
         Thank you, your brief is with us.
       </h3>
 
-      <p className="mt-5 max-w-xl text-body-lg leading-relaxed text-fog">
+      <p className="mt-5 max-w-xl text-body-lg leading-relaxed text-[var(--text-body-color)]">
         We read every enquiry ourselves and will come back to you with a point
         of view on the story, not a generic acknowledgement.
       </p>
@@ -538,11 +606,85 @@ function SuccessState({ onReset }: { onReset: () => void }) {
         </Button>
         <a
           href={`mailto:${contact.email}`}
-          className="text-body-sm text-mist transition-colors hover:text-brass"
+          className="text-body-sm text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
         >
           Or reach us at {contact.email}
         </a>
       </div>
+    </div>
+  );
+}
+
+
+/** Small caps rule that opens each group of fields. */
+function FormGroup({ title }: { title: string }) {
+  return (
+    <p className="eyebrow-muted mt-14 flex items-center gap-3 border-t pt-8 first:mt-0 first:border-t-0 first:pt-0">
+      {title}
+    </p>
+  );
+}
+
+/**
+ * Brief upload.
+ *
+ * Deliberately plain: a button, the chosen filename, and a way to remove it.
+ * The copy states the ceiling up front, because discovering a size limit
+ * after filling in a form is the worst place to discover it.
+ */
+function BriefField({
+  id,
+  brief,
+  error,
+  onChange,
+}: {
+  id: string;
+  brief: EnquiryValues["brief"];
+  error?: string;
+  onChange: (file: File | null) => void;
+}) {
+  const limitMb = Math.round(MAX_BRIEF_BYTES / (1024 * 1024));
+
+  return (
+    <div>
+      <label htmlFor={id} className="eyebrow-muted">
+        Upload Brief
+      </label>
+
+      <div className="mt-4 flex flex-wrap items-center gap-4">
+        <input
+          id={id}
+          name="brief"
+          type="file"
+          accept={BRIEF_ACCEPT}
+          onChange={(event) => onChange(event.target.files?.[0] ?? null)}
+          className="block w-full text-body-sm text-[var(--text-muted)] file:mr-4 file:cursor-pointer file:border file:border-[var(--line-strong)] file:bg-transparent file:px-5 file:py-3 file:font-mono file:text-[0.65rem] file:tracking-[0.16em] file:text-[var(--text-strong)] file:uppercase hover:file:bg-[var(--wash)]"
+        />
+      </div>
+
+      {brief ? (
+        <p className="mt-3 text-body-sm text-[var(--text-body-color)]">
+          Attached: <span className="text-[var(--text-strong)]">{brief.name}</span>{" "}
+          <button
+            type="button"
+            onClick={() => onChange(null)}
+            className="ml-2 underline underline-offset-4 hover:text-[var(--text-strong)]"
+          >
+            Remove
+          </button>
+        </p>
+      ) : (
+        <p className="mt-3 text-micro leading-relaxed text-[var(--text-faint)]">
+          Optional. PDF, Word, PowerPoint or text, up to {limitMb}MB. Anything
+          larger is better emailed across.
+        </p>
+      )}
+
+      {error ? (
+        <p role="alert" className="mt-3 text-body-sm text-[var(--color-danger)]">
+          {error}
+        </p>
+      ) : null}
     </div>
   );
 }

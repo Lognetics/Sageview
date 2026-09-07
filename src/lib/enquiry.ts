@@ -6,7 +6,26 @@
  * gate.
  */
 
-import { budgetBands, projectTypes, timelines } from "@/content/contact";
+import {
+  budgetBands,
+  MAX_BRIEF_BYTES,
+  projectTypes,
+  timelines,
+} from "@/content/contact";
+
+/**
+ * An uploaded brief, carried inside the enquiry rather than stored.
+ *
+ * `data` is base64 and is what makes the size ceiling matter: it inflates the
+ * payload by roughly a third, and a delivery webhook has to accept the whole
+ * thing in one request.
+ */
+export type BriefUpload = {
+  name: string;
+  type: string;
+  size: number;
+  data: string;
+};
 
 export type EnquiryValues = {
   fullName: string;
@@ -18,6 +37,8 @@ export type EnquiryValues = {
   timeline: string;
   budget: string;
   message: string;
+  /** Optional brief document. Absent for most enquiries. */
+  brief: BriefUpload | null;
   /** Honeypot. Real people never fill this in; bots usually do. */
   website: string;
 };
@@ -32,6 +53,7 @@ export const emptyEnquiry: EnquiryValues = {
   timeline: "",
   budget: "",
   message: "",
+  brief: null,
   website: "",
 };
 
@@ -100,6 +122,14 @@ export function validateEnquiry(values: EnquiryValues): EnquiryErrors {
     errors.message = "Please keep this under 4,000 characters.";
   }
 
+  if (values.brief) {
+    if (!values.brief.name || !values.brief.data) {
+      errors.brief = "That file could not be read. Try attaching it again.";
+    } else if (values.brief.size > MAX_BRIEF_BYTES) {
+      errors.brief = `That file is over ${Math.round(MAX_BRIEF_BYTES / (1024 * 1024))}MB. Email it across instead and we will match it to your enquiry.`;
+    }
+  }
+
   return errors;
 }
 
@@ -119,6 +149,27 @@ export function parseEnquiry(input: unknown): EnquiryValues {
     timeline: read("timeline"),
     budget: read("budget"),
     message: read("message"),
+    brief: parseBrief(source.brief),
     website: read("website"),
   };
+}
+
+/**
+ * Coerces an unknown brief into shape, or returns null.
+ *
+ * Anything malformed becomes null rather than an error: a broken attachment
+ * should never cost someone their enquiry, and the size ceiling is enforced
+ * by validation afterwards so the sender is told why.
+ */
+function parseBrief(input: unknown): BriefUpload | null {
+  if (!input || typeof input !== "object") return null;
+  const source = input as Record<string, unknown>;
+
+  const name = typeof source.name === "string" ? source.name.trim() : "";
+  const data = typeof source.data === "string" ? source.data : "";
+  const size = typeof source.size === "number" ? source.size : 0;
+  const type = typeof source.type === "string" ? source.type : "";
+
+  if (!name || !data) return null;
+  return { name: name.slice(0, 200), type: type.slice(0, 120), size, data };
 }

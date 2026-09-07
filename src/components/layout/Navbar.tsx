@@ -5,26 +5,28 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import { cn } from "@/lib/cn";
-import { primaryNav } from "@/content/site";
-import { ButtonLink } from "@/components/primitives/Button";
+import { primaryAction, primaryNav } from "@/content/site";
 import { Logo, type Wordmark } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 
 /**
  * Site header.
  *
- * Sits transparent over the hero and condenses into a translucent bar once the
- * visitor scrolls, lighter chrome, more film. A hairline progress rule tracks
- * reading position on long editorial pages.
+ * Transparent over the homepage hero, then a solid paper bar once the visitor
+ * scrolls past it. Over that dark hero the header adopts light type, which is
+ * why it tracks scroll rather than simply always being solid.
+ *
+ * Each destination carries a dropdown of in-page sections. It opens on hover
+ * and on keyboard focus through `focus-within`, so it needs no open/closed
+ * state and no JavaScript to be reachable by tab.
  */
 export function Navbar({ wordmark = null }: { wordmark?: Wordmark | null }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 
   /**
-   * The menu is open only while the route it was opened on is still current.
-   * Deriving this instead of closing it from an effect means a browser
-   * back/forward also dismisses the overlay, with no cascading render.
+   * The menu is open only while the route it was opened on is still current,
+   * so a browser back/forward dismisses the overlay with no extra effect.
    */
   const [menu, setMenu] = useState({ open: false, path: pathname });
   const menuOpen = menu.open && menu.path === pathname;
@@ -33,174 +35,140 @@ export function Navbar({ wordmark = null }: { wordmark?: Wordmark | null }) {
     [pathname],
   );
 
-  // Scroll state, read inside rAF so we never force layout on the scroll thread.
   useEffect(() => {
     let frame = 0;
-
     const onScroll = () => {
       if (frame) return;
-      frame = window.requestAnimationFrame(() => {
+      frame = requestAnimationFrame(() => {
         setScrolled(window.scrollY > 24);
         frame = 0;
       });
     };
-
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
-      if (frame) window.cancelAnimationFrame(frame);
+      if (frame) cancelAnimationFrame(frame);
     };
   }, []);
 
   const isActive = useCallback(
-    (href: string) =>
-      href === "/" ? pathname === "/" : pathname.startsWith(href),
+    (href: string) => {
+      const path = href.split(/[#?]/)[0];
+      if (path === "/") return pathname === "/";
+      return pathname === path || pathname.startsWith(`${path}/`);
+    },
     [pathname],
   );
 
-  return (
-    <>
-      <header
-        className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-[var(--dur-base)] ease-[cubic-bezier(0.22,1,0.36,1)]",
-          scrolled && !menuOpen
-            ? "border-b border-bone/10 bg-void/80 backdrop-blur-xl supports-[backdrop-filter]:bg-void/65"
-            : "border-b border-transparent bg-transparent",
-        )}
-        style={{ ["--header-h" as string]: scrolled ? "4.5rem" : "5.5rem" }}
-      >
-        <div
-          className={cn(
-            "container-wide flex items-center justify-between gap-6 transition-[height] duration-[var(--dur-base)] ease-[cubic-bezier(0.22,1,0.36,1)]",
-            scrolled ? "h-[4.5rem]" : "h-[5.5rem]",
-          )}
-        >
-          <Logo
-            wordmark={wordmark}
-            showSubline={!scrolled}
-            compact={scrolled}
-          />
+  /*
+    Only the homepage opens on a full-bleed dark hero; every other page starts
+    on paper. So the header inverts to light type there and there only, and
+    only until the visitor scrolls off the hero, after which the solid paper
+    bar takes over. Deriving it from the route keeps every page from having to
+    remember to declare it.
+  */
+  const inverted = pathname === "/" && !scrolled;
 
-          <nav aria-label="Primary" className="hidden lg:block">
-            <ul className="flex items-center gap-5 xl:gap-8">
-              {primaryNav.map((item) => (
-                <li key={item.href} className="group/item relative">
-                  <Link
-                    href={item.href}
-                    aria-current={isActive(item.href) ? "page" : undefined}
+  return (
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-colors duration-[var(--dur-base)]",
+        scrolled
+          ? "border-b bg-[var(--surface)]/92 backdrop-blur-md"
+          : "border-b border-transparent",
+        inverted && "band-dark bg-transparent",
+      )}
+    >
+      <div className="container-wide flex h-[4.5rem] items-center justify-between gap-6 md:h-20">
+        <Logo wordmark={wordmark} showSubline={false} compact />
+
+        <nav aria-label="Primary" className="hidden lg:block">
+          <ul className="flex items-center gap-1">
+            {primaryNav.map((item) => (
+              <li key={item.href} className="group relative">
+                <Link
+                  href={item.href}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className={cn(
+                    "block px-3 py-2 font-mono text-[0.68rem] tracking-[0.18em] uppercase transition-colors duration-[var(--dur-fast)]",
+                    isActive(item.href)
+                      ? "text-[var(--text-strong)]"
+                      : "text-[var(--text-muted)] hover:text-[var(--text-strong)]",
+                  )}
+                >
+                  {item.label}
+                </Link>
+
+                {item.children ? (
+                  /*
+                    Hidden by opacity rather than display so it can animate,
+                    and made unreachable by pointer-events plus invisible so a
+                    closed menu never traps a click or a screen reader.
+                  */
+                  <div
                     className={cn(
-                      "group/nav relative block py-2 text-body-sm font-medium tracking-[0.01em] transition-colors duration-[var(--dur-fast)]",
-                      isActive(item.href)
-                        ? "text-brass"
-                        : "text-fog hover:text-bone",
+                      "invisible absolute top-full left-0 min-w-56 -translate-y-1 opacity-0",
+                      "border bg-[var(--surface-raised)] p-2 shadow-lg shadow-black/5",
+                      "transition-[opacity,transform] duration-[var(--dur-fast)]",
+                      "group-hover:visible group-hover:translate-y-0 group-hover:opacity-100",
+                      "group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100",
                     )}
                   >
-                    {item.label}
-                    <span
-                      aria-hidden="true"
-                      className={cn(
-                        "absolute bottom-0 left-0 h-px w-full origin-left bg-brass transition-transform duration-[var(--dur-base)] ease-[cubic-bezier(0.22,1,0.36,1)]",
-                        isActive(item.href)
-                          ? "scale-x-100"
-                          : "scale-x-0 motion-safe:group-hover/nav:scale-x-100",
-                      )}
-                    />
-                  </Link>
+                    <ul className="flex flex-col">
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            className="block px-3 py-2 text-body-sm text-[var(--text-body-color)] transition-colors duration-[var(--dur-fast)] hover:bg-[var(--wash)] hover:text-[var(--text-strong)]"
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-                  {/*
-                    Section menu. Opens on hover and on keyboard focus
-                    (focus-within), so tabbing through the header reaches every
-                    link without a click handler or any open/closed state.
-                    `pt-3` keeps the panel touching the trigger, so the pointer
-                    never crosses a gap that would dismiss it.
-                  */}
-                  {item.children?.length ? (
-                    <div
-                      className={cn(
-                        "invisible absolute left-1/2 top-full z-50 w-[17rem] -translate-x-1/2 pt-3 opacity-0",
-                        "transition-[opacity,visibility] duration-[var(--dur-fast)]",
-                        "group-hover/item:visible group-hover/item:opacity-100",
-                        "group-focus-within/item:visible group-focus-within/item:opacity-100",
-                      )}
-                    >
-                      <ul className="border border-bone/10 bg-void/95 p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.85)] backdrop-blur-xl">
-                        {item.children.map((child) => (
-                          <li key={child.href}>
-                            <Link
-                              href={child.href}
-                              className="block px-4 py-2.5 text-body-sm text-fog transition-colors duration-[var(--dur-fast)] hover:bg-charcoal hover:text-bone"
-                            >
-                              {child.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-          </nav>
+        <div className="flex items-center gap-3">
+          <Link
+            href={primaryAction.href}
+            className={cn(
+              "hidden font-mono text-[0.68rem] tracking-[0.18em] uppercase sm:inline-flex",
+              "border border-[var(--text-strong)] px-5 py-3 text-[var(--text-strong)]",
+              "transition-colors duration-[var(--dur-fast)]",
+              "hover:bg-[var(--text-strong)] hover:text-[var(--surface)]",
+            )}
+          >
+            {primaryAction.label}
+          </Link>
 
-          <div className="flex items-center gap-3">
-            <ButtonLink
-              href="/contact"
-              size="md"
-              withArrow
-              className="hidden lg:inline-flex"
-            >
-              Start a Project
-            </ButtonLink>
-
-            <MenuToggle
-              open={menuOpen}
-              onToggle={() => setMenuOpen(!menuOpen)}
-            />
-          </div>
+          <button
+            type="button"
+            onClick={() => setMenuOpen(true)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            className="-mr-2 inline-flex h-11 w-11 items-center justify-center lg:hidden"
+          >
+            <span className="sr-only">Open menu</span>
+            <span aria-hidden className="flex w-5 flex-col gap-[5px]">
+              <span className="h-px w-full bg-[var(--text-strong)]" />
+              <span className="h-px w-full bg-[var(--text-strong)]" />
+              <span className="h-px w-full bg-[var(--text-strong)]" />
+            </span>
+          </button>
         </div>
-      </header>
+      </div>
 
       <MobileMenu
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
         isActive={isActive}
       />
-    </>
-  );
-}
-
-/** Two-line burger that morphs into a close mark. */
-function MenuToggle({
-  open,
-  onToggle,
-}: {
-  open: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      aria-expanded={open}
-      aria-controls="mobile-menu"
-      aria-label={open ? "Close menu" : "Open menu"}
-      className="relative z-50 -mr-2 flex h-12 w-12 items-center justify-center text-bone transition-colors duration-200 hover:text-brass lg:hidden"
-    >
-      <span aria-hidden="true" className="relative block h-3 w-7">
-        <span
-          className={cn(
-            "absolute left-0 block h-px w-full bg-current transition-all duration-[var(--dur-base)] ease-[cubic-bezier(0.22,1,0.36,1)]",
-            open ? "top-1.5 rotate-45" : "top-0",
-          )}
-        />
-        <span
-          className={cn(
-            "absolute left-0 block h-px bg-current transition-all duration-[var(--dur-base)] ease-[cubic-bezier(0.22,1,0.36,1)]",
-            open ? "top-1.5 w-full -rotate-45" : "top-3 w-2/3",
-          )}
-        />
-      </span>
-    </button>
+    </header>
   );
 }

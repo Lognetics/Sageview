@@ -53,6 +53,19 @@ export async function deliverEnquiry(
           timeline: enquiry.timeline,
           budget: enquiry.budget,
           message: enquiry.message,
+          /*
+            The brief travels with the enquiry as base64. Nothing is stored:
+            if no webhook is configured the file goes nowhere, which is why
+            the form tells the sender to email it instead.
+          */
+          brief: enquiry.brief
+            ? {
+                name: enquiry.brief.name,
+                type: enquiry.brief.type,
+                size: enquiry.brief.size,
+                data: enquiry.brief.data,
+              }
+            : null,
         },
       }),
       // Do not let a hanging webhook hold the request open indefinitely.

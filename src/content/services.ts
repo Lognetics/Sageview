@@ -1,213 +1,222 @@
 /**
  * SERVICES
  *
- * Three service categories and their capabilities, exactly as approved in the
- * portfolio. Descriptive sentences summarise the listed capabilities; no
- * additional service, tool, credential or claim has been introduced.
+ * Four disciplines, then the process that runs through all of them.
  *
- * Adding a service = adding an entry here. Nothing else needs to change.
+ * The ordering is deliberate. Film and Photography are what clients arrive
+ * looking for. Visual Communication is the strategic layer above production
+ * and the reason to choose SageView over a crew for hire, so it is written as
+ * an argument rather than a list. Live Production closes with the work that
+ * only happens once.
  */
 
-import { film, photo, type Media } from "./media";
-
-export type Capability = {
-  title: string;
-  /** One-line framing of the capability. */
-  summary: string;
-  /** The approved capability keywords from the portfolio. */
-  points: readonly string[];
+export type ServiceItem = {
+  name: string;
+  body: string;
+  /** Concrete forms the work takes. Kept short: these are scan-read. */
+  points?: readonly string[];
 };
 
 export type Service = {
   slug: string;
   index: string;
-  /** Short label for navigation and compact lists. */
-  shortTitle: string;
-  /** Full approved service title. */
-  title: string;
-  /** Display title split for editorial line-breaking. */
-  displayTitle: readonly string[];
+  name: string;
+  /** One line under the section title. */
   summary: string;
-  intro: string;
-  capabilities: readonly Capability[];
-  /** The cinematic frame that opens this service. */
-  image: Media;
-  /** A second frame used on the service's own page. */
-  secondaryImage: Media;
-  /** Optional film shown on the service page. */
-  showreel?: { src: string; poster: string; alt: string; caption: string };
-  metaTitle: string;
-  metaDescription: string;
+  /** The case for the discipline, two or three sentences at most. */
+  body: string;
+  items: readonly ServiceItem[];
 };
+
+export const servicesIntro = {
+  eyebrow: "Services",
+  heading: "Four disciplines,",
+  headingAccent: "one way of working.",
+  lead: "Strategy, film, photography and live production sit in the same studio and run off the same brief. That is what keeps the intent set in the first conversation intact in the final frame.",
+} as const;
 
 export const services: readonly Service[] = [
   {
-    slug: "documentary-filmmaking",
+    slug: "film",
     index: "01",
-    shortTitle: "Documentary Filmmaking",
-    title: "Documentary Filmmaking & Human-Centered Storytelling",
-    displayTitle: ["Documentary", "Filmmaking"],
-    summary:
-      "Non-fiction stories that turn important social issues, institutional milestones and community impact into engaging cinema.",
-    intro:
-      "We make non-fiction work that treats a social issue, an institutional milestone or a community's impact as cinema rather than as documentation, without ever trading the truth of the subject for the effect of the frame.",
-    capabilities: [
+    name: "Film",
+    summary: "Documentary, commercial, corporate and branded work.",
+    body: "Film is the centre of the studio. Whether the subject is a community, a product or a leadership team, the work is built the same way: find the human truth in it first, then decide how it should be shot.",
+    items: [
       {
-        title: "Impact & NGO Documentaries",
-        summary:
-          "Films built around development projects, grassroots initiatives and socio-economic crises, approached with dignity and depth.",
+        name: "Documentary Films",
+        body: "Non-fiction work that treats its subject as cinema rather than as evidence, without trading the truth of that subject for the effect of the frame.",
         points: [
-          "Development projects",
-          "Grassroots initiatives",
-          "Socio-economic crises",
-          "Dignity and depth",
+          "Human-centred documentaries",
+          "Impact stories",
+          "Institutional documentaries",
         ],
       },
       {
-        title: "Field & Institutional Reporting",
-        summary:
-          "Real-world situations captured for the people who need to understand them: international donors, stakeholders and global audiences.",
+        name: "Commercial Films",
+        body: "Brand work built on a story rather than a claim, so the product arrives inside something an audience actually wants to watch.",
+        points: ["Brand films", "Advertising", "Product storytelling"],
+      },
+      {
+        name: "Corporate Films",
+        body: "Films that make an organisation legible to the people it needs to convince, internally and externally.",
         points: [
-          "Real-world situations",
-          "International donors",
-          "Stakeholders",
-          "Global audiences",
+          "Company profiles",
+          "Leadership films",
+          "Internal communications",
         ],
       },
       {
-        title: "Character-Driven Narratives",
-        summary:
-          "Human stories that carry complex systemic data, so that a statistic arrives as a person, not a number.",
-        points: ["Human stories", "Complex systemic data"],
+        name: "Branded Content",
+        body: "Work made for the platforms it will actually live on, cut to hold attention where attention is hardest to hold.",
+        points: ["Social campaigns", "Branded storytelling", "Digital content"],
       },
     ],
-    image: photo.childStudying,
-    secondaryImage: photo.schoolchildren,
-    showreel: {
-      src: film.foodSecurity.src,
-      poster: film.foodSecurity.poster,
-      alt: film.foodSecurity.alt,
-      caption: "Documentary film: food security and vertical farming programme",
-    },
-    metaTitle: "SageView | Documentary Filmmaking",
-    metaDescription:
-      "Impact and NGO documentaries, field and institutional reporting, and character-driven narratives from SageView Production Ltd.",
+  },
+  {
+    slug: "photography",
+    index: "02",
+    name: "Photography",
+    summary: "Documentary, campaign, corporate and portrait work.",
+    body: "Photography is a discipline here, not a by-product of a shoot day. A still can carry a story into a report, a campaign or a boardroom in places a film will never be played.",
+    items: [
+      {
+        name: "Documentary Photography",
+        body: "Real people, environments and stories, photographed with the same dignity the films are made with.",
+      },
+      {
+        name: "Campaign Photography",
+        body: "Images designed around a campaign or a communication objective, including long-form photo essays built to carry a narrative on their own.",
+      },
+      {
+        name: "Corporate Photography",
+        body: "Events, workplaces, teams and the everyday texture of how an organisation actually operates.",
+      },
+      {
+        name: "Executive Portraits",
+        body: "Founders, chief executives, government leaders and professionals, photographed to look like themselves on their best day.",
+      },
+      {
+        name: "Lifestyle Portraits & Weddings",
+        body: "Private commissions, approached with the same eye for the unguarded moment that the documentary work is built on.",
+      },
+    ],
   },
   {
     slug: "visual-communication",
-    index: "02",
-    shortTitle: "Visual Communication Strategy",
-    title: "Visual Communication Strategy & Conception",
-    displayTitle: ["Visual", "Strategy"],
-    summary:
-      "Before a single frame is shot, we design the blueprint for how a message will be received.",
-    intro:
-      "Strategy is not something applied to a film after it is made. Before a single frame is shot, we design the blueprint for how a message will be received, by whom, in what state of mind, and toward what action.",
-    capabilities: [
+    index: "03",
+    name: "Visual Communication",
+    summary: "The strategic layer above production.",
+    body: "Visual Communication is not another kind of video. It is the thinking that decides what should be made at all, who it is for and what it has to achieve. Most production begins with a deliverable. This begins with an objective.",
+    items: [
       {
-        title: "Narrative Design & Campaign Strategy",
-        summary:
-          "Cohesive visual campaigns aligned to global goals and SDG frameworks.",
-        points: ["Cohesive visual campaigns", "Global goals", "SDG frameworks"],
+        name: "Story Development",
+        body: "What is the story? Who is the audience? What should they feel, and what should they understand? Settled before anything is shot.",
       },
       {
-        title: "Creative Direction & Scripting",
-        summary:
-          "Corporate briefs, policy documents and data reports translated into engaging, accessible scripts.",
-        points: [
-          "Corporate briefs",
-          "Policy documents",
-          "Data reports",
-          "Engaging, accessible scripts",
-        ],
+        name: "Creative Direction",
+        body: "How the story should look and feel, decided against the psychology of the intended viewer rather than against trend.",
       },
       {
-        title: "Pre-Visual Analytics",
-        summary:
-          "Visual tone, mood and aesthetic decided against the psychology of the target viewer, not against trend.",
-        points: [
-          "Visual tone",
-          "Mood",
-          "Aesthetic",
-          "Target-viewer psychology",
-        ],
+        name: "Communication Strategy",
+        body: "Which visual assets are actually required, which are assumed out of habit, and which would be made and never used.",
+      },
+      {
+        name: "Campaign Development",
+        body: "How one central story becomes multiple pieces of communication that reinforce each other instead of competing.",
+      },
+      {
+        name: "Social Media Management",
+        body: "For organisations that need the full communications package, the ongoing running of Instagram, LinkedIn, Facebook and the rest, so the work keeps speaking after delivery.",
       },
     ],
-    image: photo.forestrySummit,
-    secondaryImage: photo.campaignBanner,
-    metaTitle: "SageView | Visual Communication Strategy",
-    metaDescription:
-      "Narrative design, campaign strategy, creative direction, scripting and pre-visual analytics from SageView Production Ltd.",
   },
   {
-    slug: "production",
-    index: "03",
-    shortTitle: "Full-Scale Production",
-    title: "Full-Scale Production Management",
-    displayTitle: ["Full-Scale", "Production"],
-    summary:
-      "End-to-end delivery: pre-production logistics, on-set direction, live technical broadcast and post-production.",
-    intro:
-      "One team carries a project from field research to final master, including live, multi-camera technical broadcast for the moments that only happen once.",
-    capabilities: [
+    slug: "live-production",
+    index: "04",
+    name: "Live Production",
+    summary: "The moments that only happen once.",
+    body: "Live work is unforgiving: there is no second take and no fixing it in the edit. It is run by the same team that makes the films, with the technical infrastructure the room requires.",
+    items: [
       {
-        title: "Pre-Production Logistics",
-        summary:
-          "Project mapping, field research, subject sourcing and creative blueprinting before deployment.",
-        points: [
-          "Project mapping",
-          "Field research",
-          "Subject sourcing",
-          "Creative blueprinting",
-        ],
+        name: "Full-Scale Production",
+        body: "One team carrying an event from technical planning through to delivered assets.",
       },
       {
-        title: "On-Set Direction & Production",
-        summary:
-          "Live field production and high-end interviews captured cinematically by lean, efficient teams.",
-        points: [
-          "Live field production",
-          "High-end interviews",
-          "Cinematic visual capture",
-          "Lean, efficient teams",
-        ],
+        name: "Multi-Camera Production",
+        body: "Coordinated multi-camera coverage cut for broadcast or for the room.",
+      },
+      { name: "Livestreaming", body: "Streamed to the audiences that could not be there." },
+      {
+        name: "LED, Lighting & Sound",
+        body: "Screens, lighting rigs and audio specified and run for the venue.",
       },
       {
-        title: "Live Production & Technical Broadcast",
-        summary:
-          "Multi-camera live switching, real-time streaming engineering and full technical direction for corporate forums, NGO summits and launch events.",
-        points: [
-          "Multi-camera live switching",
-          "Real-time streaming engineering",
-          "Technical directing",
-          "LED display management",
-          "Stage lighting",
-          "Sound",
-          "Corporate forums",
-          "NGO summits",
-          "Launch events",
-        ],
+        name: "Event Production",
+        body: "The production layer of the event itself, not only its recording.",
       },
       {
-        title: "Post-Production & Editorial Delivery",
-        summary:
-          "Editing, sound design and colour grading tuned to emotional pacing.",
-        points: [
-          "Editing",
-          "Sound design",
-          "Colour grading",
-          "Emotional pacing",
-        ],
+        name: "Technical Direction",
+        body: "One person accountable for the technical outcome, from rehearsal to strike.",
       },
     ],
-    image: photo.studioSetup,
-    secondaryImage: photo.committee,
-    metaTitle: "SageView | Full-Scale Production",
-    metaDescription:
-      "Pre-production logistics, on-set direction, live technical broadcast and post-production delivery from SageView Production Ltd.",
   },
 ];
 
-export function getService(slug: string): Service | undefined {
-  return services.find((service) => service.slug === slug);
-}
+/**
+ * The content ecosystem.
+ *
+ * The clearest argument for the strategic layer: what a single documentary
+ * shoot is actually worth when it is planned as a system rather than as one
+ * film. Rendered as a cascade under Visual Communication.
+ */
+export const contentEcosystem = {
+  eyebrow: "Content Ecosystem",
+  heading: "One documentary",
+  headingAccent: "becomes a campaign.",
+  lead: "Planned properly, a single production yields a year of communication rather than one film and a folder of unused footage.",
+  chain: [
+    { count: "1", label: "Hero Film" },
+    { count: "3", label: "Short Films" },
+    { count: "20", label: "Photographs" },
+    { count: "—", label: "Social Media Cuts" },
+    { count: "—", label: "Campaign Assets" },
+    { count: "—", label: "Archival Material" },
+  ],
+} as const;
+
+/**
+ * HOW WE WORK
+ *
+ * Four stages. Lives inside Services rather than as its own destination:
+ * process is a reason to hire the studio, not a thing to shop for.
+ */
+export const processSteps = [
+  {
+    index: "01",
+    name: "Discover",
+    body: "Understand the objective. Who the audience is, what has to change, and what the work is actually for.",
+  },
+  {
+    index: "02",
+    name: "Develop",
+    body: "Develop the story and the creative direction, so every production decision has something to answer to.",
+  },
+  {
+    index: "03",
+    name: "Produce",
+    body: "Film, photograph and create, with the crew built for this brief rather than a standing team.",
+  },
+  {
+    index: "04",
+    name: "Deliver",
+    body: "Deliver the final assets, in the formats and cuts the campaign actually needs.",
+  },
+] as const;
+
+export const processIntro = {
+  eyebrow: "How We Work",
+  heading: "Four stages,",
+  headingAccent: "every project.",
+  lead: "The sequence does not change. What changes is how long each stage takes and who is in the room for it.",
+} as const;

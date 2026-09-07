@@ -1,103 +1,138 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   SAGEVIEW PRODUCTION LTD: DESIGN SYSTEM
-   Documentary Film × Global Development Organization × Premium Creative Agency
+   SAGEVIEW PRODUCTION LTD: DESIGN SYSTEM (2026)
 
-   A single cinematic surface: deep black base, bone-white type, one restrained
-   brass accent. Hierarchy comes from typography, contrast, spacing and motion,
-   never from decoration.
+   Work-led, light-first. The previous system was a dark cinematic surface with
+   an editorial serif; this one inverts it. Paper is the default ground, the
+   work supplies the colour, and type does the shouting: a heavy grotesque set
+   large, tight and uppercase against a lot of air.
+
+   Dark is now punctuation rather than the default. A band opts in with
+   `band-dark`, which re-points the semantic tokens instead of overriding
+   utilities one by one, so anything inside it inverts automatically.
+
+   Rule of thumb: components should reach for the semantic tokens (surface,
+   text, line, accent) rather than raw palette values, so a band can flip
+   ground without the component knowing.
    ========================================================================== */
 
 @theme {
-  /* --- Base surfaces (dark cinematic foundation) ------------------------ */
-  --color-void: #050607;
-  --color-ink: #0a0c0d;
-  --color-charcoal: #121516;
-  --color-graphite: #1b1f20;
-  --color-slate: #2a2f30;
+  /* --- Raw palette ------------------------------------------------------ */
+  --color-paper: #f1efea;
+  --color-paper-raised: #ffffff;
+  --color-paper-sunken: #e6e3dc;
 
-  /* --- Neutrals --------------------------------------------------------- */
-  --color-ash: #545b59;
-  --color-mist: #8b918e;
-  --color-fog: #b4b8b5;
-  --color-bone: #e9e5dd;
-  --color-paper: #f6f4ef;
+  --color-ink: #101010;
+  --color-ink-soft: #1a1a1a;
+  --color-ink-raised: #232323;
 
-  /* --- Accent (restrained, singular) ------------------------------------ */
-  --color-brass: #c2a05a;
-  --color-brass-bright: #d9bb7c;
-  --color-brass-deep: #8f7436;
+  --color-grey-1: #4a4a47;
+  --color-grey-2: #6e6e69;
+  --color-grey-3: #9a9a94;
+  --color-grey-4: #c7c5be;
 
-  /* --- Supporting tint (used sparingly: rules, tints, never as UI colour) */
-  --color-sage: #7d8f7e;
+  /* Gold, carried over from the wordmark. Two values: one that holds on
+     paper, one that holds on black. Never use the other way round. */
+  --color-gold: #a8801f;
+  --color-gold-bright: #d8b256;
 
-  /* --- Semantic --------------------------------------------------------- */
-  --color-danger: #d98b7a;
-  --color-success: #8fae8b;
+  --color-danger: #a4402c;
+  --color-success: #3f6b42;
 
   /* --- Typefaces -------------------------------------------------------- */
-  --font-display: var(--font-instrument-serif), "Iowan Old Style", Georgia,
-    "Times New Roman", serif;
+  --font-display: var(--font-archivo), "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular",
-    Menlo, Consolas, monospace;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", Menlo,
+    Consolas, monospace;
 
-  /* --- Fluid editorial type scale --------------------------------------- */
-  /* Clamped so nothing overflows at 320px and nothing bloats past 1920px.   */
-  --text-eyebrow: 0.5844rem;
-  --text-micro: clamp(0.6375rem, 0.612rem + 0.1275vw, 0.6906rem);
-  --text-body-sm: clamp(0.7438rem, 0.7225rem + 0.1275vw, 0.7969rem);
-  --text-body: clamp(0.85rem, 0.816rem + 0.17vw, 0.9031rem);
-  --text-body-lg: clamp(0.9031rem, 0.85rem + 0.2975vw, 1.0625rem);
-  --text-lead: clamp(1.0625rem, 0.935rem + 0.595vw, 1.3812rem);
-  --text-h4: clamp(1.0625rem, 0.935rem + 0.6375vw, 1.4875rem);
-  --text-h3: clamp(1.275rem, 1.0625rem + 1.02vw, 1.9125rem);
-  --text-h2: clamp(1.7rem, 1.275rem + 2.04vw, 3.1875rem);
-  --text-h1: clamp(2.125rem, 1.445rem + 3.23vw, 4.675rem);
-  --text-display: clamp(2.55rem, 1.36rem + 5.27vw, 7.225rem);
-  --text-numeral: clamp(2.975rem, 1.7rem + 5.95vw, 7.65rem);
-
-  /* --- Motion ----------------------------------------------------------- */
-  --ease-cinema: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-shutter: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 240ms;
-  --dur-base: 520ms;
-  --dur-slow: 900ms;
-  --dur-reveal: 1100ms;
+  /* --- Type scale -------------------------------------------------------
+     Display sizes are deliberately large: this design leans on one or two
+     enormous lines per screen rather than many medium ones. */
+  --text-eyebrow: 0.6rem;
+  --text-micro: 0.6875rem;
+  --text-body-sm: clamp(0.78rem, 0.76rem + 0.12vw, 0.84rem);
+  --text-body: clamp(0.875rem, 0.85rem + 0.16vw, 0.95rem);
+  --text-body-lg: clamp(0.95rem, 0.9rem + 0.3vw, 1.125rem);
+  --text-lead: clamp(1.1rem, 0.98rem + 0.62vw, 1.5rem);
+  --text-h4: clamp(1.05rem, 0.95rem + 0.5vw, 1.35rem);
+  --text-h3: clamp(1.3rem, 1.1rem + 1vw, 2rem);
+  --text-h2: clamp(1.9rem, 1.4rem + 2.4vw, 3.4rem);
+  --text-h1: clamp(2.4rem, 1.6rem + 4vw, 5.2rem);
+  --text-display: clamp(3rem, 1.5rem + 7vw, 9rem);
+  --text-mega: clamp(3.4rem, 1rem + 11vw, 14rem);
 
   /* --- Layout ----------------------------------------------------------- */
-  --spacing-gutter: clamp(1.25rem, 4vw, 4.5rem);
-  --spacing-section: clamp(4.5rem, 9vw, 11rem);
-  --container-editorial: 78rem;
-  --container-prose: 46rem;
+  --container-wide: 96rem;
+  --container-editorial: 72rem;
+  --container-prose: 44rem;
+  --spacing-gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --spacing-section: clamp(4.5rem, 9vw, 9rem);
+
+  /* --- Motion ----------------------------------------------------------- */
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 620ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================================================
-   BASE
+   SEMANTIC SURFACE TOKENS
+   Every band resolves its colours from these. `band-dark` re-points them.
    ========================================================================== */
+
+:root {
+  --surface: var(--color-paper);
+  --surface-raised: var(--color-paper-raised);
+  --surface-sunken: var(--color-paper-sunken);
+  --text-strong: var(--color-ink);
+  --text-body-color: var(--color-grey-1);
+  --text-muted: var(--color-grey-2);
+  --text-faint: var(--color-grey-3);
+  --line: color-mix(in oklab, var(--color-ink) 14%, transparent);
+  --line-strong: color-mix(in oklab, var(--color-ink) 26%, transparent);
+  --accent: var(--color-gold);
+  --wash: color-mix(in oklab, var(--color-ink) 6%, transparent);
+}
+
+.band-dark {
+  --surface: var(--color-ink);
+  --surface-raised: var(--color-ink-raised);
+  --surface-sunken: var(--color-ink-soft);
+  --text-strong: #f4f2ed;
+  --text-body-color: #c3c1ba;
+  --text-muted: #8f8d86;
+  --text-faint: #6a6862;
+  --line: color-mix(in oklab, #f4f2ed 16%, transparent);
+  --line-strong: color-mix(in oklab, #f4f2ed 32%, transparent);
+  --accent: var(--color-gold-bright);
+  --wash: color-mix(in oklab, #f4f2ed 7%, transparent);
+
+  background-color: var(--surface);
+  color: var(--text-body-color);
+}
 
 @layer base {
   *,
   *::before,
   *::after {
-    border-color: color-mix(in oklab, var(--color-bone) 12%, transparent);
+    border-color: var(--line);
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    /* Belt-and-braces against horizontal overflow on any viewport. */
     overflow-x: hidden;
   }
 
   body {
-    background-color: var(--color-void);
-    color: var(--color-bone);
+    background-color: var(--surface);
+    color: var(--text-body-color);
     font-family: var(--font-sans);
     font-size: var(--text-body);
-    line-height: 1.65;
+    line-height: 1.6;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
@@ -109,6 +144,7 @@
   h4,
   h5,
   h6 {
+    color: var(--text-strong);
     text-wrap: balance;
   }
 
@@ -116,21 +152,20 @@
     text-wrap: pretty;
   }
 
-  /* Visible, high-contrast focus for keyboard users only. */
   :focus-visible {
-    outline: 2px solid var(--color-brass);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 1px;
   }
 
   ::selection {
-    background-color: var(--color-brass);
-    color: var(--color-void);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
   }
 
-  /* Offset anchor targets so sticky nav never covers a heading. */
+  /* Sticky header clearance for every anchored section. */
   [id] {
-    scroll-margin-top: 6.5rem;
+    scroll-margin-top: 6rem;
   }
 
   img,
@@ -139,38 +174,63 @@
     max-width: 100%;
     height: auto;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 /* ==========================================================================
    TYPOGRAPHY UTILITIES
    ========================================================================== */
 
-@utility font-display {
+/* The house voice: heavy grotesque, tight, set large. */
+@utility display {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  color: var(--text-strong);
+  text-transform: uppercase;
 }
 
-/* Small caps technical label: the "timecode" voice of the interface. */
+/* Same face, sentence case, for headings that should not shout. */
+@utility display-soft {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  color: var(--text-strong);
+}
+
 @utility eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-eyebrow);
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   line-height: 1;
-  color: var(--color-brass);
+  color: var(--accent);
 }
 
 @utility eyebrow-muted {
   font-family: var(--font-mono);
   font-size: var(--text-eyebrow);
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   line-height: 1;
-  color: var(--color-ash);
+  color: var(--text-faint);
 }
 
 @utility index-numeral {
@@ -184,16 +244,16 @@
    LAYOUT UTILITIES
    ========================================================================== */
 
-@utility container-editorial {
+@utility container-wide {
   width: 100%;
-  max-width: var(--container-editorial);
+  max-width: var(--container-wide);
   margin-inline: auto;
   padding-inline: var(--spacing-gutter);
 }
 
-@utility container-wide {
+@utility container-editorial {
   width: 100%;
-  max-width: 96rem;
+  max-width: var(--container-editorial);
   margin-inline: auto;
   padding-inline: var(--spacing-gutter);
 }
@@ -209,343 +269,103 @@
   padding-block: var(--spacing-section);
 }
 
-/* Full-viewport hero height. Declared as one utility so the `svh` override is
-   guaranteed to follow the `vh` fallback in source order. */
 @utility hero-viewport {
   min-height: 100vh;
   min-height: 100svh;
 }
 
-/* Hairline rule in the brand's bone tone. */
 @utility rule-hairline {
-  border-top: 1px solid color-mix(in oklab, var(--color-bone) 12%, transparent);
+  border-top: 1px solid var(--line);
 }
 
 /* ==========================================================================
-   FILM GRAIN
-   Fixed, screen-blended noise across the whole surface. One repeating SVG
-   turbulence tile, no image request, negligible cost, disabled on reduced
-   motion is unnecessary (it does not move), but it is hidden when printing.
+   MOTION
+   Reveal-on-scroll. The observer adds `is-revealed`; without JavaScript the
+   `no-js` fallback in <head> keeps everything visible.
    ========================================================================== */
 
-@utility film-grain {
-  position: relative;
-}
-
-@utility film-grain-layer {
-  position: fixed;
-  inset: -50%;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
-  will-change: transform;
-  animation: grain-drift 6s steps(6) infinite;
-}
-
-@keyframes grain-drift {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  16% {
-    transform: translate(-2%, -3%);
-  }
-  33% {
-    transform: translate(3%, -2%);
-  }
-  50% {
-    transform: translate(-1%, 2%);
-  }
-  66% {
-    transform: translate(2%, 3%);
-  }
-  83% {
-    transform: translate(-3%, 1%);
-  }
-}
-
-/* Scroll cue: a light travelling down a hairline. */
-@keyframes scroll-cue {
-  0% {
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-  45% {
-    transform: scaleY(1);
-    transform-origin: top;
-  }
-  55% {
-    transform: scaleY(1);
-    transform-origin: bottom;
-  }
-  100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
-  }
-}
-
-/* Staggered entry for the network roles list when a cluster is selected. */
-@keyframes network-role-in {
-  from {
-    opacity: 0;
-    transform: translateX(-0.5rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Vignette used on full-bleed cinematic frames.
-   Four layers, each doing one job:
-     1. top scrim   - guarantees contrast for the fixed navigation, whatever
-                      the footage is doing up there (bright sky, pale walls).
-     2. bottom lift - anchors the hero copy and blends into the page below.
-     3. radial      - pulls the eye to centre frame.
-     4. overall     - a light grade so white type always clears AA. */
-@utility cinema-vignette {
-  background-image:
-    linear-gradient(
-      to bottom,
-      color-mix(in oklab, var(--color-void) 82%, transparent) 0%,
-      color-mix(in oklab, var(--color-void) 42%, transparent) 14%,
-      transparent 30%
-    ),
-    linear-gradient(
-      to top,
-      var(--color-void) 2%,
-      color-mix(in oklab, var(--color-void) 78%, transparent) 30%,
-      color-mix(in oklab, var(--color-void) 30%, transparent) 62%,
-      transparent 100%
-    ),
-    radial-gradient(
-      120% 90% at 50% 40%,
-      transparent 25%,
-      color-mix(in oklab, var(--color-void) 70%, transparent) 100%
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in oklab, var(--color-void) 28%, transparent),
-      color-mix(in oklab, var(--color-void) 28%, transparent)
-    );
-}
-
-/* ==========================================================================
-   SCROLL REVEAL
-   Driven by one shared IntersectionObserver (see components/primitives/reveal).
-
-   Elements are only hidden under `html.js`, a class set by a synchronous inline
-   script in <head>. That means: no flash of hidden-then-shown content, and a
-   visitor without JavaScript sees every word of the site.
-   ========================================================================== */
-
-.js [data-reveal] {
+@utility reveal {
   opacity: 0;
-  transform: translate3d(0, var(--reveal-y, 1.75rem), 0);
+  transform: translateY(14px);
   transition:
-    opacity var(--dur-reveal) var(--ease-cinema),
-    transform var(--dur-reveal) var(--ease-cinema);
-  transition-delay: var(--reveal-delay, 0ms);
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
 }
 
-.js [data-reveal][data-reveal-visible="true"] {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-/* Clip-path curtain reveal, used for imagery and full-bleed frames.
-   The clip lives on the inner wrapper, never on the observed element: a
-   clipped element has an empty intersection rectangle, so the observer would
-   never fire and the content would stay hidden permanently. */
-.js [data-reveal="clip"],
-.js [data-reveal="wipe"] {
+.is-revealed {
   opacity: 1;
   transform: none;
 }
 
-.js [data-reveal="clip"] > [data-reveal-inner] {
-  clip-path: inset(0 0 101% 0);
-  transition: clip-path var(--dur-reveal) var(--ease-cinema);
-  transition-delay: var(--reveal-delay, 0ms);
+.no-js .reveal {
+  opacity: 1;
+  transform: none;
 }
-
-.js [data-reveal="clip"][data-reveal-visible="true"] > [data-reveal-inner] {
-  clip-path: inset(0 0 0 0);
-}
-
-/* Horizontal wipe, used for rules and dividers. */
-.js [data-reveal="wipe"] > [data-reveal-inner] {
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path var(--dur-slow) var(--ease-shutter);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-.js [data-reveal="wipe"][data-reveal-visible="true"] > [data-reveal-inner] {
-  clip-path: inset(0 0 0 0);
-}
-
-/* ==========================================================================
-   REDUCED MOTION
-   Everything non-essential collapses to an instant, static presentation.
-   ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .js [data-reveal],
-  .js [data-reveal-inner] {
-    opacity: 1 !important;
-    transform: none !important;
-    clip-path: none !important;
-  }
-
-  .film-grain-layer {
-    animation: none;
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }
 
 /* ==========================================================================
-   PRINT
+   MARQUEE
+   Used for the client strip. Duplicated content scrolls; the wrapper hides the
+   seam. Pauses on hover and stops entirely under reduced motion.
    ========================================================================== */
 
-@media print {
-  .film-grain-layer,
-  [data-print-hide] {
+@keyframes marquee-track {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-track 38s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   MEDIA
+   ========================================================================== */
+
+/* Stills sit slightly desaturated until hovered, so the grid reads as one
+   piece and the work still comes forward on approach. */
+@utility media-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@utility print-hidden {
+  @media print {
     display: none !important;
   }
+}
 
+@media print {
   body {
     background: #fff;
     color: #000;
   }
-}
-
-/* ==========================================================================
-   ALTERNATING SURFACES
-   Bands alternate between the dark cinematic base and a warm paper surface as
-   the visitor scrolls, on every page.
-
-   The rhythm is automatic: every page is a flat list of <section> bands inside
-   <main>, so even-numbered bands take the light surface. That keeps heroes
-   (always first) dark and needs no per-page bookkeeping.
-
-   Sections carry dark-surface utilities baked into their markup (bg-ink,
-   text-fog, border-bone/10 and so on). Rather than rewrite twenty-one
-   components, the light surface remaps those utilities for its own subtree.
-   These rules sit outside @layer so they win over Tailwind's utilities.
-
-   Opt a band out with `surface-hold-dark` when its artwork depends on black.
-   ========================================================================== */
-
-:root {
-  --l-bg: #f6f4ef;
-  --l-bg-raised: #fffefb;
-  --l-bg-sunken: #eae5da;
-  --l-text: #0a0c0d;
-  --l-text-2: #4a504d;
-  --l-text-3: #5f6662;
-  --l-text-4: #767c78;
-  --l-brass: #7c6420;
-  --l-border: color-mix(in oklab, #0a0c0d 14%, transparent);
-}
-
-main > section:nth-of-type(even):not(.surface-hold-dark) {
-  background-color: var(--l-bg);
-  color: var(--l-text);
-}
-
-.surface-light,
-main > section:nth-of-type(even):not(.surface-hold-dark) {
-  /* Borders: bone hairlines become ink hairlines. Brass borders are left
-     alone so accent rules keep their colour. */
-  *:not([class*="border-brass"]),
-  *:not([class*="border-brass"])::before,
-  *:not([class*="border-brass"])::after {
-    border-color: var(--l-border);
-  }
-
-  /* Type */
-  .text-bone,
-  .text-paper { color: var(--l-text); }
-  .text-fog { color: var(--l-text-2); }
-  .text-mist { color: var(--l-text-3); }
-  .text-ash { color: var(--l-text-4); }
-  .text-brass,
-  .text-brass-bright { color: var(--l-brass); }
-  .eyebrow { color: var(--l-brass); }
-  .eyebrow-muted { color: var(--l-text-4); }
-
-  /* Panels that were black become raised paper, so layering survives. */
-  .bg-void,
-  .bg-ink { background-color: var(--l-bg-raised); }
-  .bg-charcoal,
-  .bg-graphite { background-color: var(--l-bg-sunken); }
-  .hover\:bg-charcoal:hover { background-color: var(--l-bg-sunken); }
-
-  /* Hairline rules and the brass ticks that open each section. */
-  .rule-hairline { border-top-color: var(--l-border); }
-  .bg-bone\/10,
-  .bg-bone\/15,
-  .bg-bone\/20 { background-color: var(--l-border); }
-  .bg-brass\/60,
-  .bg-brass\/40 { background-color: var(--l-brass); }
-
-  /* Buttons: the solid brass button keeps its fill, the ghost button flips. */
-  .border-bone\/25,
-  .border-bone\/30 { border-color: var(--l-border); }
-
-  /*
-    Opacity variants (text-bone/70, bg-bone/10 and friends) are separate
-    classes, so the exact-match rules above miss them: a 70%-opacity bone
-    would stay near-invisible on paper. Matched by attribute instead, which
-    trades the precise alpha for guaranteed legibility.
-  */
-  [class*="text-bone/"],
-  [class*="text-paper/"] { color: color-mix(in oklab, var(--l-text) 82%, transparent); }
-  [class*="text-fog/"],
-  [class*="text-mist/"] { color: var(--l-text-2); }
-  [class*="text-ash/"] { color: var(--l-text-4); }
-  [class*="text-brass/"] { color: var(--l-brass); }
-  [class*="bg-bone/"],
-  [class*="bg-paper/"] { background-color: var(--l-border); }
-  [class*="bg-ash/"] { background-color: color-mix(in oklab, var(--l-text) 30%, transparent); }
-
-  /*
-    Decorative washes: display type set at 2-4% opacity as a texture behind
-    the content. The blanket rule above would promote these to near-black
-    slabs sitting over the very headings they back, so they are pulled back
-    to a whisper. Declared last so it wins on source order.
-  */
-  [class*="text-bone/["],
-  [class*="text-paper/["],
-  [class*="text-brass/["],
-  .text-bone\/5,
-  .text-bone\/10,
-  .text-bone\/15,
-  .text-bone\/20,
-  .text-bone\/25,
-  .text-bone\/30 {
-    color: color-mix(in oklab, var(--l-text) 7%, transparent);
-  }
-}
-
-/* The vignette and grain are black-surface effects: hold them off paper. */
-main > section:nth-of-type(even):not(.surface-hold-dark) .cinema-vignette {
-  display: none;
-}
-
-@media print {
-  main > section { background-color: #fff; color: #000; }
 }

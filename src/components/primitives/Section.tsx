@@ -3,7 +3,13 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { Reveal } from "./Reveal";
 
-/** Standard vertical rhythm wrapper. Every major band on the site uses it. */
+/**
+ * Standard band wrapper. Every major section on the site uses it.
+ *
+ * `tone` picks the ground. Dark bands set `band-dark`, which re-points the
+ * semantic colour tokens for everything inside, so children never need to know
+ * which ground they are sitting on.
+ */
 export function Section({
   children,
   id,
@@ -11,6 +17,8 @@ export function Section({
   container = "editorial",
   as: Tag = "section",
   labelledBy,
+  tone = "paper",
+  flush = false,
 }: {
   children: ReactNode;
   id?: string;
@@ -18,6 +26,9 @@ export function Section({
   container?: "editorial" | "wide" | "prose" | "none";
   as?: "section" | "div" | "footer" | "article";
   labelledBy?: string;
+  tone?: "paper" | "raised" | "sunken" | "dark";
+  /** Drop the vertical rhythm, for bands that manage their own height. */
+  flush?: boolean;
 }) {
   const containerClass =
     container === "editorial"
@@ -28,8 +39,21 @@ export function Section({
           ? "container-prose"
           : undefined;
 
+  const toneClass =
+    tone === "dark"
+      ? "band-dark"
+      : tone === "raised"
+        ? "bg-[var(--surface-raised)]"
+        : tone === "sunken"
+          ? "bg-[var(--surface-sunken)]"
+          : "bg-[var(--surface)]";
+
   return (
-    <Tag id={id} aria-labelledby={labelledBy} className={cn("section-y", className)}>
+    <Tag
+      id={id}
+      aria-labelledby={labelledBy}
+      className={cn(!flush && "section-y", toneClass, className)}
+    >
       {containerClass ? (
         <div className={containerClass}>{children}</div>
       ) : (
@@ -39,7 +63,7 @@ export function Section({
   );
 }
 
-/** The mono "timecode" label that opens most sections. */
+/** The mono label that opens most sections, with its leading rule. */
 export function Eyebrow({
   children,
   className,
@@ -61,7 +85,10 @@ export function Eyebrow({
     >
       <span
         aria-hidden="true"
-        className={cn("h-px w-8", muted ? "bg-ash/60" : "bg-brass/60")}
+        className={cn(
+          "h-px w-8",
+          muted ? "bg-[var(--text-faint)]" : "bg-[var(--accent)]",
+        )}
       />
       {children}
     </Tag>
@@ -69,32 +96,44 @@ export function Eyebrow({
 }
 
 /**
- * Section opener: eyebrow, display heading, optional lead paragraph.
- * `id` is applied to the heading so sections can be labelled for screen
- * readers via `aria-labelledby`.
+ * Section opener: eyebrow, display heading, optional lead.
+ *
+ * The heading takes a second, lighter-weight line through `accent`, which is
+ * how nearly every section in this design is titled: one hard statement, then
+ * a softer completion of the sentence.
  */
 export function SectionIntro({
   eyebrow,
   heading,
+  accent,
   headingId,
   lead,
   align = "left",
   level = 2,
+  size = "h2",
   className,
   children,
 }: {
   eyebrow?: string;
   heading: ReactNode;
+  accent?: ReactNode;
   headingId?: string;
   lead?: ReactNode;
   align?: "left" | "center";
   level?: 1 | 2 | 3;
+  size?: "h1" | "h2" | "h3" | "display";
   className?: string;
   children?: ReactNode;
 }) {
   const Heading = `h${level}` as "h1" | "h2" | "h3";
   const sizeClass =
-    level === 1 ? "text-h1" : level === 2 ? "text-h2" : "text-h3";
+    size === "display"
+      ? "text-display"
+      : size === "h1"
+        ? "text-h1"
+        : size === "h2"
+          ? "text-h2"
+          : "text-h3";
 
   return (
     <div
@@ -113,37 +152,28 @@ export function SectionIntro({
       ) : null}
 
       <Reveal delay={80}>
-        <Heading
-          id={headingId}
-          className={cn("font-display mt-6 text-balance", sizeClass)}
-        >
+        <Heading id={headingId} className={cn("display mt-6", sizeClass)}>
           {heading}
+          {accent ? (
+            <span className="block text-[var(--text-faint)]">{accent}</span>
+          ) : null}
         </Heading>
       </Reveal>
 
       {lead ? (
-        <Reveal delay={160}>
-          <div
+        <Reveal delay={140}>
+          <p
             className={cn(
-              "mt-6 max-w-2xl text-body-lg leading-relaxed text-fog",
+              "mt-6 max-w-2xl text-body-lg leading-relaxed text-[var(--text-body-color)]",
               align === "center" && "mx-auto",
             )}
           >
             {lead}
-          </div>
+          </p>
         </Reveal>
       ) : null}
 
       {children}
     </div>
-  );
-}
-
-/** A hairline rule that wipes in when scrolled into view. */
-export function Rule({ className }: { className?: string }) {
-  return (
-    <Reveal variant="wipe">
-      <hr className={cn("rule-hairline border-0", className)} />
-    </Reveal>
   );
 }

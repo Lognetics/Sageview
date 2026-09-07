@@ -1,57 +1,39 @@
 import type { MetadataRoute } from "next";
 
-import { caseStudies } from "@/content/case-studies";
-import { services } from "@/content/services";
 import { site } from "@/content/site";
+import { workProjects } from "@/content/work";
 
 /**
  * Sitemap.
  *
- * Generated from the content layer, so adding a service or case study puts it
- * in the sitemap automatically: there is no second list to forget.
+ * Five destinations plus one entry per project. The service disciplines are
+ * sections of a single page rather than pages of their own, so they are not
+ * listed separately: a sitemap of fragments would claim pages that do not
+ * exist.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const url = (path: string) => new URL(path, site.url).toString();
+  const now = new Date();
+  const url = (path: string) => `${site.url}${path}`;
 
-  const staticRoutes: {
-    path: string;
-    priority: number;
-    changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
-  }[] = [
-    { path: "/", priority: 1, changeFrequency: "monthly" },
-    { path: "/about", priority: 0.9, changeFrequency: "yearly" },
-    { path: "/vision", priority: 0.9, changeFrequency: "yearly" },
-    { path: "/services", priority: 0.9, changeFrequency: "yearly" },
-    { path: "/process", priority: 0.8, changeFrequency: "yearly" },
-    { path: "/case-studies", priority: 0.9, changeFrequency: "monthly" },
-    { path: "/deliverables", priority: 0.8, changeFrequency: "yearly" },
-    { path: "/philosophy", priority: 0.8, changeFrequency: "yearly" },
-    { path: "/network", priority: 0.7, changeFrequency: "yearly" },
-    { path: "/why-sageview", priority: 0.7, changeFrequency: "yearly" },
-    { path: "/testimonials", priority: 0.7, changeFrequency: "monthly" },
-    { path: "/contact", priority: 0.9, changeFrequency: "yearly" },
+  const pages: MetadataRoute.Sitemap = [
+    { url: url("/"), lastModified: now, changeFrequency: "monthly", priority: 1 },
+    { url: url("/work"), lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: url("/services"), lastModified: now, changeFrequency: "yearly", priority: 0.8 },
+    { url: url("/about"), lastModified: now, changeFrequency: "yearly", priority: 0.7 },
+    {
+      url: url("/start-a-project"),
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.6,
+    },
   ];
 
-  const lastModified = new Date();
+  const projects: MetadataRoute.Sitemap = workProjects.map((project) => ({
+    url: url(`/work/${project.slug}`),
+    lastModified: now,
+    changeFrequency: "yearly",
+    priority: 0.6,
+  }));
 
-  return [
-    ...staticRoutes.map((route) => ({
-      url: url(route.path),
-      lastModified,
-      changeFrequency: route.changeFrequency,
-      priority: route.priority,
-    })),
-    ...services.map((service) => ({
-      url: url(`/services/${service.slug}`),
-      lastModified,
-      changeFrequency: "yearly" as const,
-      priority: 0.8,
-    })),
-    ...caseStudies.map((study) => ({
-      url: url(`/case-studies/${study.slug}`),
-      lastModified,
-      changeFrequency: "yearly" as const,
-      priority: 0.8,
-    })),
-  ];
+  return [...pages, ...projects];
 }

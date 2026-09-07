@@ -1,160 +1,229 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
-import { TextLink } from "@/components/primitives/Button";
+import { Reveal } from "@/components/primitives/Reveal";
 import { Section, SectionIntro } from "@/components/primitives/Section";
-import { CTASection } from "@/components/sections/CTASection";
-import { CapabilityChain } from "@/components/sections/CapabilityChain";
-import { Founder } from "@/components/sections/Founder";
-import { NarrativeDesigners } from "@/components/sections/NarrativeDesigners";
-import { PageHero } from "@/components/sections/PageHero";
-import { Pillars } from "@/components/sections/Pillars";
-import { about } from "@/content/about";
+import { FounderPortrait } from "@/components/sections/FounderPortrait";
+import { PageHeader } from "@/components/sections/PageHeader";
+import { StartCTA } from "@/components/sections/StartCTA";
+import {
+  aboutHero,
+  approach,
+  network,
+  philosophy,
+  team,
+  whoWeAre,
+} from "@/content/about";
 import { photo } from "@/content/media";
-import { partnerSectors } from "@/content/site";
-import { visionStatement } from "@/content/vision";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
-    "SageView Production Ltd specialises in documentary filmmaking, high-impact brand storytelling and visual communication, translating complex institutional, development, corporate and social ideas into human-centered narratives.",
+    "SageView Production Ltd: who we are, the founder, our philosophy, our approach, and the team and network behind the work.",
   path: "/about",
 });
 
 export default function AboutPage() {
   return (
     <>
-      <PageHero
-        eyebrow={about.hero.eyebrow}
-        title={
-          <>
-            Strategic creativity.
-            <span className="block text-brass italic">
-              Human-centered storytelling.
-            </span>
-          </>
-        }
-        lead={about.hero.body}
-        image={photo.crewFilming}
-        meta={[
-          { label: "Discipline", value: "Documentary" },
-          { label: "Practice", value: "Visual Communication" },
-          { label: "Approach", value: "Narrative Design" },
-          { label: "Standard", value: "Cinema-grade" },
-        ]}
+      <PageHeader
+        eyebrow={aboutHero.eyebrow}
+        heading={aboutHero.heading}
+        accent={aboutHero.headingAccent}
+        lead={aboutHero.lead}
       />
 
-      {/* Introduction */}
-      <Section id="introduction" labelledBy="about-intro-heading" container="wide">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-7">
-            <SectionIntro
-              eyebrow={about.introduction.eyebrow}
-              headingId="about-intro-heading"
-              heading={
-                <>
-                  Stories carry meaning.
-                  <span className="block text-brass italic">
-                    We bring that meaning to the screen.
-                  </span>
-                </>
-              }
+      {/* Large visual, before any of the argument. */}
+      <Section container="wide" className="pt-14 md:pt-20">
+        <Reveal>
+          <div className="relative aspect-[21/9] overflow-hidden bg-[var(--surface-sunken)]">
+            <Image
+              src={photo.fieldCrew.src}
+              alt={photo.fieldCrew.alt}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
             />
+          </div>
+        </Reveal>
+      </Section>
 
-            <div className="mt-8 max-w-xl space-y-5">
-              {about.introduction.body.map((paragraph) => (
-                <p
-                  key={paragraph}
-                  className="text-body-lg leading-relaxed text-fog"
-                >
+      <Section id="who-we-are" labelledBy="who-we-are-heading" container="wide">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-20">
+          <div className="lg:col-span-5">
+            <SectionIntro
+              eyebrow={whoWeAre.eyebrow}
+              headingId="who-we-are-heading"
+              heading={whoWeAre.heading}
+              accent={whoWeAre.headingAccent}
+            />
+          </div>
+
+          <div className="space-y-6 lg:col-span-7">
+            {whoWeAre.body.map((paragraph, index) => (
+              <Reveal key={paragraph} delay={index * 60}>
+                <p className="text-body-lg leading-relaxed text-[var(--text-body-color)]">
                   {paragraph}
                 </p>
-              ))}
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 lg:pt-4">
-            <div className="border-t border-bone/15 pt-8">
-              <p className="eyebrow-muted">We partner with</p>
-              <ul className="mt-6 flex flex-col">
-                {partnerSectors.map((sector, index) => (
-                  <li
-                    key={sector}
-                    className="flex items-baseline gap-5 border-b border-bone/10 py-4 last:border-b-0"
-                  >
-                    <span className="index-numeral text-[0.625rem] text-brass/70">
-                      0{index + 1}
-                    </span>
-                    <span className="font-display text-h4 leading-tight text-bone">
-                      {sector}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </Section>
 
-      <NarrativeDesigners />
+      <FounderPortrait />
 
-      {/* End-to-end capability */}
-      <Section id="capability" labelledBy="capability-heading" container="wide">
-        <SectionIntro
-          eyebrow="End-to-End Capability"
-          headingId="capability-heading"
-          heading={
-            <>
-              One team,
-              <span className="text-brass italic"> concept to final cut.</span>
-            </>
-          }
-          lead="SageView manages the creative process from concept and pre-production strategy through production and final execution, so the intent set on day one survives to the last frame."
-        />
+      <Section
+        id="philosophy"
+        labelledBy="philosophy-heading"
+        container="wide"
+        tone="dark"
+      >
+        <div className="mx-auto max-w-3xl text-center">
+          <Reveal>
+            <p className="eyebrow justify-center flex items-center gap-3">
+              <span aria-hidden="true" className="h-px w-8 bg-[var(--accent)]" />
+              {philosophy.eyebrow}
+            </p>
+          </Reveal>
 
-        <div className="mt-16">
-          <CapabilityChain />
-        </div>
-      </Section>
+          <Reveal delay={80}>
+            <h2 id="philosophy-heading" className="display mt-8 text-display">
+              {philosophy.heading}
+              <span className="block text-[var(--text-faint)]">
+                {philosophy.headingAccent}
+              </span>
+            </h2>
+          </Reveal>
 
-      <Pillars />
-
-      <Founder />
-
-      {/* Vision pointer */}
-      <Section id="vision" labelledBy="about-vision-heading" container="wide">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-7">
-            <SectionIntro
-              eyebrow="Where We're Going"
-              headingId="about-vision-heading"
-              heading={
-                <>
-                  Built in Africa.
-                  <span className="block text-brass italic">
-                    Made for the world&rsquo;s most important rooms.
-                  </span>
-                </>
-              }
-              lead={visionStatement.short}
-            />
-
-            <div className="mt-9">
-              <TextLink href="/vision">Read the full vision</TextLink>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 lg:pt-8">
-            <blockquote className="border-l border-brass/40 pl-6">
-              <p className="font-display text-h3 leading-tight text-paper">
-                &ldquo;{visionStatement.pullQuote}&rdquo;
+          <Reveal delay={140}>
+            <blockquote className="mt-10">
+              <p className="display-soft text-h3 text-[var(--text-strong)]">
+                &ldquo;{philosophy.quote}&rdquo;
               </p>
             </blockquote>
+          </Reveal>
+
+          <Reveal delay={180}>
+            <p className="mt-8 text-body-lg leading-relaxed text-[var(--text-body-color)]">
+              {philosophy.body}
+            </p>
+          </Reveal>
+        </div>
+
+        <ul className="mt-20 grid gap-px border bg-[var(--line)] sm:grid-cols-2 lg:grid-cols-4">
+          {philosophy.principles.map((principle, index) => (
+            <Reveal as="li" key={principle.index} delay={index * 60}>
+              <div className="flex h-full flex-col bg-[var(--surface)] p-8">
+                <span className="index-numeral text-body-sm text-[var(--accent)]">
+                  {principle.index}
+                </span>
+                <h3 className="display-soft mt-8 text-h4">{principle.name}</h3>
+                <p className="mt-3 text-body text-[var(--text-body-color)]">
+                  {principle.body}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </ul>
+      </Section>
+
+      <Section id="approach" labelledBy="approach-heading" container="wide">
+        <SectionIntro
+          eyebrow={approach.eyebrow}
+          headingId="approach-heading"
+          heading={approach.heading}
+          accent={approach.headingAccent}
+          lead={approach.lead}
+        />
+
+        <ol className="mt-16 border-t">
+          {approach.points.map((point, index) => (
+            <Reveal as="li" key={point.index} delay={index * 60}>
+              <div className="flex flex-col gap-4 border-b py-8 md:flex-row md:gap-12">
+                <span className="index-numeral shrink-0 text-body-sm text-[var(--accent)] md:w-16">
+                  {point.index}
+                </span>
+                <h3 className="display-soft w-full text-h4 md:w-[34%]">
+                  {point.name}
+                </h3>
+                <p className="max-w-xl text-body text-[var(--text-body-color)]">
+                  {point.body}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </ol>
+      </Section>
+
+      <Section
+        id="team"
+        labelledBy="team-heading"
+        container="wide"
+        tone="sunken"
+      >
+        <SectionIntro
+          eyebrow={team.eyebrow}
+          headingId="team-heading"
+          heading={team.heading}
+          accent={team.headingAccent}
+          lead={team.lead}
+        />
+
+        <ul className="mt-14 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+          {team.roles.map((role, index) => (
+            <Reveal as="li" key={role.name} delay={index * 50}>
+              <div className="border-t pt-5">
+                <h3 className="display-soft text-h4">{role.name}</h3>
+                <p className="mt-2 text-body text-[var(--text-body-color)]">
+                  {role.body}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </ul>
+      </Section>
+
+      <Section id="network" labelledBy="network-heading" container="wide">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-20">
+          <div className="lg:col-span-5">
+            <SectionIntro
+              eyebrow={network.eyebrow}
+              headingId="network-heading"
+              heading={network.heading}
+              accent={network.headingAccent}
+              lead={network.lead}
+            />
+          </div>
+
+          <div className="lg:col-span-7">
+            <ul className="grid gap-x-8 sm:grid-cols-2">
+              {network.specialists.map((specialist, index) => (
+                <Reveal as="li" key={specialist} delay={index * 40}>
+                  <div className="flex items-baseline gap-4 border-b py-4">
+                    <span className="index-numeral text-[0.6rem] text-[var(--accent)]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-body text-[var(--text-strong)]">
+                      {specialist}
+                    </span>
+                  </div>
+                </Reveal>
+              ))}
+            </ul>
+
+            <Reveal delay={120}>
+              <p className="mt-10 max-w-xl text-body-lg leading-relaxed text-[var(--text-body-color)]">
+                {network.note}
+              </p>
+            </Reveal>
           </div>
         </div>
       </Section>
 
-      <CTASection />
+      <StartCTA />
     </>
   );
 }

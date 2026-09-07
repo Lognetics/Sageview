@@ -54,7 +54,7 @@ export default function NotFound() {
         <nav aria-label="Site sections" className="mt-16 border-t border-bone/10 pt-8">
           <p className="eyebrow-muted">Or try</p>
           <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
-            {[...footerNav.explore, ...footerNav.company].map((item) => (
+            {[...footerNav.explore, ...footerNav.services].map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
