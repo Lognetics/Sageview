@@ -79,7 +79,6 @@ export default function AboutPage() {
         id="philosophy"
         labelledBy="philosophy-heading"
         container="wide"
-        tone="dark"
       >
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
@@ -113,14 +112,14 @@ export default function AboutPage() {
           </Reveal>
         </div>
 
-        <ul className="mt-20 grid gap-px border bg-[var(--line)] sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-24 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {philosophy.principles.map((principle, index) => (
             <Reveal as="li" key={principle.index} delay={index * 60}>
-              <div className="flex h-full flex-col bg-[var(--surface)] p-8">
-                <span className="index-numeral text-body-sm text-[var(--accent)]">
+              <div className="flex h-full flex-col border-t pt-6">
+                <span className="index-numeral text-[0.62rem] tracking-[0.18em] text-[var(--accent)]">
                   {principle.index}
                 </span>
-                <h3 className="display-soft mt-8 text-h4">{principle.name}</h3>
+                <h3 className="display-soft mt-6 text-h4">{principle.name}</h3>
                 <p className="mt-3 text-body text-[var(--text-body-color)]">
                   {principle.body}
                 </p>

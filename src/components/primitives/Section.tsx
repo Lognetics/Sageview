@@ -6,7 +6,8 @@ import { Reveal } from "./Reveal";
 /**
  * Standard band wrapper. Every major section on the site uses it.
  *
- * `tone` picks the ground. Dark bands set `band-dark`, which re-points the
+ * `tone` picks the ground. The site lives on black, so `dark` is the default
+ * and `light` is the exception: it sets `band-light`, which re-points the
  * semantic colour tokens for everything inside, so children never need to know
  * which ground they are sitting on.
  */
@@ -17,7 +18,7 @@ export function Section({
   container = "editorial",
   as: Tag = "section",
   labelledBy,
-  tone = "paper",
+  tone = "dark",
   flush = false,
 }: {
   children: ReactNode;
@@ -26,7 +27,7 @@ export function Section({
   container?: "editorial" | "wide" | "prose" | "none";
   as?: "section" | "div" | "footer" | "article";
   labelledBy?: string;
-  tone?: "paper" | "raised" | "sunken" | "dark";
+  tone?: "dark" | "raised" | "sunken" | "light";
   /** Drop the vertical rhythm, for bands that manage their own height. */
   flush?: boolean;
 }) {
@@ -40,8 +41,8 @@ export function Section({
           : undefined;
 
   const toneClass =
-    tone === "dark"
-      ? "band-dark"
+    tone === "light"
+      ? "band-light"
       : tone === "raised"
         ? "bg-[var(--surface-raised)]"
         : tone === "sunken"

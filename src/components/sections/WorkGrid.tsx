@@ -86,7 +86,7 @@ export function WorkGrid() {
           Nothing in this category yet.
         </p>
       ) : (
-        <ul className="mt-10 grid gap-x-6 gap-y-14 sm:grid-cols-2">
+        <ul className="mt-14 grid gap-x-8 gap-y-16 sm:grid-cols-2">
           {projects.map((project, index) => (
             <ProjectCard
               key={project.slug}
@@ -110,7 +110,7 @@ function ProjectCard({
   return (
     <li>
       <Link href={`/work/${project.slug}`} className="group block">
-        <div className="relative aspect-[4/3] overflow-hidden bg-[var(--surface-sunken)]">
+        <div className="relative aspect-[3/2] overflow-hidden bg-[var(--surface-sunken)]">
           <Image
             src={project.image.src}
             alt={project.image.alt}
@@ -122,7 +122,7 @@ function ProjectCard({
         </div>
 
         <div className="mt-5 flex items-baseline justify-between gap-4">
-          <h3 className="display-soft text-h3">{project.title}</h3>
+          <h3 className="display-soft text-h4">{project.title}</h3>
           {project.client ? (
             <p className="shrink-0 font-mono text-[0.65rem] tracking-[0.16em] text-[var(--text-faint)] uppercase">
               {project.client}

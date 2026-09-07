@@ -13,7 +13,7 @@ import { services } from "@/content/services";
  */
 export function WhatWeDo() {
   return (
-    <Section id="what-we-do" labelledBy="what-we-do-heading" container="wide" tone="dark">
+    <Section id="what-we-do" labelledBy="what-we-do-heading" container="wide">
       <SectionIntro
         eyebrow="What We Do"
         headingId="what-we-do-heading"

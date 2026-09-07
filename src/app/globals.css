@@ -3,14 +3,15 @@
 /* ==========================================================================
    SAGEVIEW PRODUCTION LTD: DESIGN SYSTEM (2026)
 
-   Work-led, light-first. The previous system was a dark cinematic surface with
-   an editorial serif; this one inverts it. Paper is the default ground, the
-   work supplies the colour, and type does the shouting: a heavy grotesque set
-   large, tight and uppercase against a lot of air.
+   A cinema-grade dark gallery. Near-black is the ground so that film and
+   photography carry the colour on the page, and the type stays deliberately
+   quiet around them: medium weights, generous tracking on small labels, and
+   almost no uppercase shouting. Restraint is the premium signal here, not
+   scale.
 
-   Dark is now punctuation rather than the default. A band opts in with
-   `band-dark`, which re-points the semantic tokens instead of overriding
-   utilities one by one, so anything inside it inverts automatically.
+   Paper is the exception rather than the rule. A band opts into it with
+   `band-light`, which re-points the semantic tokens instead of overriding
+   utilities one by one, so anything inside inverts automatically.
 
    Rule of thumb: components should reach for the semantic tokens (surface,
    text, line, accent) rather than raw palette values, so a band can flip
@@ -27,6 +28,12 @@
   --color-ink-soft: #1a1a1a;
   --color-ink-raised: #232323;
 
+  /* The gallery ground. Not pure black: a trace of warmth stops projected
+     stills from looking like they are floating on a void. */
+  --color-black: #0a0a0b;
+  --color-black-soft: #121213;
+  --color-black-raised: #17171a;
+
   --color-grey-1: #4a4a47;
   --color-grey-2: #6e6e69;
   --color-grey-3: #9a9a94;
@@ -39,6 +46,28 @@
 
   --color-danger: #a4402c;
   --color-success: #3f6b42;
+
+  /* --- Compatibility bridge -------------------------------------------
+     The previous system named colours after the palette (bone, fog, brass)
+     rather than after the job they do. Components still using those names
+     resolve here, and because each maps to a semantic token rather than a
+     fixed value, they now invert correctly inside a dark band instead of
+     rendering as pale-on-pale.
+
+     New work should use the semantic tokens directly. These stay until the
+     last legacy class is gone. */
+  --color-bone: var(--text-strong);
+  --color-fog: var(--text-body-color);
+  --color-mist: var(--text-muted);
+  --color-ash: var(--text-faint);
+  --color-brass: var(--accent);
+  --color-brass-bright: var(--accent);
+  --color-brass-deep: var(--accent);
+  --color-void: var(--surface);
+  --color-charcoal: var(--surface-sunken);
+  --color-graphite: var(--surface-sunken);
+  --color-slate: var(--line-strong);
+  --color-sage: var(--text-muted);
 
   /* --- Typefaces -------------------------------------------------------- */
   --font-display: var(--font-archivo), "Helvetica Neue", Helvetica, Arial,
@@ -84,6 +113,22 @@
    ========================================================================== */
 
 :root {
+  --surface: var(--color-black);
+  --surface-raised: var(--color-black-raised);
+  --surface-sunken: var(--color-black-soft);
+  --text-strong: #f2f0ec;
+  --text-body-color: #a8a6a0;
+  --text-muted: #7c7a74;
+  --text-faint: #5a5854;
+  --line: color-mix(in oklab, #f2f0ec 12%, transparent);
+  --line-strong: color-mix(in oklab, #f2f0ec 24%, transparent);
+  --accent: var(--color-gold-bright);
+  --wash: color-mix(in oklab, #f2f0ec 5%, transparent);
+}
+
+/* The rare paper band. Used for a single stretch of reading, not for whole
+   pages: this design lives on black. */
+.band-light {
   --surface: var(--color-paper);
   --surface-raised: var(--color-paper-raised);
   --surface-sunken: var(--color-paper-sunken);
@@ -95,22 +140,15 @@
   --line-strong: color-mix(in oklab, var(--color-ink) 26%, transparent);
   --accent: var(--color-gold);
   --wash: color-mix(in oklab, var(--color-ink) 6%, transparent);
-}
-
-.band-dark {
-  --surface: var(--color-ink);
-  --surface-raised: var(--color-ink-raised);
-  --surface-sunken: var(--color-ink-soft);
-  --text-strong: #f4f2ed;
-  --text-body-color: #c3c1ba;
-  --text-muted: #8f8d86;
-  --text-faint: #6a6862;
-  --line: color-mix(in oklab, #f4f2ed 16%, transparent);
-  --line-strong: color-mix(in oklab, #f4f2ed 32%, transparent);
-  --accent: var(--color-gold-bright);
-  --wash: color-mix(in oklab, #f4f2ed 7%, transparent);
 
   background-color: var(--surface);
+  color: var(--text-body-color);
+}
+
+/* Retained so any band still asking for dark explicitly gets the ground it
+   expects now that dark is the default. */
+.band-dark {
+  background-color: var(--color-black);
   color: var(--text-body-color);
 }
 
@@ -194,12 +232,28 @@
    TYPOGRAPHY UTILITIES
    ========================================================================== */
 
-/* The house voice: heavy grotesque, tight, set large. */
+/*
+  The house voice.
+
+  Deliberately restrained: medium weight, sentence case, only slightly tight.
+  An earlier pass set this at 800 and uppercase, which read as an institutional
+  report rather than a studio reel. On a dark gallery the imagery carries the
+  page and the type stays out of its way.
+*/
 @utility display {
   font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 0.92;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  color: var(--text-strong);
+}
+
+/* Reserved for the studio name and the rare title that must land hard. */
+@utility display-caps {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
   color: var(--text-strong);
   text-transform: uppercase;
 }
@@ -207,8 +261,8 @@
 /* Same face, sentence case, for headings that should not shout. */
 @utility display-soft {
   font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-weight: 500;
+  letter-spacing: -0.015em;
   line-height: 1.02;
   color: var(--text-strong);
 }
@@ -367,5 +421,34 @@
   body {
     background: #fff;
     color: #000;
+  }
+}
+
+
+/* ==========================================================================
+   MOBILE TYPE STEP
+   One 10% reduction below the tablet breakpoint. Applied to the scale tokens
+   rather than to individual utilities, so every size follows and the ratios
+   between them are preserved.
+
+   The fluid sizes already shrink with the viewport; this takes them down a
+   further step, which is what small screens actually need once the layout has
+   collapsed to a single column.
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  :root {
+    --text-eyebrow: 0.54rem;
+    --text-micro: 0.619rem;
+    --text-body-sm: clamp(0.702rem, 0.684rem + 0.108vw, 0.756rem);
+    --text-body: clamp(0.788rem, 0.765rem + 0.144vw, 0.855rem);
+    --text-body-lg: clamp(0.855rem, 0.81rem + 0.27vw, 1.013rem);
+    --text-lead: clamp(0.99rem, 0.882rem + 0.558vw, 1.35rem);
+    --text-h4: clamp(0.945rem, 0.855rem + 0.45vw, 1.215rem);
+    --text-h3: clamp(1.17rem, 0.99rem + 0.9vw, 1.8rem);
+    --text-h2: clamp(1.71rem, 1.26rem + 2.16vw, 3.06rem);
+    --text-h1: clamp(2.16rem, 1.44rem + 3.6vw, 4.68rem);
+    --text-display: clamp(2.7rem, 1.35rem + 6.3vw, 8.1rem);
+    --text-mega: clamp(3.06rem, 0.9rem + 9.9vw, 12.6rem);
   }
 }

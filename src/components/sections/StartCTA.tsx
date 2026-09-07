@@ -7,7 +7,7 @@ import { contact, primaryAction } from "@/content/site";
 /** Closing call to action. Appears at the foot of every page. */
 export function StartCTA() {
   return (
-    <Section labelledBy="start-cta-heading" container="wide" tone="dark">
+    <Section labelledBy="start-cta-heading" container="wide">
       <div className="flex flex-col items-start gap-10 lg:flex-row lg:items-end lg:justify-between">
         <Reveal>
           <h2 id="start-cta-heading" className="display max-w-3xl text-display">

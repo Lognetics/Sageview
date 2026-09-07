@@ -40,15 +40,15 @@ export function MoreThanProduction() {
         lead="Not because it was badly made, but because nobody decided what it was for. We start at the other end."
       />
 
-      <ol className="mt-16 grid gap-px border bg-[var(--line)] md:grid-cols-3">
+      <ol className="mt-20 grid gap-x-12 gap-y-14 md:grid-cols-3">
         {moves.map((move, index) => (
           <Reveal as="li" key={move.name} delay={index * 80}>
-            <div className="flex h-full flex-col bg-[var(--surface)] p-8 md:p-10">
-              <span className="index-numeral text-body-sm text-[var(--accent)]">
+            <div className="flex h-full flex-col border-t pt-6">
+              <span className="index-numeral text-[0.62rem] tracking-[0.18em] text-[var(--accent)]">
                 {move.index}
               </span>
-              <h3 className="display mt-8 text-h2">{move.name}</h3>
-              <p className="mt-4 text-body text-[var(--text-body-color)]">
+              <h3 className="display mt-6 text-h3">{move.name}</h3>
+              <p className="mt-4 max-w-sm text-body text-[var(--text-body-color)]">
                 {move.body}
               </p>
             </div>

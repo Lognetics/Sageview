@@ -12,9 +12,10 @@ import { MobileMenu } from "./MobileMenu";
 /**
  * Site header.
  *
- * Transparent over the homepage hero, then a solid paper bar once the visitor
- * scrolls past it. Over that dark hero the header adopts light type, which is
- * why it tracks scroll rather than simply always being solid.
+ * Transparent over the hero, then a solid bar once the visitor scrolls, so the
+ * chrome never competes with a full-bleed frame. The site sits on one dark
+ * ground throughout, so the header needs no inversion: only the backing
+ * changes.
  *
  * Each destination carries a dropdown of in-page sections. It opens on hover
  * and on keyboard focus through `focus-within`, so it needs no open/closed
@@ -61,23 +62,13 @@ export function Navbar({ wordmark = null }: { wordmark?: Wordmark | null }) {
     [pathname],
   );
 
-  /*
-    Only the homepage opens on a full-bleed dark hero; every other page starts
-    on paper. So the header inverts to light type there and there only, and
-    only until the visitor scrolls off the hero, after which the solid paper
-    bar takes over. Deriving it from the route keeps every page from having to
-    remember to declare it.
-  */
-  const inverted = pathname === "/" && !scrolled;
-
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-[var(--dur-base)]",
         scrolled
-          ? "border-b bg-[var(--surface)]/92 backdrop-blur-md"
+          ? "border-b bg-[var(--color-black)]/90 backdrop-blur-md"
           : "border-b border-transparent",
-        inverted && "band-dark bg-transparent",
       )}
     >
       <div className="container-wide flex h-[4.5rem] items-center justify-between gap-6 md:h-20">

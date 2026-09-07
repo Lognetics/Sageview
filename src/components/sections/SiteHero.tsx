@@ -12,17 +12,18 @@ import { primaryAction, site } from "@/content/site";
  * that is not also in the text, so it is `aria-hidden` and the poster does the
  * work whenever motion is unavailable or the file has not loaded.
  *
- * `band-dark` rather than a one-off palette, so the header inverts with it.
+ * The wash is heavier at the foot, where the type sits, so the name stays
+ * legible over whatever frame the loop happens to be on.
  */
 export function SiteHero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="band-dark relative isolate flex hero-viewport flex-col justify-end overflow-hidden"
+      className="relative isolate flex hero-viewport flex-col justify-end overflow-hidden bg-[var(--color-black)]"
     >
       <video
         aria-hidden="true"
-        className="media-cover -z-20 opacity-70"
+        className="media-cover -z-20"
         poster={film.heroLoop.poster}
         autoPlay
         muted
@@ -37,7 +38,7 @@ export function SiteHero() {
       {/* Legibility wash. Heavier at the foot, where the type sits. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-[var(--color-ink)] via-[var(--color-ink)]/55 to-[var(--color-ink)]/25"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-[var(--color-black)] via-[var(--color-black)]/60 to-[var(--color-black)]/20"
       />
 
       <div className="container-wide pb-16 md:pb-24">
@@ -45,7 +46,7 @@ export function SiteHero() {
 
         <h1
           id="hero-heading"
-          className="display mt-8 text-mega text-[var(--text-strong)]"
+          className="display-caps mt-8 text-mega text-[var(--text-strong)]"
         >
           SageView
         </h1>
@@ -81,8 +82,8 @@ function HeroLink({
         "inline-flex items-center px-7 py-4 font-mono text-[0.7rem] tracking-[0.18em] uppercase",
         "transition-colors duration-[var(--dur-fast)]",
         solid
-          ? "bg-[var(--text-strong)] text-[var(--color-ink)] hover:bg-[var(--accent)]"
-          : "border border-[var(--line-strong)] text-[var(--text-strong)] hover:border-[var(--text-strong)] hover:bg-[var(--text-strong)] hover:text-[var(--color-ink)]",
+          ? "bg-[var(--text-strong)] text-[var(--color-black)] hover:bg-[var(--accent)]"
+          : "border border-[var(--line-strong)] text-[var(--text-strong)] hover:border-[var(--text-strong)] hover:bg-[var(--text-strong)] hover:text-[var(--color-black)]",
       )}
     >
       {children}

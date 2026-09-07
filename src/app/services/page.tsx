@@ -46,7 +46,7 @@ export default function ServicesPage() {
           id={service.slug}
           labelledBy={`${service.slug}-heading`}
           container="wide"
-          tone={index % 2 === 1 ? "dark" : "paper"}
+          tone={index % 2 === 1 ? "sunken" : "dark"}
         >
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
@@ -148,7 +148,7 @@ export default function ServicesPage() {
         id="process"
         labelledBy="process-heading"
         container="wide"
-        tone="sunken"
+        tone="light"
       >
         <SectionIntro
           eyebrow={processIntro.eyebrow}
@@ -158,14 +158,14 @@ export default function ServicesPage() {
           lead={processIntro.lead}
         />
 
-        <ol className="mt-16 grid gap-px border bg-[var(--line)] md:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-20 grid gap-x-10 gap-y-14 md:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((step, index) => (
             <Reveal as="li" key={step.index} delay={index * 70}>
-              <div className="flex h-full flex-col bg-[var(--surface)] p-8 md:p-10">
-                <span className="index-numeral text-body-sm text-[var(--accent)]">
+              <div className="flex h-full flex-col border-t pt-6">
+                <span className="index-numeral text-[0.62rem] tracking-[0.18em] text-[var(--accent)]">
                   {step.index}
                 </span>
-                <h3 className="display mt-8 text-h3">{step.name}</h3>
+                <h3 className="display mt-6 text-h3">{step.name}</h3>
                 <p className="mt-4 text-body text-[var(--text-body-color)]">
                   {step.body}
                 </p>

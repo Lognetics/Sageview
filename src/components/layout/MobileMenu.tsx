@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 import { cn } from "@/lib/cn";
-import { contact, primaryNav } from "@/content/site";
+import { contact, primaryAction, primaryNav } from "@/content/site";
 import { ButtonLink } from "@/components/primitives/Button";
 
 /**
@@ -109,7 +109,7 @@ export function MobileMenu({
       className={cn(
         // z-40 deliberately sits *below* the header's z-50 so the logo and the
         // close toggle stay visible and clickable over the open menu.
-        "fixed inset-0 z-40 flex flex-col bg-void lg:hidden",
+        "band-dark fixed inset-0 z-40 flex flex-col bg-[var(--surface)] lg:hidden",
         "transition-[opacity,transform] duration-[var(--dur-base)] ease-[cubic-bezier(0.22,1,0.36,1)]",
         open
           ? "pointer-events-auto translate-y-0 opacity-100"
@@ -127,7 +127,7 @@ export function MobileMenu({
           {primaryNav.map((item, index) => (
             <li
               key={item.href}
-              className="border-t border-bone/10 py-5 first:border-t-0"
+              className="border-t py-5 first:border-t-0"
               style={{
                 transitionDelay: open ? `${120 + index * 45}ms` : "0ms",
               }}
@@ -137,13 +137,13 @@ export function MobileMenu({
                 onClick={onClose}
                 aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
-                  "font-display flex items-baseline gap-4 text-[clamp(2.25rem,11vw,3.25rem)] leading-none transition-colors duration-200",
+                  "display flex items-baseline gap-4 text-[clamp(2rem,10vw,3rem)] leading-none transition-colors duration-200",
                   isActive(item.href)
-                    ? "text-brass"
-                    : "text-bone hover:text-brass",
+                    ? "text-[var(--accent)]"
+                    : "text-[var(--text-strong)] hover:text-[var(--accent)]",
                 )}
               >
-                <span className="index-numeral text-[0.625rem] text-ash">
+                <span className="index-numeral text-[0.625rem] text-[var(--text-faint)]">
                   0{index + 1}
                 </span>
                 {item.label}
@@ -160,8 +160,8 @@ export function MobileMenu({
                         className={cn(
                           "text-body-sm transition-colors duration-200",
                           isActive(child.href)
-                            ? "text-brass"
-                            : "text-mist hover:text-bone",
+                            ? "text-[var(--accent)]"
+                            : "text-[var(--text-muted)] hover:text-[var(--text-strong)]",
                         )}
                       >
                         {child.label}
@@ -178,7 +178,7 @@ export function MobileMenu({
           {/* Closing on click matters: without it the dialog stays mounted
               over the page the visitor just navigated to. */}
           <ButtonLink
-            href="/contact"
+            href={primaryAction.href}
             size="lg"
             withArrow
             className="w-full"
@@ -188,17 +188,17 @@ export function MobileMenu({
           </ButtonLink>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-bone/10 pt-8">
+        <div className="mt-10 flex flex-col gap-3 border-t pt-8">
           <p className="eyebrow-muted">Direct</p>
           <a
             href={`mailto:${contact.email}`}
-            className="text-body-sm break-all text-bone transition-colors hover:text-brass"
+            className="text-body-sm break-all text-[var(--text-strong)] transition-colors hover:text-[var(--accent)]"
           >
             {contact.email}
           </a>
           <a
             href={`tel:${contact.phoneHref}`}
-            className="text-body-sm text-bone transition-colors hover:text-brass"
+            className="text-body-sm text-[var(--text-strong)] transition-colors hover:text-[var(--accent)]"
           >
             {contact.phone}
           </a>
@@ -206,7 +206,7 @@ export function MobileMenu({
             href={contact.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-body-sm text-bone transition-colors hover:text-brass"
+            className="text-body-sm text-[var(--text-strong)] transition-colors hover:text-[var(--accent)]"
           >
             Instagram {contact.instagram}
           </a>
