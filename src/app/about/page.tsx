@@ -50,7 +50,12 @@ export default function AboutPage() {
         </Reveal>
       </Section>
 
-      <Section id="who-we-are" labelledBy="who-we-are-heading" container="wide">
+      <Section
+        id="who-we-are"
+        labelledBy="who-we-are-heading"
+        container="wide"
+        tone="light"
+      >
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-20">
           <div className="lg:col-span-5">
             <SectionIntro
@@ -161,7 +166,7 @@ export default function AboutPage() {
         id="team"
         labelledBy="team-heading"
         container="wide"
-        tone="sunken"
+        tone="light"
       >
         <SectionIntro
           eyebrow={team.eyebrow}

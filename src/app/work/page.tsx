@@ -24,7 +24,7 @@ export default function WorkPage() {
         lead="Documentary and commercial film, photography and live production. Filter by discipline."
       />
 
-      <Section container="wide">
+      <Section container="wide" tone="light">
         {/*
           WorkGrid reads the active filter from the query string, so it needs a
           Suspense boundary: useSearchParams opts a component out of static

@@ -9,7 +9,12 @@ import { whoWeAre } from "@/content/about";
 /** Short introduction and one image, pointing at the About page. */
 export function AboutTeaser() {
   return (
-    <Section id="about" labelledBy="about-teaser-heading" container="wide">
+    <Section
+      id="about"
+      labelledBy="about-teaser-heading"
+      container="wide"
+      tone="light"
+    >
       <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-20">
         <div className="lg:col-span-6">
           <SectionIntro

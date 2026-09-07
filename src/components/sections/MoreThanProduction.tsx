@@ -31,6 +31,7 @@ export function MoreThanProduction() {
       id="more-than-production"
       labelledBy="more-than-heading"
       container="wide"
+      tone="light"
     >
       <SectionIntro
         eyebrow="More Than Production"

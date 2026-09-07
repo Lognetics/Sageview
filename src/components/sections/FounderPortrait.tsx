@@ -20,7 +20,7 @@ export function FounderPortrait() {
   );
 
   return (
-    <Section id="founder" labelledBy="founder-heading" container="wide" tone="light">
+    <Section id="founder" labelledBy="founder-heading" container="wide" tone="dark">
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-20">
         {portrait ? (
           <Reveal className="lg:col-span-5">

@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Section, SectionIntro } from "@/components/primitives/Section";
 import { Reveal } from "@/components/primitives/Reveal";
+import { Tilt3D } from "@/components/primitives/Tilt3D";
 import { workProjects } from "@/content/work";
 
 /**
@@ -19,7 +20,12 @@ export function SelectedWork() {
   if (!lead) return null;
 
   return (
-    <Section id="selected-work" labelledBy="selected-work-heading" container="wide">
+    <Section
+      id="selected-work"
+      labelledBy="selected-work-heading"
+      container="wide"
+      tone="light"
+    >
       <div className="flex flex-wrap items-end justify-between gap-6">
         <SectionIntro
           eyebrow="Selected Work"
@@ -39,16 +45,18 @@ export function SelectedWork() {
 
       <Reveal delay={100}>
         <Link href={`/work/${lead.slug}`} className="group mt-14 block">
-          <div className="relative aspect-[16/9] overflow-hidden bg-[var(--surface-sunken)]">
-            <Image
-              src={lead.image.src}
-              alt={lead.image.alt}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out)] group-hover:scale-[1.02]"
-            />
-          </div>
+          <Tilt3D max={4}>
+            <div className="relative aspect-[16/9] overflow-hidden bg-[var(--surface-sunken)]">
+              <Image
+                src={lead.image.src}
+                alt={lead.image.alt}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
+          </Tilt3D>
           <div className="mt-6 flex flex-wrap items-baseline justify-between gap-4">
             <h3 className="display-soft text-h2">{lead.title}</h3>
             <p className="font-mono text-[0.65rem] tracking-[0.16em] text-[var(--text-faint)] uppercase">
@@ -63,17 +71,19 @@ export function SelectedWork() {
 
       <ul className="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2">
         {rest.map((project, index) => (
-          <Reveal as="li" key={project.slug} delay={index * 60}>
+          <Reveal as="li" key={project.slug} delay={index * 60} className="depth-in">
             <Link href={`/work/${project.slug}`} className="group block">
-              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--surface-sunken)]">
-                <Image
-                  src={project.image.src}
-                  alt={project.image.alt}
-                  fill
-                  sizes="(min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out)] group-hover:scale-[1.03]"
-                />
-              </div>
+              <Tilt3D>
+                <div className="relative aspect-[3/2] overflow-hidden bg-[var(--surface-sunken)]">
+                  <Image
+                    src={project.image.src}
+                    alt={project.image.alt}
+                    fill
+                    sizes="(min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              </Tilt3D>
               <h3 className="display-soft mt-5 text-h3">{project.title}</h3>
               <p className="mt-2 text-body text-[var(--text-body-color)]">
                 {project.summary}

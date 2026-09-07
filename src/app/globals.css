@@ -452,3 +452,90 @@
     --text-mega: clamp(3.06rem, 0.9rem + 9.9vw, 12.6rem);
   }
 }
+
+/* ==========================================================================
+   DEPTH
+   Three-dimensional motion, kept to the two places it earns its keep: work
+   cards leaning toward the pointer, and bands arriving with a slight rotation
+   as they scroll into view.
+
+   Everything here is transform and opacity only, so it composites on the GPU
+   and never triggers layout. All of it is behind a reduced-motion guard: the
+   3D is an enhancement, and the flat site is the real one.
+   ========================================================================== */
+
+.tilt-3d {
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
+}
+
+.tilt-3d > * {
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg))
+    translate3d(0, 0, 0);
+  transform-style: preserve-3d;
+  transition: transform var(--dur-base) var(--ease-out);
+  will-change: transform;
+}
+
+/* The media inside travels further than its frame, which is what reads as
+   depth rather than as a skew. */
+.tilt-3d :is(img, video) {
+  transform: translate3d(var(--tilt-px, 0), var(--tilt-py, 0), 0) scale(1.06);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-3d > *,
+  .tilt-3d :is(img, video) {
+    transform: none !important;
+    transition: none;
+  }
+}
+
+/*
+  Scroll-linked entrances.
+
+  Driven by `animation-timeline: view()`, so the browser runs them against
+  scroll position off the main thread: no observer, no scroll handler, and no
+  jank while the page is being flung. Browsers without it simply keep the
+  JavaScript `reveal` behaviour, which is why this is additive rather than a
+  replacement.
+*/
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .depth-in {
+      animation: depth-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+      transform-origin: 50% 100%;
+    }
+
+    @keyframes depth-in {
+      from {
+        opacity: 0;
+        transform: perspective(1400px) rotateX(7deg) translate3d(0, 42px, -60px);
+      }
+      to {
+        opacity: 1;
+        transform: perspective(1400px) rotateX(0) translate3d(0, 0, 0);
+      }
+    }
+
+    /* The hero frame drifts and settles as it leaves, so the page opens with
+       depth rather than with a static plate. */
+    .depth-hero {
+      animation: depth-hero linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+
+    @keyframes depth-hero {
+      from {
+        transform: scale(1.12) translate3d(0, 0, 0);
+      }
+      to {
+        transform: scale(1.24) translate3d(0, -3%, 0);
+      }
+    }
+  }
+}

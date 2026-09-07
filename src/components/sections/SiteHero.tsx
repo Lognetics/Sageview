@@ -23,7 +23,7 @@ export function SiteHero() {
     >
       <video
         aria-hidden="true"
-        className="media-cover -z-20"
+        className="media-cover depth-hero -z-20"
         poster={film.heroLoop.poster}
         autoPlay
         muted
