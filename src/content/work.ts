@@ -59,6 +59,16 @@ export type WorkProject = {
    * omits the gallery entirely when there is nothing to show.
    */
   gallery?: readonly Media[];
+  /**
+   * Presentation hints for projects whose frames are not landscape crops.
+   *
+   * `frameAspect` sets the box the frames are shown in, and `fit` decides
+   * whether a frame fills that box or sits whole inside it. A photo essay
+   * built as portrait slides with type set into them has to be shown whole:
+   * cropping it to landscape cuts the words off the picture.
+   */
+  frameAspect?: string;
+  fit?: "cover" | "contain";
   /** Ordering weight for the grid: lower comes first. */
   order: number;
 };

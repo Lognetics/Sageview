@@ -79,14 +79,22 @@ export default async function ProjectPage({ params }: Params) {
             caption={`${project.title}: press play to watch`}
           />
         ) : (
-          <div className="relative aspect-[16/9] overflow-hidden bg-[var(--surface-sunken)]">
+          <div
+            className="relative mx-auto overflow-hidden bg-[var(--surface-sunken)]"
+            style={{
+              aspectRatio: project.frameAspect ?? "16 / 9",
+              maxWidth: project.frameAspect ? "34rem" : undefined,
+            }}
+          >
             <Image
               src={project.image.src}
               alt={project.image.alt}
               fill
               priority
-              sizes="100vw"
-              className="object-cover"
+              sizes={project.frameAspect ? "34rem" : "100vw"}
+              className={
+                project.fit === "contain" ? "object-contain" : "object-cover"
+              }
             />
           </div>
         )}
@@ -98,17 +106,33 @@ export default async function ProjectPage({ params }: Params) {
             {project.gallery.map((frame, index) => (
               <li
                 key={frame.src}
-                /* A photo essay reads better when the frames are not all the
-                   same size: every third runs full width. */
-                className={index % 3 === 2 ? "sm:col-span-2" : undefined}
+                /* Landscape sets read better broken up, so every third runs
+                   full width. A portrait essay is a sequence of equal slides
+                   and keeps its own rhythm. */
+                className={
+                  project.frameAspect || index % 3 !== 2
+                    ? undefined
+                    : "sm:col-span-2"
+                }
               >
-                <div className="relative aspect-[3/2] overflow-hidden bg-[var(--surface-sunken)]">
+                <div
+                  className="relative overflow-hidden bg-[var(--surface-sunken)]"
+                  style={{ aspectRatio: project.frameAspect ?? "3 / 2" }}
+                >
                   <Image
                     src={frame.src}
                     alt={frame.alt}
                     fill
-                    sizes={index % 3 === 2 ? "100vw" : "(min-width: 640px) 50vw, 100vw"}
-                    className="object-cover"
+                    sizes={
+                      index % 3 === 2
+                        ? "100vw"
+                        : "(min-width: 640px) 50vw, 100vw"
+                    }
+                    className={
+                      project.fit === "contain"
+                        ? "object-contain"
+                        : "object-cover"
+                    }
                   />
                 </div>
               </li>

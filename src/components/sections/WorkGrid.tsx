@@ -123,7 +123,10 @@ function ProjectCard({
     <li className="depth-in">
       <Link href={`/work/${project.slug}`} className="group block">
         <Tilt3D>
-          <div className="relative aspect-[3/2] overflow-hidden bg-[var(--surface-sunken)]">
+          <div
+          className="relative overflow-hidden bg-[var(--surface-sunken)]"
+          style={{ aspectRatio: project.frameAspect ?? "3 / 2" }}
+        >
             <Image
               src={project.image.src}
               alt={project.image.alt}

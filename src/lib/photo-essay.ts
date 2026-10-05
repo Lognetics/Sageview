@@ -1,4 +1,4 @@
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 import type { Media } from "@/content/media";
@@ -21,7 +21,32 @@ import type { WorkProject } from "@/content/work";
  *   01-arrival.jpg, 02-the-walk.jpg, 03-dusk.jpg
  * That matters more here than anywhere else on the site, because the order of
  * an essay is the argument it makes.
+ *
+ * An optional `essay.json` beside the frames carries the title, summary and a
+ * caption per file. Captions derived from filenames are a floor, not a
+ * target: a photograph of a boy walking to school barefoot deserves to be
+ * described as that rather than as "the walk". Where the file is absent, or a
+ * frame is missing from it, the filename is still used, so the folder keeps
+ * working on its own.
  */
+
+type EssayMeta = {
+  title?: string;
+  summary?: string;
+  credit?: string;
+  captions?: Record<string, string>;
+};
+
+function readMeta(dir: string): EssayMeta {
+  const file = join(dir, "essay.json");
+  if (!existsSync(file)) return {};
+  try {
+    return JSON.parse(readFileSync(file, "utf8")) as EssayMeta;
+  } catch {
+    // A malformed sidecar should cost the captions, never the essay.
+    return {};
+  }
+}
 
 const DIR = "media/photo-essay";
 
@@ -52,6 +77,7 @@ function describe(filename: string, index: number): string {
 export function photoEssayFrames(): Media[] {
   const dir = join(process.cwd(), "public", DIR);
   if (!existsSync(dir)) return [];
+  const { captions = {} } = readMeta(dir);
 
   return readdirSync(dir)
     .filter((name) => {
@@ -62,7 +88,7 @@ export function photoEssayFrames(): Media[] {
     .sort((a, b) => a.localeCompare(b, "en", { numeric: true }))
     .map((name, index) => ({
       src: `/${DIR}/${name}`,
-      alt: describe(name, index),
+      alt: captions[name] ?? describe(name, index),
     }));
 }
 
@@ -77,19 +103,27 @@ export function photoEssayProject(): WorkProject | null {
   const frames = photoEssayFrames();
   if (frames.length === 0) return null;
 
+  const meta = readMeta(join(process.cwd(), "public", DIR));
   const [cover, ...rest] = frames;
 
   return {
     slug: "photo-essay",
-    title: "Photo Essay",
+    title: meta.title ?? "Photo Essay",
     summary:
+      meta.summary ??
       "A sequence of frames read in order, where the story is carried by the photographs rather than by a film.",
-    categories: ["photography", "photo-essay"],
+    categories: ["photography", "photo-essay", "documentary"],
     image: cover,
     gallery: rest,
+    /* The frames are portrait slides with their own type set into them, so
+       they are shown whole rather than cropped to the landscape the rest of
+       the index uses. Cropping these would cut the words off the picture. */
+    frameAspect: "4/5",
+    fit: "contain",
     meta: [
       { label: "Discipline", value: "Documentary photography" },
       { label: "Frames", value: String(frames.length) },
+      ...(meta.credit ? [{ label: "Credit", value: meta.credit }] : []),
     ],
     order: 0,
   };
