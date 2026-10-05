@@ -116,7 +116,7 @@ export const workProjects: readonly WorkProject[] = [
       { label: "Discipline", value: "Documentary" },
       { label: "Partner", value: "Flow with Pride Impact Hub" },
     ],
-    order: 2,
+    order: 3,
   },
   {
     slug: "food-security-programme",
@@ -132,7 +132,26 @@ export const workProjects: readonly WorkProject[] = [
     },
     meta: [{ label: "Discipline", value: "Documentary" }],
     gallery: [photo.foodSecurityField, photo.forestrySummit],
-    order: 3,
+    order: 4,
+  },
+  {
+    slug: "jemia",
+    title: "Jemia",
+    summary:
+      "A documentary portrait of a founder building a space of her own, from the site work to the finished room.",
+    categories: ["film", "documentary", "commercial"],
+    image: photo.jemiaStill,
+    video: {
+      src: film.jemia.src,
+      poster: film.jemia.poster,
+      alt: film.jemia.alt,
+    },
+    meta: [
+      { label: "Discipline", value: "Documentary" },
+      { label: "Length", value: "3 minutes 37 seconds" },
+      { label: "Format", value: "1080p" },
+    ],
+    order: 2,
   },
   {
     slug: "charcoal-colliers",
@@ -148,7 +167,7 @@ export const workProjects: readonly WorkProject[] = [
       photo.portersCarrying,
       photo.quarryWide,
     ],
-    order: 4,
+    order: 5,
   },
   {
     slug: "field-portraits",
@@ -166,7 +185,7 @@ export const workProjects: readonly WorkProject[] = [
       photo.youngVendor,
       photo.elderWriting,
     ],
-    order: 5,
+    order: 6,
   },
   {
     slug: "summit-and-assembly",
@@ -178,7 +197,7 @@ export const workProjects: readonly WorkProject[] = [
     meta: [
       { label: "Discipline", value: "Live production, photography" },
     ],
-    order: 6,
+    order: 7,
   },
 ];
 

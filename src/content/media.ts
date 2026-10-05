@@ -136,6 +136,10 @@ export const photo = {
     src: `${DOC}/food-security-cover.jpg`,
     alt: "Rows of red planters on timber racks with green watering cans, set up for a vertical farming programme.",
   },
+  jemiaStill: {
+    src: "/media/video/jemia-poster.jpg",
+    alt: "A palette knife laying white paint onto a canvas in an ornate gold frame.",
+  },
   foodSecurityField: {
     src: `${DOC}/food-security-field.jpg`,
     alt: "Tomato seedlings in a propagation tray, close up.",
@@ -170,6 +174,16 @@ export const film = {
     src: "/media/video/food-security-programme.mp4",
     poster: "/media/video/food-security-programme-poster.jpg",
     alt: "A documentary on a food security and vertical farming programme.",
+  },
+  /*
+    Supplied as a 275MB 4K master, which GitHub refuses outright at over
+    100MB. Transcoded to 1080p at 2.2Mbps, which is 59MB: the only file on the
+    site above 720p, and the sharpest thing on it as a result.
+  */
+  jemia: {
+    src: "/media/video/jemia.mp4",
+    poster: "/media/video/jemia-poster.jpg",
+    alt: "The Jemia documentary.",
   },
 } as const;
 
