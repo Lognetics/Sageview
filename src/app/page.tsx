@@ -2,7 +2,7 @@ import { AboutTeaser } from "@/components/sections/AboutTeaser";
 import { ClientMarquee } from "@/components/sections/ClientMarquee";
 import { MoreThanProduction } from "@/components/sections/MoreThanProduction";
 import { SelectedWork } from "@/components/sections/SelectedWork";
-import { SiteHero } from "@/components/sections/SiteHero";
+import { LetterformHero } from "@/components/sections/LetterformHero";
 import { StartCTA } from "@/components/sections/StartCTA";
 import { WhatWeDo } from "@/components/sections/WhatWeDo";
 
@@ -16,7 +16,7 @@ import { WhatWeDo } from "@/components/sections/WhatWeDo";
 export default function HomePage() {
   return (
     <>
-      <SiteHero />
+      <LetterformHero />
       <SelectedWork />
       <WhatWeDo />
       <MoreThanProduction />
