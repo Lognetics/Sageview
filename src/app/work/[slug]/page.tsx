@@ -84,6 +84,31 @@ export default async function ProjectPage({ params }: Params) {
         )}
       </Section>
 
+      {project.gallery?.length ? (
+        <Section container="wide" className="pt-0">
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {project.gallery.map((frame, index) => (
+              <li
+                key={frame.src}
+                /* A photo essay reads better when the frames are not all the
+                   same size: every third runs full width. */
+                className={index % 3 === 2 ? "sm:col-span-2" : undefined}
+              >
+                <div className="relative aspect-[3/2] overflow-hidden bg-[var(--surface-sunken)]">
+                  <Image
+                    src={frame.src}
+                    alt={frame.alt}
+                    fill
+                    sizes={index % 3 === 2 ? "100vw" : "(min-width: 640px) 50vw, 100vw"}
+                    className="object-cover"
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
+
       {project.body ? (
         <Section container="prose" className="pt-0">
           <div className="space-y-6">

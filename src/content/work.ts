@@ -48,6 +48,15 @@ export type WorkProject = {
   body?: readonly string[];
   /** Shown as a small meta row. */
   meta?: readonly { label: string; value: string }[];
+  /**
+   * Further stills, shown as a gallery on the project page.
+   *
+   * This is where a photo essay belongs: a set of frames read in sequence
+   * rather than one cover standing in for the whole body of work. Add images
+   * to the registry and list them here; the page renders what it is given and
+   * omits the gallery entirely when there is nothing to show.
+   */
+  gallery?: readonly Media[];
   /** Ordering weight for the grid: lower comes first. */
   order: number;
 };
@@ -85,7 +94,7 @@ export const workProjects: readonly WorkProject[] = [
     summary:
       "A documentary made with Flow with Pride Impact Hub on period poverty and the silence around it.",
     categories: ["film", "documentary"],
-    image: photo.girlResting,
+    image: photo.periodPovertyCover,
     video: {
       src: film.periodPoverty.src,
       poster: film.periodPoverty.poster,
@@ -103,13 +112,14 @@ export const workProjects: readonly WorkProject[] = [
     summary:
       "A documentary on a food security programme and the vertical farming behind it.",
     categories: ["film", "documentary"],
-    image: photo.forestrySummit,
+    image: photo.foodSecurityCover,
     video: {
       src: film.foodSecurity.src,
       poster: film.foodSecurity.poster,
       alt: film.foodSecurity.alt,
     },
     meta: [{ label: "Discipline", value: "Documentary" }],
+    gallery: [photo.foodSecurityField, photo.forestrySummit],
     order: 3,
   },
   {
@@ -120,6 +130,12 @@ export const workProjects: readonly WorkProject[] = [
     categories: ["photography", "documentary"],
     image: photo.collierEmerging,
     meta: [{ label: "Discipline", value: "Documentary photography" }],
+    gallery: [
+      photo.collierFlexing,
+      photo.collierSmiling,
+      photo.portersCarrying,
+      photo.quarryWide,
+    ],
     order: 4,
   },
   {
@@ -130,6 +146,14 @@ export const workProjects: readonly WorkProject[] = [
     categories: ["photography"],
     image: photo.boySeatedRural,
     meta: [{ label: "Discipline", value: "Portrait photography" }],
+    gallery: [
+      photo.girlResting,
+      photo.childStudying,
+      photo.boyWheelchair,
+      photo.childrenLaughing,
+      photo.youngVendor,
+      photo.elderWriting,
+    ],
     order: 5,
   },
   {

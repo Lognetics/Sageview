@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 import { cn } from "@/lib/cn";
-import { contact, primaryAction, primaryNav } from "@/content/site";
+import { ContactLinks } from "@/components/primitives/ContactIcons";
+import { primaryAction, primaryNav } from "@/content/site";
 import { ButtonLink } from "@/components/primitives/Button";
 
 /**
@@ -188,28 +189,9 @@ export function MobileMenu({
           </ButtonLink>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t pt-8">
+        <div className="mt-10 border-t pt-8">
           <p className="eyebrow-muted">Direct</p>
-          <a
-            href={`mailto:${contact.email}`}
-            className="text-body-sm break-all text-[var(--text-strong)] transition-colors hover:text-[var(--accent)]"
-          >
-            {contact.email}
-          </a>
-          <a
-            href={`tel:${contact.phoneHref}`}
-            className="text-body-sm text-[var(--text-strong)] transition-colors hover:text-[var(--accent)]"
-          >
-            {contact.phone}
-          </a>
-          <a
-            href={contact.instagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-body-sm text-[var(--text-strong)] transition-colors hover:text-[var(--accent)]"
-          >
-            Instagram {contact.instagram}
-          </a>
+          <ContactLinks labelled className="mt-5" />
         </div>
       </nav>
     </div>

@@ -125,6 +125,21 @@ export const photo = {
     src: `${DOC}/charcoal-quarry-wide.jpg`,
     alt: "A wide view of workers loading charcoal in a quarry.",
   },
+
+  /* Supplied October 2026 as replacement cover art for the two films whose
+     thumbnails were standing in for the work rather than showing it. */
+  periodPovertyCover: {
+    src: `${DOC}/period-poverty-cover.jpg`,
+    alt: "A woman in a deep blue covering standing at a washing line in a sunlit compound.",
+  },
+  foodSecurityCover: {
+    src: `${DOC}/food-security-cover.jpg`,
+    alt: "Rows of red planters on timber racks with green watering cans, set up for a vertical farming programme.",
+  },
+  foodSecurityField: {
+    src: `${DOC}/food-security-field.jpg`,
+    alt: "Tomato seedlings in a propagation tray, close up.",
+  },
 } as const satisfies Record<string, Media>;
 
 /**

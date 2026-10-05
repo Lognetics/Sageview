@@ -20,7 +20,7 @@ export function AboutTeaser() {
           <SectionIntro
             eyebrow="About SageView"
             headingId="about-teaser-heading"
-            heading="A studio built"
+            heading="A company built"
             accent="around the story."
           />
 

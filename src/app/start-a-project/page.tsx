@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 
+import {
+  InstagramIcon,
+  MailIcon,
+  PhoneIcon,
+} from "@/components/primitives/ContactIcons";
 import { Section } from "@/components/primitives/Section";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { PageHeader } from "@/components/sections/PageHeader";
@@ -34,7 +39,8 @@ export default function StartAProjectPage() {
             <dl className="mt-12 space-y-8">
               <div>
                 <dt className="eyebrow-muted">Projects</dt>
-                <dd className="mt-3">
+                <dd className="mt-3 flex items-center gap-3">
+                  <MailIcon className="shrink-0 text-[var(--accent)]" />
                   <a
                     href={`mailto:${contact.projectEmail}`}
                     className="text-body text-[var(--text-strong)] underline underline-offset-4 hover:text-[var(--accent)]"
@@ -46,7 +52,8 @@ export default function StartAProjectPage() {
 
               <div>
                 <dt className="eyebrow-muted">General</dt>
-                <dd className="mt-3">
+                <dd className="mt-3 flex items-center gap-3">
+                  <MailIcon className="shrink-0 text-[var(--accent)]" />
                   <a
                     href={`mailto:${contact.email}`}
                     className="text-body text-[var(--text-strong)] underline underline-offset-4 hover:text-[var(--accent)]"
@@ -58,7 +65,8 @@ export default function StartAProjectPage() {
 
               <div>
                 <dt className="eyebrow-muted">Phone</dt>
-                <dd className="mt-3">
+                <dd className="mt-3 flex items-center gap-3">
+                  <PhoneIcon className="shrink-0 text-[var(--accent)]" />
                   <a
                     href={`tel:${contact.phoneHref}`}
                     className="text-body text-[var(--text-strong)] underline underline-offset-4 hover:text-[var(--accent)]"
@@ -70,7 +78,8 @@ export default function StartAProjectPage() {
 
               <div>
                 <dt className="eyebrow-muted">Instagram</dt>
-                <dd className="mt-3">
+                <dd className="mt-3 flex items-center gap-3">
+                  <InstagramIcon className="shrink-0 text-[var(--accent)]" />
                   <a
                     href={contact.instagramUrl}
                     target="_blank"

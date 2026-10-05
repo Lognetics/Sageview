@@ -32,7 +32,7 @@ export const servicesIntro = {
   eyebrow: "Services",
   heading: "Four disciplines,",
   headingAccent: "one way of working.",
-  lead: "Strategy, film, photography and live production sit in the same studio and run off the same brief. That is what keeps the intent set in the first conversation intact in the final frame.",
+  lead: "Strategy, film, photography and live production sit in the same company and run off the same brief. That is what keeps the intent set in the first conversation intact in the final frame.",
 } as const;
 
 export const services: readonly Service[] = [
@@ -41,7 +41,7 @@ export const services: readonly Service[] = [
     index: "01",
     name: "Film",
     summary: "Documentary, commercial, corporate and branded work.",
-    body: "Film is the centre of the studio. Whether the subject is a community, a product or a leadership team, the work is built the same way: find the human truth in it first, then decide how it should be shot.",
+    body: "Film is the centre of what we do. Whether the subject is a community, a product or a leadership team, the work is built the same way: find the human truth in it first, then decide how it should be shot.",
     items: [
       {
         name: "Documentary Films",

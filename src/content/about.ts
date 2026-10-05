@@ -17,11 +17,11 @@ export const aboutHero = {
 
 export const whoWeAre = {
   eyebrow: "Who We Are",
-  heading: "A studio built around",
+  heading: "A company built around",
   headingAccent: "the story first.",
   body: [
     "SageView Production Ltd is a visual communications and production company. We make human-centred visual work for brands, organisations and institutions: documentary and commercial film, photography, campaign material and live production.",
-    "The studio was built on a simple observation. Most visual work fails not because it was badly shot, but because nobody decided what it was for. So we start with the objective and the audience, and let those decide the film, the photographs and the format, rather than the other way around.",
+    "The company was built on a simple observation. Most visual work fails not because it was badly shot, but because nobody decided what it was for. So we start with the objective and the audience, and let those decide the film, the photographs and the format, rather than the other way around.",
     "That means strategy, production and post are not separate departments here. They are the same team working from the same brief, which is why the intent set in the first conversation is still intact in the final grade.",
   ],
 } as const;
@@ -118,7 +118,7 @@ export const approach = {
  * Team and network.
  *
  * The portfolio names one individual. Everyone else is described by role,
- * because the studio is deliberately an assembled network rather than a
+ * because the company is deliberately an assembled network rather than a
  * standing payroll, and inventing named staff would be a lie.
  */
 export const team = {

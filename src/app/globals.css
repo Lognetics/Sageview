@@ -480,7 +480,9 @@
 /* The media inside travels further than its frame, which is what reads as
    depth rather than as a skew. */
 .tilt-3d :is(img, video) {
-  transform: translate3d(var(--tilt-px, 0), var(--tilt-py, 0), 0) scale(1.06);
+  /* Just enough overscan to cover the parallax offset without softening the
+     frame. The travel is 12px, so 1.03 on a card-width image is sufficient. */
+  transform: translate3d(var(--tilt-px, 0), var(--tilt-py, 0), 0) scale(1.03);
   transition: transform var(--dur-base) var(--ease-out);
 }
 
@@ -529,13 +531,147 @@
       animation-range: cover;
     }
 
+    /*
+      Kept close to 1. The film masters are 720p, so every extra percent of
+      scale is upscaling: at the previous 1.12 to 1.24 the hero was being
+      stretched past 1700px from a 1280px source and visibly softened. The
+      drift now comes almost entirely from translation rather than zoom.
+    */
     @keyframes depth-hero {
       from {
-        transform: scale(1.12) translate3d(0, 0, 0);
+        transform: scale(1.02) translate3d(0, 0, 0);
       }
       to {
-        transform: scale(1.24) translate3d(0, -3%, 0);
+        transform: scale(1.06) translate3d(0, -2.5%, 0);
       }
     }
+  }
+}
+
+/* ==========================================================================
+   FINISHING
+   The details that separate a built page from a finished one: optical type
+   settings, considered link and hover affordances, and media that arrives
+   rather than appears.
+   ========================================================================== */
+
+@layer base {
+  html {
+    /* Tabular figures in the mono labels, proper kerning everywhere, and the
+       slightly tighter optical sizing the display face is drawn for. */
+    font-kerning: normal;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* A thin dark scrollbar: the default light one cuts a bright stripe down
+     the side of a black page. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--text-faint) 60%, transparent)
+      transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--text-faint) 55%, transparent);
+    border: 3px solid transparent;
+    background-clip: content-box;
+    border-radius: 99px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklab, var(--text-muted) 80%, transparent);
+    background-clip: content-box;
+  }
+
+  /* Links in running copy: a hairline that thickens on approach, rather than
+     the browser's default underline sitting on the descenders. */
+  .prose-link,
+  p > a:not([class]) {
+    color: var(--text-strong);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--accent) 55%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition:
+      text-decoration-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+
+  .prose-link:hover,
+  p > a:not([class]):hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+}
+
+/*
+  Media arrives.
+
+  Images fade up as they decode instead of snapping in, which is most of the
+  difference between a gallery that feels considered and one that feels like
+  it is still loading. `content-visibility` keeps offscreen frames out of
+  rendering work on long pages.
+*/
+@utility media-frame {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--surface-sunken);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 400px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .media-frame :is(img, video) {
+    animation: media-in var(--dur-slow) var(--ease-out) both;
+  }
+
+  @keyframes media-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/*
+  Video.
+
+  `object-fit: cover` on every frame, and crisp-edges left well alone: the
+  masters are 720p, so the honest fix for sharpness is a higher-resolution
+  source, not a filter. What is controllable here is that nothing scales a
+  video further than it has to.
+*/
+video {
+  object-fit: cover;
+  background-color: var(--color-black);
+}
+
+/* A quieter, more deliberate hover for anything that acts as a card. */
+@utility card-hover {
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    opacity var(--dur-base) var(--ease-out);
+}
+
+.group:hover .card-hover {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group:hover .card-hover {
+    transform: none;
   }
 }
