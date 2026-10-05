@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
-import { ContactSheet } from "@/components/sections/ContactSheet";
+import { Tilt3D } from "@/components/primitives/Tilt3D";
 import { cn } from "@/lib/cn";
 import {
   projectsFor,
@@ -85,8 +87,60 @@ export function WorkGrid() {
           Nothing in this category yet.
         </p>
       ) : (
-        <ContactSheet projects={projects} className="mt-6" />
+        <ul className="mt-14 grid gap-x-8 gap-y-16 sm:grid-cols-2">
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              priority={index < 2}
+            />
+          ))}
+        </ul>
       )}
     </>
+  );
+}
+
+function ProjectCard({
+  project,
+  priority,
+}: {
+  project: WorkProject;
+  priority: boolean;
+}) {
+  return (
+    <li className="depth-in">
+      <Link href={`/work/${project.slug}`} className="group block">
+        <Tilt3D>
+          <div className="relative aspect-[3/2] overflow-hidden bg-[var(--surface-sunken)]">
+            <Image
+              src={project.image.src}
+              alt={project.image.alt}
+              fill
+              priority={priority}
+              sizes="(min-width: 640px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </Tilt3D>
+
+        <div className="mt-5 flex items-baseline justify-between gap-4">
+          <h3 className="display-soft text-h4">{project.title}</h3>
+          {project.client ? (
+            <p className="shrink-0 font-mono text-[0.65rem] tracking-[0.16em] text-[var(--text-faint)] uppercase">
+              {project.client}
+            </p>
+          ) : null}
+        </div>
+
+        <p className="mt-2 max-w-md text-body text-[var(--text-body-color)]">
+          {project.summary}
+        </p>
+
+        <p className="mt-3 font-mono text-[0.62rem] tracking-[0.18em] text-[var(--text-faint)] uppercase">
+          {project.categories.join(" / ")}
+        </p>
+      </Link>
+    </li>
   );
 }
