@@ -96,6 +96,7 @@ export const primaryNav: NavItem[] = [
       { label: "Photography", href: "/work?category=photography" },
       { label: "Commercial", href: "/work?category=commercial" },
       { label: "Documentary", href: "/work?category=documentary" },
+      { label: "Photo Essay", href: "/work?category=photo-essay" },
     ],
   },
   {

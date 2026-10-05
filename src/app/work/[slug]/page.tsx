@@ -7,17 +7,25 @@ import { Section } from "@/components/primitives/Section";
 import { VideoFrame } from "@/components/primitives/VideoFrame";
 import { StartCTA } from "@/components/sections/StartCTA";
 import { getProject, workProjects } from "@/content/work";
+import { photoEssayProject } from "@/lib/photo-essay";
 import { pageMetadata } from "@/lib/seo";
 
 type Params = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return workProjects.map((project) => ({ slug: project.slug }));
+  const slugs = workProjects.map((project) => ({ slug: project.slug }));
+  return photoEssayProject() ? [...slugs, { slug: "photo-essay" }] : slugs;
+}
+
+/** The static projects plus the essay, which only exists once it has frames. */
+function resolve(slug: string) {
+  if (slug === "photo-essay") return photoEssayProject() ?? undefined;
+  return getProject(slug);
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = resolve(slug);
   if (!project) return {};
 
   return pageMetadata({
@@ -30,7 +38,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function ProjectPage({ params }: Params) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = resolve(slug);
   if (!project) notFound();
 
   return (

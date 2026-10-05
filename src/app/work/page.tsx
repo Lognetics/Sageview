@@ -5,7 +5,9 @@ import { PageHeader } from "@/components/sections/PageHeader";
 import { Section } from "@/components/primitives/Section";
 import { StartCTA } from "@/components/sections/StartCTA";
 import { WorkGrid } from "@/components/sections/WorkGrid";
+import { photoEssayProject } from "@/lib/photo-essay";
 import { pageMetadata } from "@/lib/seo";
+import { workProjects } from "@/content/work";
 
 export const metadata: Metadata = pageMetadata({
   title: "Work",
@@ -15,6 +17,14 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function WorkPage() {
+  /*
+    The essay is read off disk at build time and prepended, so dropping frames
+    into public/media/photo-essay/ puts it in the index with no code change.
+    Absent frames, it is simply not there.
+  */
+  const essay = photoEssayProject();
+  const projects = essay ? [essay, ...workProjects] : workProjects;
+
   return (
     <>
       <PageHeader
@@ -31,7 +41,7 @@ export default function WorkPage() {
           prerendering unless one is present.
         */}
         <Suspense fallback={<div className="min-h-[60vh]" />}>
-          <WorkGrid />
+          <WorkGrid projects={projects} />
         </Suspense>
       </Section>
 

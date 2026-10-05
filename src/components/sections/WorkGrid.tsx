@@ -26,7 +26,15 @@ import {
  * `scroll: false` on the replace keeps the page from jumping to the top each
  * time a filter is pressed.
  */
-export function WorkGrid() {
+export function WorkGrid({
+  projects: source,
+}: {
+  /**
+   * Assembled on the server, because the photo essay is read from the
+   * filesystem at build time and a client component cannot do that.
+   */
+  projects: readonly WorkProject[];
+}) {
   const router = useRouter();
   const params = useSearchParams();
 
@@ -36,7 +44,10 @@ export function WorkGrid() {
     return (match?.id ?? "all") as WorkFilterId;
   }, [raw]);
 
-  const projects = useMemo(() => projectsFor(active), [active]);
+  const projects = useMemo(
+    () => projectsFor(active, source),
+    [active, source],
+  );
 
   const select = useCallback(
     (id: WorkFilterId) => {

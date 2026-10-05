@@ -20,7 +20,8 @@ export type WorkCategory =
   | "film"
   | "photography"
   | "commercial"
-  | "documentary";
+  | "documentary"
+  | "photo-essay";
 
 export const workFilters = [
   { id: "all", label: "All" },
@@ -28,6 +29,7 @@ export const workFilters = [
   { id: "photography", label: "Photography" },
   { id: "commercial", label: "Commercial" },
   { id: "documentary", label: "Documentary" },
+  { id: "photo-essay", label: "Photo Essay" },
 ] as const;
 
 export type WorkFilterId = (typeof workFilters)[number]["id"];
@@ -170,9 +172,17 @@ export const workProjects: readonly WorkProject[] = [
   },
 ];
 
-/** Projects matching a filter, in grid order. */
-export function projectsFor(filter: WorkFilterId): readonly WorkProject[] {
-  const ordered = [...workProjects].sort((a, b) => a.order - b.order);
+/**
+ * Projects matching a filter, in grid order.
+ *
+ * Takes the list rather than closing over `workProjects`, because the photo
+ * essay is read off disk at build time and so is only known to the server.
+ */
+export function projectsFor(
+  filter: WorkFilterId,
+  projects: readonly WorkProject[] = workProjects,
+): readonly WorkProject[] {
+  const ordered = [...projects].sort((a, b) => a.order - b.order);
   if (filter === "all") return ordered;
   return ordered.filter((project) =>
     project.categories.includes(filter as WorkCategory),
