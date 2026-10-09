@@ -52,7 +52,16 @@ export function SiteHero() {
         </h1>
 
         <p className="mt-6 max-w-xl text-lead text-[var(--text-body-color)]">
-          {site.tagline}
+          {site.statement}
+        </p>
+
+        {/*
+          The longer line sits smaller and dimmer than the statement above it,
+          so the hero reads in two steps rather than as one block of copy: the
+          claim first, then what the company actually does.
+        */}
+        <p className="mt-5 max-w-lg text-body-sm leading-relaxed text-[var(--text-muted)]">
+          {site.description}
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">

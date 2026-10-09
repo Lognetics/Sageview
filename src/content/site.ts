@@ -14,8 +14,10 @@ export const site = {
   shortName: "SageView",
   tagline: "Visual Communications & Production",
   taglineLower: "Visual communications and production.",
+  /** The line the hero leads with, under the name. */
+  statement: "We turn ideas, people, and moments into stories that move.",
   description:
-    "SageView Production Ltd is a visual communications and production company making human-centred film, photography and campaign work for brands, organisations and institutions.",
+    "SageView Production Ltd is a creative production company crafting films, photography, and visual experiences for brands, organisations, and people with stories worth telling.",
   seoTitle: "SageView Production Ltd | Visual Communications & Production",
   seoDescription:
     "SageView Production Ltd is a visual communications and production company working across documentary and commercial film, photography, visual communication strategy and live production.",
